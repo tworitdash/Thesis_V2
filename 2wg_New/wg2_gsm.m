@@ -52,11 +52,11 @@ s_params_5_feko = extract(data5_feko,'S_PARAMETERS');
 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(Spp(:, 4, 4))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(Spp(:, 1, 1))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(25,25, :))))/2, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(21,21, :))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(4, 4, :))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(1, 1, :))))/2, 'LineWidth', 2); grid on;
 
 
 xlim([5 21])

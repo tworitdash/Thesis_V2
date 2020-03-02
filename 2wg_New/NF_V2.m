@@ -1,10 +1,10 @@
 clear;
 
-<<<<<<< HEAD
+% <<<<<<< HEAD
 F = 21.15e9;
-=======
-F = 14e9;
->>>>>>> 3cd70c1b5ad50c4d770b39fe63ca6f7d3ec01f8c
+% =======
+% F = 14e9;
+% >>>>>>> 3cd70c1b5ad50c4d770b39fe63ca6f7d3ec01f8c
 
 err = 1; erp = 1; murr = 1; murp = 1;
 
@@ -32,13 +32,13 @@ Nr1 = find(fc_1 < F);
 Np1 = find(fc_2 < F);
 
 % <<<<<<< HEAD
-<<<<<<< HEAD
+% <<<<<<< HEAD
 Nr = 1:1:20;
 Np = 1:1:23;
-=======
-Nr = 1:1:10;
-Np = 1:1:10;
->>>>>>> 3cd70c1b5ad50c4d770b39fe63ca6f7d3ec01f8c
+% =======
+% Nr = 1:1:10;
+% Np = 1:1:10;
+% >>>>>>> 3cd70c1b5ad50c4d770b39fe63ca6f7d3ec01f8c
 % =======
 % Nr = 1:1:20;
 % Np = 1:1:20;

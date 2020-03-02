@@ -1,6 +1,10 @@
 clear;
 
+<<<<<<< HEAD
 F = 21.15e9;
+=======
+F = 14e9;
+>>>>>>> 3cd70c1b5ad50c4d770b39fe63ca6f7d3ec01f8c
 
 err = 1; erp = 1; murr = 1; murp = 1;
 
@@ -28,8 +32,13 @@ Nr1 = find(fc_1 < F);
 Np1 = find(fc_2 < F);
 
 % <<<<<<< HEAD
+<<<<<<< HEAD
 Nr = 1:1:20;
 Np = 1:1:23;
+=======
+Nr = 1:1:10;
+Np = 1:1:10;
+>>>>>>> 3cd70c1b5ad50c4d770b39fe63ca6f7d3ec01f8c
 % =======
 % Nr = 1:1:20;
 % Np = 1:1:20;
@@ -76,6 +85,8 @@ br = Srp * ap + Srr * ar;
 
 Gamma_sum = ar + br;
 
+% Gamma_sum = ones(length(Nr1), 1);
+
 % Gamma_sum = 1 + sum((Spr(length(Np1), length(Nr1)).'), 2) + sum(Srr(length(Nr1), length(Nr1)), 2);
 % =======
 % Gamma_sum = 1 + sum(Srr.^2, 2);
@@ -92,7 +103,7 @@ for k = 1:length(Nr1)
 end
 
 % E_aperture = sqrt(squeeze(abs(Er_rho(5, :, :))).^2 + squeeze(abs(Er_phi(5, :, :))).^2 + squeeze(abs(Er_z(5, :, :))).^2);
-E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2); % + abs(E_aperture_z).^2);
+E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2 + abs(E_aperture_z).^2);
 
 % % E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2); % + abs(E_aperture_z).^2);
 x = rho .* cos(phi);
@@ -136,7 +147,7 @@ E_z = sqrt(aux(f, 5).^2 + aux(f, 6).^2);
 
 % E_tot = sqrt(abs(E_rho).^2 + abs(E_phi).^2 + abs(E_z).^2);
 
-E_tot = sqrt(abs(E_rho).^2 + abs(E_phi).^2); % + abs(E_z).^2);
+E_tot = sqrt(abs(E_rho).^2 + abs(E_phi).^2 + abs(E_z).^2);
 
 E_tot_reshape = reshape(E_tot, 100, 360);
 
@@ -198,7 +209,7 @@ E_aperture_rho = zeros(size(rho));
 E_aperture_phi = zeros(size(rho));
 E_aperture_z = zeros(size(rho));
 
-for k = 1:length(Np1)-1
+for k = 1:length(Np1)
     E_aperture_rho = E_aperture_rho + squeeze(Ep_rho(k, :, :)) .* (Gamma_sum(k));
     E_aperture_phi = E_aperture_phi + squeeze(Ep_phi(k, :, :)) .* (Gamma_sum(k));
     E_aperture_z = E_aperture_z + squeeze(Ep_z(k, :, :)) .* (Gamma_sum(k));

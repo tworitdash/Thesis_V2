@@ -1,6 +1,6 @@
 clear;
 
-F = 10e9;
+F = 14e9;
 
 err = 1; erp = 1; murr = 1; murp = 1;
 
@@ -28,8 +28,8 @@ Nr1 = find(fc_1 < F);
 Np1 = find(fc_2 < F);
 
 % <<<<<<< HEAD
-Nr = 1:1:5;
-Np = 1:1:5;
+Nr = 1:1:10;
+Np = 1:1:10;
 % =======
 % Nr = 1:1:20;
 % Np = 1:1:20;
@@ -51,7 +51,7 @@ Srr = Slr * Srr_ * Slr;
 %% 
 [rho, phi] = meshgrid(eps:rr/100:rr,  eps:pi/180:2*pi-eps);
 
-z = 0.0005;
+z = 0;
 
 [Er_rho, Er_phi, Er_z] = E_r(Nr1, rho, phi, F, rr, z, epsilonr, mur);
 %% 
@@ -76,6 +76,8 @@ br = Spr.' * ap + Srr * ar;
 
 Gamma_sum = ar + br;
 
+% Gamma_sum = ones(length(Nr1), 1);
+
 % Gamma_sum = 1 + sum((Spr(length(Np1), length(Nr1)).'), 2) + sum(Srr(length(Nr1), length(Nr1)), 2);
 % =======
 % Gamma_sum = 1 + sum(Srr.^2, 2);
@@ -86,13 +88,13 @@ E_aperture_phi = zeros(size(rho));
 E_aperture_z = zeros(size(rho));
 
 for k = 1:length(Nr1)
-    E_aperture_rho = E_aperture_rho + squeeze(Er_rho(k, :, :)) .* abs(Gamma_sum(1));
-    E_aperture_phi = E_aperture_phi + squeeze(Er_phi(k, :, :)) .* abs(Gamma_sum(1));
-    E_aperture_z = E_aperture_z + squeeze(Er_z(k, :, :)) .* abs(Gamma_sum(1));
+    E_aperture_rho = E_aperture_rho + squeeze(Er_rho(k, :, :)) .* abs(Gamma_sum(k));
+    E_aperture_phi = E_aperture_phi + squeeze(Er_phi(k, :, :)) .* abs(Gamma_sum(k));
+    E_aperture_z = E_aperture_z + squeeze(Er_z(k, :, :)) .* abs(Gamma_sum(k));
 end
 
 % E_aperture = sqrt(squeeze(abs(Er_rho(5, :, :))).^2 + squeeze(abs(Er_phi(5, :, :))).^2 + squeeze(abs(Er_z(5, :, :))).^2);
-E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2); % + abs(E_aperture_z).^2);
+E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2 + abs(E_aperture_z).^2);
 
 % % E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2); % + abs(E_aperture_z).^2);
 x = rho .* cos(phi);
@@ -177,7 +179,7 @@ E_z = sqrt(aux(f, 5).^2 + aux(f, 6).^2);
 
 % E_tot = sqrt(abs(E_rho).^2 + abs(E_phi).^2 + abs(E_z).^2);
 
-E_tot = sqrt(abs(E_rho).^2 + abs(E_phi).^2); % + abs(E_z).^2);
+E_tot = sqrt(abs(E_rho).^2 + abs(E_phi).^2 + abs(E_z).^2);
 
 E_tot_reshape = reshape(E_tot, 100, 360);
 
@@ -215,7 +217,7 @@ grid on;
 % >>>>>>> 37893f8e2e343fb0a1d771a64115f47cd4bdd608
 [rho, phi] = meshgrid(eps:rp/100:rp, eps:pi/180:2*pi+eps);
 
-z = -0.0005;
+z = 0;
 
 [Ep_rho, Ep_phi, Ep_z] = E_r(Np1, rho, phi, F, rp, z, epsilonp, mup);
 
@@ -239,7 +241,7 @@ E_aperture_rho = zeros(size(rho));
 E_aperture_phi = zeros(size(rho));
 E_aperture_z = zeros(size(rho));
 
-for k = 1:length(Np1)-1
+for k = 1:length(Np1)
     E_aperture_rho = E_aperture_rho + squeeze(Ep_rho(k, :, :)) .* (Gamma_sum(k));
     E_aperture_phi = E_aperture_phi + squeeze(Ep_phi(k, :, :)) .* (Gamma_sum(k));
     E_aperture_z = E_aperture_z + squeeze(Ep_z(k, :, :)) .* (Gamma_sum(k));

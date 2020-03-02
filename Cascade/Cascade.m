@@ -22,8 +22,8 @@ r = [rr rp rt];
 % Nr = 1:1:5; % number of modes on R waveguide
 % Np = 1:1:5; % number of modes on P waveguide
 
-N1 = 1:1:73; % number of modes on 1st waveguide
-N2 = 1:1:73; % number of modes on 2nd waveguide
+N1 = 1:1:20; % number of modes on 1st waveguide
+N2 = 1:1:20; % number of modes on 2nd waveguide
 
 erp = 1;
 err = 1;
@@ -39,8 +39,8 @@ murr = 1;
 % Np = 1:1:30; % number of modes on R waveguide
 % Nt = 1:1:30; % number of modes on P waveguide
 
-Ns = 1:1:73; % number of modes on last but one waveguide
-Ne = 1:1:73; % number of modes on last waveguide
+Ns = 1:1:20; % number of modes on last but one waveguide
+Ne = 1:1:20; % number of modes on last waveguide
 
 ert = 1;
 erp = 1;
@@ -76,11 +76,11 @@ for i = 2:length(r)-1
 end
 
 %   Sl = Sl * SL(rp, F(k), Np, L);
-%  [Slr] = SL(rr, F(k), Nr, L);
-%  [Slt] = SL(rt, F(k), Nt, L);
+%  [Slr] = SL(rr, F(k), N1, 0.001);
+%  [Slt] = SL(rt, F(k), Ne, 0.001);
  
-%  [Slr] = SL(r(1), F(k), N1, L);
-%  [Slt] = SL(r(end), F(k), Ne, L);
+ [Slr] = SL(r(1), F(k), N1, 0.001);
+ [Slt] = SL(r(end), F(k), Ne, 0.001);
  
 % Sl = Slr * Slp * Slt;
 
@@ -91,16 +91,16 @@ I = eye(length(N2), length(N2));
 U1 = inv(I - S22 * Sl * S33 * Sl);
 U2 = inv(I - S33 * Sl * S22 * Sl);
 
-% STT(k, :, :) = Slt * (S11 + S12 * Sl * U2 * S33 * Sl * S21) * Slt;
-% STR(k, :, :) = Slt * (S12 * Sl * U2 * S34) * Slr;
-% SRT(k, :, :) = Slr * (S43 * Sl * U1 * S21) * Slt;
-% SRR(k, :, :) = Slr * (S44 + S43 * Sl * U2 * S22 * Sl * S34) * Slr;
+STT(k, :, :) = Slt * (S11 + S12 * Sl * U2 * S33 * Sl * S21) * Slt.';
+STR(k, :, :) = Slt * (S12 * Sl * U2 * S34) * Slr;
+SRT(k, :, :) = Slr * (S43 * Sl * U1 * S21) * Slt;
+SRR(k, :, :) = Slr * (S44 + S43 * Sl * U1 * S22 * Sl * S34) * Slr;
 
 
-STT(k, :, :) = (S11 + S12 * Sl * U2 * S33 * Sl * S21);
-STR(k, :, :) = (S12 * Sl * U2 * S34);
-SRT(k, :, :) = (S43 * Sl * U1 * S21);
-SRR(k, :, :) = (S44 + S43 * Sl * U1 * S22 * Sl * S34);
+% STT(k, :, :) = (S11 + S12 * Sl * U2 * S33 * Sl * S21);
+% STR(k, :, :) = (S12 * Sl * U2 * S34);
+% SRT(k, :, :) = (S43 * Sl * U1 * S21);
+% SRR(k, :, :) = (S44 + S43 * Sl * U1 * S22 * Sl * S34);
 
 end
 %% Plots
@@ -112,7 +112,10 @@ end
 % save('Srr4_ratio_1_modes_1_1mm', 'SRR');
 
 F_cst = linspace(4e9, 21e9, 1001);
-data5_cst = read(rfdata.data,'../../Thesis/Bessel/Thesis_circ_step/Cascade/3wg_V1.s39p');
+% data5_cst = read(rfdata.data,'../../Thesis/Bessel/Thesis_circ_step/Cascade/3wg_V1.s39p');
+
+data5_cst = read(rfdata.data,'3wg_V2_more_modes.s300p');
+
 s_params_5_cst = extract(data5_cst,'S_PARAMETERS');
 
 
@@ -121,13 +124,23 @@ s_params_5_feko = extract(data5_feko,'S_PARAMETERS');
 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(STT(:, 13, 13))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(SRT(:, 1, 1))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(7, 7, :))))/2, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(151, 1, :))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(15, 15, :))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(1, 11, :))))/2, 'LineWidth', 2); grid on;
 
 
-xlim([9.5 21])
+xlim([4 21])
 
 
+figure;
+
+plot(F * 1e-9, angle((squeeze(SRT(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
+hold on;
+plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(151, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
+hold on;
+plot(F * 1e-9, angle((squeeze(s_params_5_feko(1, 11, :)))) * 180/pi, 'LineWidth', 2); grid on;
+
+
+xlim([4 21])

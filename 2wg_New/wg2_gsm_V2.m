@@ -3,6 +3,8 @@ clear;
 
 F = 4e9:0.5e9:21e9;
 
+F1 = 4e9:0.5e9:7e9;
+
 rp = 0.0405319403216/2; % radius of the waveguide
 rr = 0.0405319403216/2.1;
 
@@ -28,10 +30,10 @@ Np = 1:1:15;
 X_til = Inner_p(Nr, Np, rp, rr, erp, murp, err, murr);
 
 
-parfor k = 1:length(F)
+for k = 1:length(F)
 
 
-[Spp_, Spr_, Srp_, Srr_] = GSM(Nr, Np, F(k), rp, rr, erp, murp, err, murr, X_til);
+[Spp_, Spr_, Srp_, Srr_] = GSM(Nr, Np, F1(k), rp, rr, erp, murp, err, murr, X_til);
 
 % Spp(k, :, :) = Spp_;
 % Spr(k, :, :) = Spr_;
@@ -46,7 +48,9 @@ Spr(k, :, :) = Slp * Spr_ * Slr;
 Srp(k, :, :) = Slr * Srp_ * Slp;
 Srr(k, :, :) = Slr * Srr_ * Slr;
 
+S = [Spp_ Spr_; Srp_ Srr_];
 
+S*S
 end
 
 %%
@@ -60,11 +64,13 @@ s_params_5_feko = extract(data5_feko,'S_PARAMETERS');
 
 figure;
 
+plot(F * 1e-9, db(abs(squeeze(Spr(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+hold on;
 plot(F * 1e-9, db(abs(squeeze(Srp(:, 1, 1))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(1,20, :))))/2, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(20,1, :))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(11, 1, :))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(1, 11, :))))/2, 'LineWidth', 2); grid on;
 
 
 xlim([5 21])
@@ -73,9 +79,29 @@ xlim([5 21])
 
 figure;
 
+plot(F * 1e-9, angle((squeeze(Spr(:, 1, 1)))), 'LineWidth', 2); grid on;
+hold on;
 plot(F * 1e-9, angle((squeeze(Srp(:, 1, 1)))), 'LineWidth', 2); grid on;
 hold on;
 plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(20,1, :)))), 'LineWidth', 2); grid on;
 hold on;
 plot(F * 1e-9, angle((squeeze(s_params_5_feko(1, 11, :)))), 'LineWidth', 2); grid on;
 
+
+%% 
+
+% figure;
+% 
+% plot(F1 * 1e-9, db(abs(squeeze(Spp(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+% hold on;
+% 
+% figure;
+% 
+% plot(F1 * 1e-9, db(abs(squeeze(Spr(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+% hold on;
+% plot(F1 * 1e-9, db(abs(squeeze(Srp(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+% 
+% figure;
+% 
+% plot(F1 * 1e-9, db(abs(squeeze(Srr(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+% hold on;

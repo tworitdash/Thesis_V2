@@ -44,20 +44,20 @@ Ir = eye(length(Nr), length(Nr));
 
 X = sqrt(Kr * Zr) * X_til * sqrt(Yp * Kp); % modular inner cross product. Takes the dimension of Np \times Nr
 
-% F_ = 2 * inv(Qr + X * inv(Qp) * X.');
+F_ = 2 * inv(Qr + X * inv(Qp) * X.');
+
+Spp = inv(Qp) * X.' * F_ * X - Ip;
+Spr = inv(Qp) * X.' * F_ * Qr;
+Srp = 2 * eye(length(Nr), length(Np)) - F_ * X;
+Srr = F_ * Qr - Ir;
+
+% M = Qp + X.' * inv(Qr) * X;
+% N = X.' * inv(Qr) * X - Qp;
 % 
-% Spp = inv(Qp) * X.' * F_ * X - Ip;
-% Spr = inv(Qp) * X.' * F_ * Qr;
-% Srp = F_ * X;
-% Srr = F_ * Qr - Ir;
-
-M = Qp + X.' * inv(Qr) * X;
-N = X.' * inv(Qr) * X - Qp;
-
-Srr = -2 * inv(Qr) * X * inv(M) * X.' + Ir;
-Srp = inv(Qr) * X * (Ip - inv(M) * N);
-Spr = 2 * inv(M) * X.';
-Spp = inv(M) * N;
+% Srr = -2 * inv(Qr) * X * inv(M) * X.' + Ir;
+% Srp = inv(Qr) * X * (Ip - inv(M) * N);
+% Spr = 2 * inv(M) * X.';
+% Spp = inv(M) * N;
 
 end
 

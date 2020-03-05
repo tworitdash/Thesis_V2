@@ -7,7 +7,9 @@ function [Erho, Ephi, Ez] = E_TE(epsilon, m, rho, phi, beta_rho, z, beta)
 %     C2 = 0; % C2 and D2 are for the phi component
 %     D2 = 1;
     
-    beta_z = -1j .* sqrt(-(beta.^2 - beta_rho.^2));
+%     beta_z = -1j .* sqrt(-(beta.^2 - beta_rho.^2));
+    
+     beta_z = sqrt((beta.^2 - beta_rho.^2));
     
     Erho = -A .* m./(epsilon .* rho) .* besselj(m, beta_rho .* rho) .* (-C1 .* sin(m .* phi)...
         + D1 .* cos(m .* phi)) .* exp(-1j .* beta_z .* z);

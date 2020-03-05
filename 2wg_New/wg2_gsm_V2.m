@@ -49,7 +49,7 @@ Srr(k, :, :) = Slr * Srr_ * Slr;
 
 end
 
-
+%%
 F_cst = linspace(4e9, 21e9, 1001);
 data5_cst = read(rfdata.data,'2wg_cst.s38p');
 s_params_5_cst = extract(data5_cst,'S_PARAMETERS');
@@ -60,11 +60,11 @@ s_params_5_feko = extract(data5_feko,'S_PARAMETERS');
 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(Spp(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(Srp(:, 1, 1))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(1,1, :))))/2, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(1,20, :))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(11, 11, :))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(11, 1, :))))/2, 'LineWidth', 2); grid on;
 
 
 xlim([5 21])
@@ -75,7 +75,7 @@ figure;
 
 plot(F * 1e-9, angle((squeeze(Srp(:, 1, 1)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(21,1, :)))), 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(20,1, :)))), 'LineWidth', 2); grid on;
 hold on;
 plot(F * 1e-9, angle((squeeze(s_params_5_feko(1, 11, :)))), 'LineWidth', 2); grid on;
 

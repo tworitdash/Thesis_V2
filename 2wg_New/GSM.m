@@ -51,13 +51,13 @@ X = sqrt(Kr * Zr) * X_til * sqrt(Yp * Kp); % modular inner cross product. Takes 
 % Srp = F_ * X;
 % Srr = F_ * Qr - Ir;
 
-M = Qr + X * inv(Qp) * X.';
-N = Qr - X * inv(Qp) * X.';
+M = Qp + X.' * inv(Qr) * X;
+N = X.' * inv(Qr) * X - Qp;
 
-Spp = 2 * inv(Qp) * X.' * inv(M) * X - Ip;;
-Spr = inv(Qp) * X.' * inv(M) * N;
-Srp = 2 * inv(M) * X;
-Srr = inv(M) * N;
+Srr = -2 * inv(Qr) * X * inv(M) * X.' + Ir;
+Srp = inv(Qr) * X * (Ip - inv(M) * N);
+Spr = 2 * inv(M) * X.';
+Spp = inv(M) * N;
 
 end
 

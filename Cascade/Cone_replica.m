@@ -112,7 +112,7 @@ plot(F * 1e-9, db(abs(squeeze(STT(:, 1, 1))))/2, 'LineWidth', 2); grid on;
 % hold on;
 % plot(F * 1e-9, (angle(squeeze(STT(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
 
-xlim([1 21]);
+xlim([4.5 21]);
 
 c_ = load('Str_cone_replica_20.mat');
 
@@ -127,7 +127,7 @@ plot(F * 1e-9, db(abs(squeeze(STR(:, 1, 1))))/2, 'LineWidth', 2); grid on;
 % hold on;
 % plot(F * 1e-9, (angle(squeeze(STT(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
 
-xlim([1 21]);
+xlim([4.5 21]);
 
 c_ = load('Srt_cone_replica_20.mat');
 SRT = c_.SRT;
@@ -141,7 +141,7 @@ plot(F * 1e-9, db(abs(squeeze(SRT(:, 1, 1))))/2, 'LineWidth', 2); grid on;
 % hold on;
 % plot(F * 1e-9, (angle(squeeze(STT(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
 
-xlim([1 21]);
+xlim([4.5 21]);
 
 
 c_ = load('Srr_cone_replica_20.mat');
@@ -156,5 +156,5 @@ plot(F * 1e-9, db(abs(squeeze(SRR(:, 1, 1))))/2, 'LineWidth', 2); grid on;
 % hold on;
 % plot(F * 1e-9, (angle(squeeze(STT(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
 
-xlim([1 21]);
+xlim([4.5 21]);
 

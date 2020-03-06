@@ -4,8 +4,8 @@ function [Hrho, Hphi, Hz] = H_TM(mu, m, rho, phi, beta_rho, z, beta)
     C = 1;
     D = 0;
     
-%     beta_z = -1j .* sqrt(-(beta.^2 - beta_rho.^2));
-     beta_z = sqrt((beta.^2 - beta_rho.^2));
+    beta_z = -1j .* sqrt(-(beta.^2 - beta_rho.^2));
+%      beta_z = sqrt((beta.^2 - beta_rho.^2));
      
     Hrho = B .* (m ./ (mu .* rho)) .* besselj(m, beta_rho .* rho).* (-C .* sin(m .* phi)...
         + D .* cos(m .* phi)) * exp(-1j .* beta_z .* z);

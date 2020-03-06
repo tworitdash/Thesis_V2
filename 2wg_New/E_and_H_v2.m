@@ -36,9 +36,9 @@ lamb = c0./f; % wavelength
  
 beta = 2 * pi ./ lamb; % wave number
 
-% beta_z = -1j .* sqrt(-(beta.^2 - beta_rho.^2));
+beta_z = -1j .* sqrt(-(beta.^2 - beta_rho.^2));
 
-beta_z = sqrt((beta.^2 - beta_rho.^2));
+% beta_z = sqrt((beta.^2 - beta_rho.^2));
 
 %% Wave equations
 

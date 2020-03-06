@@ -6,16 +6,17 @@ rt = 0.0405319403216/1.9;
 rp = 0.0405319403216/2; % radius of the waveguide
 rr = 0.0405319403216/2.1;
 rd = 2.2e-2;
+re = 2.3e-2;
 
 
-R = [rr rp rt rd]; % radius vector
+R = [rr rp rt rd re]; % radius vector
 
-F = 4e9:0.5e9:50e9; % Frequency of operation
+F = 4e9:0.5e9:21e9; % Frequency of operation
 
-er = [1 1 1 1]; % Relative Permittivity of each WG section
-mur = [1 1 1 1]; % Relative Permeability of each WG section
+er = [1 1 1 1 1]; % Relative Permittivity of each WG section
+mur = [1 1 1 1 1]; % Relative Permeability of each WG section
 
-L = 1e-3 * [1 1 1 1]; % length of each waveguide section
+L = 1e-3 * [1 1 1 20 1]; % length of each waveguide section
 
 N = 1:1:20; % Number of modes
 
@@ -73,7 +74,77 @@ SRR(k, :, :) = slr * SRR_ * slr;
 end
 
 
-save('Stt4_ratio_1_modes_20_1mm', 'STT');
-save('Str4_ratio_1_modes_20_1mm', 'STR');
-save('Srt4_ratio_1_modes_20_1mm', 'SRT');
-save('Srr4_ratio_1_modes_20_1mm', 'SRR');
+save('Stt5_ratio_1_modes_20', 'STT');
+save('Str5_ratio_1_modes_20', 'STR');
+save('Srt5_ratio_1_modes_20', 'SRT');
+save('Srr5_ratio_1_modes_20', 'SRR');
+
+
+
+%% Plot
+
+
+data5 = read(rfdata.data,'5wg_touchstone_5modes_1mm_2cm_1mm.s10p');
+s_params_5 = extract(data5,'S_PARAMETERS');
+
+c_ = load('Stt5_ratio_1_modes_20.mat');
+
+F1 = 4e9:0.5e9:21e9;
+
+STT = c_.STT;
+figure;
+plot(F1 * 1e-9, db(abs(squeeze(s_params_5(1, 1, :))))/2, 'LineWidth', 2); grid on;
+hold on;
+plot(F * 1e-9, db(abs(squeeze(STT(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+xlim([4.5 21]);
+figure;
+plot(F1 * 1e-9, angle((squeeze(s_params_5(1, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
+hold on;
+plot(F * 1e-9, (angle(squeeze(STT(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
+
+xlim([4.5 21]);
+
+c_ = load('Str5_ratio_1_modes_20.mat');
+
+STR = c_.STR;
+figure;
+plot(F1 * 1e-9, db(abs(squeeze(s_params_5(1, 6, :))))/2, 'LineWidth', 2); grid on;
+hold on;
+plot(F * 1e-9, db(abs(squeeze(STR(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+xlim([4.5 21]);
+figure;
+plot(F1 * 1e-9, angle((squeeze(s_params_5(1, 6, :)))) * 180/pi, 'LineWidth', 2); grid on;
+hold on;
+plot(F * 1e-9, (angle(squeeze(STR(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
+
+xlim([4.5 21]);
+
+c_ = load('Srt5_ratio_1_modes_20.mat');
+SRT = c_.SRT;
+figure;
+plot(F1 * 1e-9, db(abs(squeeze(s_params_5(6, 1, :))))/2, 'LineWidth', 2); grid on;
+hold on;
+plot(F * 1e-9, db(abs(squeeze(SRT(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+xlim([4.5 21]);
+figure;
+plot(F1 * 1e-9, angle((squeeze(s_params_5(6, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
+hold on;
+plot(F * 1e-9, (angle(squeeze(SRT(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
+
+xlim([4.5 21]);
+
+
+c_ = load('Srr5_ratio_1_modes_20.mat');
+SRR = c_.SRR;
+figure;
+plot(F1 * 1e-9, db(abs(squeeze(s_params_5(6, 6, :))))/2, 'LineWidth', 2); grid on;
+hold on;
+plot(F * 1e-9, db(abs(squeeze(SRR(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+xlim([4.5 21]);
+figure;
+plot(F1 * 1e-9, angle((squeeze(s_params_5(6, 6, :)))) * 180/pi, 'LineWidth', 2); grid on;
+hold on;
+plot(F * 1e-9, (angle(squeeze(SRR(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
+
+xlim([4.5 21]);
+

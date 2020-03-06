@@ -86,8 +86,8 @@ else
       
       beta_rho = xmn_(i)./r;
 
-      % beta_z = -1j .* sqrt(-(beta.^2 - beta_rho.^2));
-       beta_z = sqrt((beta.^2 - beta_rho.^2));
+      beta_z = -1j .* sqrt(-(beta.^2 - beta_rho.^2));
+%        beta_z = sqrt((beta.^2 - beta_rho.^2));
     
       if mode == "TE"
 

@@ -106,41 +106,41 @@ end
 %% Plots
 
 
-% save('Stt4_ratio_1_modes_1_1mm', 'STT');
-% save('Str4_ratio_1_modes_1_1mm', 'STR');
-% save('Srt4_ratio_1_modes_1_1mm', 'SRT');
-% save('Srr4_ratio_1_modes_1_1mm', 'SRR');
+save('Stt3_ratio_1_modes_20_1mm', 'STT');
+save('Str3_ratio_1_modes_20_1mm', 'STR');
+save('Srt3_ratio_1_modes_20_1mm', 'SRT');
+save('Srr3_ratio_1_modes_20_1mm', 'SRR');
 
 F_cst = linspace(4e9, 21e9, 1001);
 % data5_cst = read(rfdata.data,'../../Thesis/Bessel/Thesis_circ_step/Cascade/3wg_V1.s39p');
 
-data5_cst = read(rfdata.data,'3wg_V2_more_modes.s300p');
+data5_cst = read(rfdata.data,'3wg_V1.s39p');
 
 s_params_5_cst = extract(data5_cst,'S_PARAMETERS');
 
 
-data5_feko = read(rfdata.data,'../../Thesis/Bessel/Thesis_circ_step/Cascade/3wg_feko_10_modes.s20p');
+data5_feko = read(rfdata.data,'3wg_feko_10_modes.s20p');
 s_params_5_feko = extract(data5_feko,'S_PARAMETERS');
 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(STT(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(STR(:, 1, 1))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(1, 1, :))))/2, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(1, 21, :))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(11, 11, :))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(11, 1, :))))/2, 'LineWidth', 2); grid on;
 
 
-xlim([4 21])
+xlim([5 21])
 
 
 figure;
 
-plot(F * 1e-9, angle((squeeze(STT(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(STR(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(1, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(1, 21, :)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, angle((squeeze(s_params_5_feko(11, 11, :)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(s_params_5_feko(11, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
 
 
-xlim([4 21])
+xlim([5 21])

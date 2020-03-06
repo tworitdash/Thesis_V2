@@ -1,0 +1,26 @@
+%% WKB Approximation
+c0 = 3e8;  %speed of light
+
+rb = 0.02; %bottom radius
+rt = 0.04; %top radius
+
+theta = pi/4;% slope of the taper
+
+z = eps:1e-5:5e-2; % z axis
+
+r = rb + z .* tan(theta);
+
+Str = load('Xmn.mat');
+Xmn = Str.Xmn;
+
+
+xmn = Xmn(1).xmn;
+
+
+F = 1e9:0.5e9:21e9;
+
+
+
+
+
+

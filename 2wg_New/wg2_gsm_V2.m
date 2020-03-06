@@ -24,16 +24,16 @@ epsilonp = erp * er0;   % Permittivity in the medium
 mup = mu0 * murp;
 
 
-Nr = 1:1:15;
-Np = 1:1:15;
+Nr = 1:1:20;
+Np = 1:1:20;
 
 X_til = Inner_p(Nr, Np, rp, rr, erp, murp, err, murr);
 
 
-for k = 1:length(F)
+parfor k = 1:length(F)
 
 
-[Spp_, Spr_, Srp_, Srr_] = GSM(Nr, Np, F1(k), rp, rr, erp, murp, err, murr, X_til);
+[Spp_, Spr_, Srp_, Srr_] = GSM(Nr, Np, F(k), rp, rr, erp, murp, err, murr, X_til);
 
 % Spp(k, :, :) = Spp_;
 % Spr(k, :, :) = Spr_;
@@ -49,9 +49,18 @@ Srp(k, :, :) = Slr * Srp_ * Slp;
 Srr(k, :, :) = Slr * Srr_ * Slr;
 
 S = [Spp_ Spr_; Srp_ Srr_];
-
 S*S
+
+
 end
+
+
+
+save('Spp2_ratio_1_modes_20', 'Spp');
+save('Spr2_ratio_1_modes_20', 'Spr');
+save('Srp2_ratio_1_modes_20', 'Srp');
+save('Srr2_ratio_1_modes_20', 'Srr');
+
 
 %%
 F_cst = linspace(4e9, 21e9, 1001);
@@ -64,13 +73,13 @@ s_params_5_feko = extract(data5_feko,'S_PARAMETERS');
 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(Spr(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(Spr(:, 1, 5))))/2, 'LineWidth', 2); grid on;
+% hold on;
+% plot(F * 1e-9, db(abs(squeeze(Srp(:, 1, 5))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(Srp(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(1,25, :))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(20,1, :))))/2, 'LineWidth', 2); grid on;
-hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(1, 11, :))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(1, 15, :))))/2, 'LineWidth', 2); grid on;
 
 
 xlim([5 21])
@@ -79,29 +88,31 @@ xlim([5 21])
 
 figure;
 
-plot(F * 1e-9, angle((squeeze(Spr(:, 1, 1)))), 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(Spr(:, 1, 5)))), 'LineWidth', 2); grid on;
+% hold on;
+% plot(F * 1e-9, angle((squeeze(Srp(:, 1, 5)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, angle((squeeze(Srp(:, 1, 1)))), 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(1,25, :)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(20,1, :)))), 'LineWidth', 2); grid on;
-hold on;
-plot(F * 1e-9, angle((squeeze(s_params_5_feko(1, 11, :)))), 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(s_params_5_feko(5, 11, :)))), 'LineWidth', 2); grid on;
 
 
 %% 
 
-% figure;
-% 
-% plot(F1 * 1e-9, db(abs(squeeze(Spp(:, 1, 1))))/2, 'LineWidth', 2); grid on;
-% hold on;
-% 
-% figure;
-% 
-% plot(F1 * 1e-9, db(abs(squeeze(Spr(:, 1, 1))))/2, 'LineWidth', 2); grid on;
-% hold on;
-% plot(F1 * 1e-9, db(abs(squeeze(Srp(:, 1, 1))))/2, 'LineWidth', 2); grid on;
-% 
-% figure;
-% 
-% plot(F1 * 1e-9, db(abs(squeeze(Srr(:, 1, 1))))/2, 'LineWidth', 2); grid on;
-% hold on;
+figure;
+
+hold on;
+
+plot(F * 1e-9, db(abs(squeeze(Spp(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+hold on;
+
+figure;
+
+plot(F * 1e-9, db(abs(squeeze(Spr(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+hold on;
+plot(F * 1e-9, db(abs(squeeze(Srp(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+
+figure;
+
+plot(F * 1e-9, db(abs(squeeze(Srr(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+hold on;

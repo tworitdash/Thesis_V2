@@ -11,7 +11,9 @@ function [SL] = SL(rr, F, Nr, L)
     for i = 1:length(Nr)
         beta = (2 * pi * F) ./ c0;
         beta_rho = (Xmn(i).xmn)./rr;
+        
         beta_z = -1j .* sqrt(-(beta.^2 - beta_rho.^2));
+        
         SL(i, i) = exp(-1j .* beta_z .* L);
     end
 end

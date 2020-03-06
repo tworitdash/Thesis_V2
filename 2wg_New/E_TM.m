@@ -4,8 +4,8 @@ function [Erho, Ephi, Ez] = E_TM(epsilon, m, rho, phi, beta_rho, z, beta, omega,
     C = 1;
     D = 0;
     
-%     beta_z = -1j .* sqrt(-(beta.^2 - beta_rho.^2));
-     beta_z = sqrt((beta.^2 - beta_rho.^2));
+    beta_z = -1j .* sqrt(-(beta.^2 - beta_rho.^2));
+%      beta_z = sqrt((beta.^2 - beta_rho.^2));
      
     Erho = -B .* (beta_rho .* beta_z ./ (omega .* mu .* epsilon)) .* besselj_der(m, beta_rho .* rho).* (C .* cos(m .* phi)...
         + D .* sin(m .* phi)) * exp(-1j .* beta_z .* z);

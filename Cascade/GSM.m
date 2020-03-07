@@ -49,7 +49,7 @@ F_ = 2 * inv(Qr + X * inv(Qp) * X.');
 Spp = inv(Qp) * X.' * F_ * X - Ip;
 Spr = inv(Qp) * X.' * F_ * Qr;
 % Srp = 2 * eye(length(Nr), length(Np)) - F_ * X;
-Srp = Spr;
+Srp = Spr.';
 Srr = F_ * Qr - Ir;
 
 end

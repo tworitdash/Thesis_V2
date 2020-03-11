@@ -3,7 +3,7 @@
 F_cst = linspace(4e9, 21e9, 1001);
 F = 4e9:0.5e9:21e9;
 
-data5_cst = read(rfdata.data,'2wg_cst.s38p');
+data5_cst = read(rfdata.data,'../../../feko/cst/2wg_V1_20modes.s80p');
 s_params_5_cst = extract(data5_cst,'S_PARAMETERS');
 
 
@@ -22,36 +22,36 @@ SRR = c_rr.Srr;
 %% SPP 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(SPP(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(SPP(:, 4, 4)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(1,1, :))))/2, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(6,6, :)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(11, 11, :))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(14, 14, :)))), 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S in  dB', 'FontSize', 12, 'FontWeight', 'bold');
 title(['S Parameter'], 'FontSize', 12, 'FontWeight', 'bold')
 
-legend({'S_{PP} of TE_{11} 20 modes active MM', 'S_{PP} of TE_{11} 10 modes active CST',...
-    'S_{PP} of TE_{11}, 10 modes active MM'},...
+legend({'S_{PP} of TE_{11} MM', 'S_{PP} of TE_{11} CST',...
+    'S_{PP} of TE_{11} FEKO'},...
     'FontSize', 12, 'FontWeight', 'bold');
 
 xlim([5 21]);
 
 figure;
 
-plot(F * 1e-9, angle((squeeze(SPP(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(SPP(:, 4, 4)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(1, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(6, 6, :)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, angle((squeeze(s_params_5_feko(11, 11, :)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(s_params_5_feko(14, 14, :)))) * 180/pi, 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S parameter Phase in deg', 'FontSize', 12, 'FontWeight', 'bold');
 title(['S parameter Phase'], 'FontSize', 12, 'FontWeight', 'bold')
 
-legend({'S_{PP} of TE_{11} 20 modes active MM', 'S_{PP} of TE_{11} 10 modes active CST',...
-    'S_{PP} of TE_{11}, 10 modes active MM'},...
+legend({'S_{PP} of TE_{11} MM', 'S_{PP} of TE_{11} CST',...
+    'S_{PP} of TE_{11} FEKO'},...
     'FontSize', 12, 'FontWeight', 'bold');
 
 xlim([5 21]);
@@ -60,27 +60,27 @@ xlim([5 21]);
 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(SPR(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(SPR(:, 1, 1)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(1,20, :))))/2, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(1,42, :)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(11, 1, :))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(11, 1, :)))), 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S in  dB', 'FontSize', 12, 'FontWeight', 'bold');
 title(['S Parameter'], 'FontSize', 12, 'FontWeight', 'bold')
 
-legend({'S_{PR} of TE_{11} 20 modes active MM', 'S_{PR} of TE_{11} 10 modes active CST',...
-    'S_{PR} of TE_{11}, 10 modes active MM'},...
+legend({'S_{PR} of TE_{11} MM', 'S_{PR} of TE_{11} CST',...
+    'S_{PR} of TE_{11} FEKO'},...
     'FontSize', 12, 'FontWeight', 'bold');
 
 xlim([5 21]);
 
 figure;
 
-plot(F * 1e-9, angle((squeeze(SPR(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(SPR(:, 1, 1)))) * 180/pi, '*', 'LineWidth', 1); grid on;
 hold on;
-plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(1, 20, :)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(1, 42, :)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
 plot(F * 1e-9, angle((squeeze(s_params_5_feko(11, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
 
@@ -88,8 +88,8 @@ xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S parameter Phase in deg', 'FontSize', 12, 'FontWeight', 'bold');
 title(['S parameter Phase'], 'FontSize', 12, 'FontWeight', 'bold')
 
-legend({'S_{PR} of TE_{11} 20 modes active MM', 'S_{PR} of TE_{11} 10 modes active CST',...
-    'S_{PR} of TE_{11}, 10 modes active MM'},...
+legend({'S_{PR} of TE_{11} MM', 'S_{PR} of TE_{11} CST',...
+    'S_{PR} of TE_{11} FEKO'},...
     'FontSize', 12, 'FontWeight', 'bold');
 
 
@@ -99,18 +99,18 @@ xlim([5 21]);
 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(SRP(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(SRP(:, 1, 1)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(20,1, :))))/2, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(42,1, :)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(1, 11, :))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(1, 11, :)))), 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S in  dB', 'FontSize', 12, 'FontWeight', 'bold');
 title(['S Parameter'], 'FontSize', 12, 'FontWeight', 'bold')
 
-legend({'S_{RP} of TE_{11} 20 modes active MM', 'S_{RP} of TE_{11} 10 modes active CST',...
-    'S_{RP} of TE_{11}, 10 modes active MM'},...
+legend({'S_{RP} of TE_{11} MM', 'S_{RP} of TE_{11} CST',...
+    'S_{RP} of TE_{11} FEKO'},...
     'FontSize', 12, 'FontWeight', 'bold');
 
 xlim([5 21]);
@@ -118,9 +118,9 @@ xlim([5 21]);
 
 figure;
 
-plot(F * 1e-9, angle((squeeze(SRP(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(SRP(:, 1, 1)))) * 180/pi, '*', 'LineWidth', 1); grid on;
 hold on;
-plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(20, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(42, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
 plot(F * 1e-9, angle((squeeze(s_params_5_feko(1, 11, :)))) * 180/pi, 'LineWidth', 2); grid on;
 
@@ -128,8 +128,8 @@ xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S parameter Phase in deg', 'FontSize', 12, 'FontWeight', 'bold');
 title(['S parameter Phase'], 'FontSize', 12, 'FontWeight', 'bold')
 
-legend({'S_{RP} of TE_{11} 20 modes active MM', 'S_{RP} of TE_{11} 10 modes active CST',...
-    'S_{RP} of TE_{11}, 10 modes active MM'},...
+legend({'S_{RP} of TE_{11} MM', 'S_{RP} of TE_{11} CST',...
+    'S_{RP} of TE_{11} FEKO'},...
     'FontSize', 12, 'FontWeight', 'bold');
 
 xlim([5 21]);
@@ -138,18 +138,18 @@ xlim([5 21]);
 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(SRR(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(SRR(:, 1, 1)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(20,20, :))))/2, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(42,42, :)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(1, 1, :))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(1, 1, :)))), 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S in  dB', 'FontSize', 12, 'FontWeight', 'bold');
 title(['S Parameter'], 'FontSize', 12, 'FontWeight', 'bold')
 
-legend({'S_{RR} of TE_{11} 20 modes active MM', 'S_{RR} of TE_{11} 10 modes active CST',...
-    'S_{RR} of TE_{11}, 10 modes active MM'},...
+legend({'S_{RR} of TE_{11} MM', 'S_{RR} of TE_{11} CST',...
+    'S_{RR} of TE_{11} FEKO'},...
     'FontSize', 12, 'FontWeight', 'bold');
 
 xlim([5 21]);
@@ -159,7 +159,7 @@ figure;
 
 plot(F * 1e-9, angle((squeeze(SRR(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(20, 20, :)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(42, 42, :)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
 plot(F * 1e-9, angle((squeeze(s_params_5_feko(1, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
 
@@ -167,8 +167,8 @@ xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S parameter Phase in deg', 'FontSize', 12, 'FontWeight', 'bold');
 title(['S parameter Phase'], 'FontSize', 12, 'FontWeight', 'bold')
 
-legend({'S_{RR} of TE_{11} 20 modes active MM', 'S_{RR} of TE_{11} 10 modes active CST',...
-    'S_{RR} of TE_{11}, 10 modes active MM'},...
+legend({'S_{RR} of TE_{11} MM', 'S_{RR} of TE_{11} CST',...
+    'S_{RR} of TE_{11} FEKO'},...
     'FontSize', 12, 'FontWeight', 'bold');
 
 xlim([5 21]);

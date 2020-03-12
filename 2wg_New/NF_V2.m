@@ -118,6 +118,33 @@ hold on;
 
 shading interp;
 
+figure;
+
+h = pcolor(x,y, db(abs(E_aperture_rho)./max(E_aperture_rho)));
+
+set(h,'ZData',-1+zeros(size(E_aperture_rho)))
+hold on;
+
+shading interp;
+
+figure;
+
+h = pcolor(x,y, db(abs(E_aperture_phi)./max(E_aperture_phi)));
+
+set(h,'ZData',-1+zeros(size(E_aperture_rho)))
+hold on;
+
+shading interp;
+
+figure;
+
+h = pcolor(x,y, db(abs(E_aperture_z)./max(E_aperture_z)));
+
+set(h,'ZData',-1+zeros(size(E_aperture_rho)))
+hold on;
+
+shading interp;
+
 
 [ficname,pathname] = uigetfile('*.efe','fichier ''.efe'' a convertir ?');
 nomfic = [pathname ficname];
@@ -151,9 +178,27 @@ E_tot = sqrt(abs(E_rho).^2 + abs(E_phi).^2 + abs(E_z).^2);
 
 E_tot_reshape = reshape(E_tot, 100, 360);
 
+E_rho_reshape = reshape(E_rho, 100, 360);
+E_phi_reshape = reshape(E_phi, 100, 360);
+E_z_reshape = reshape(E_z, 100, 360);
+
+
 figure;
 
 surface(x_f, y_f, db((abs(E_tot_reshape).')./max(abs(E_tot_reshape).'))); shading flat;
+
+figure;
+
+surface(x_f, y_f, db((abs(E_rho_reshape).')./max(abs(E_rho_reshape).'))); shading flat;
+
+figure;
+
+surface(x_f, y_f, db((abs(E_phi_reshape).')./max(abs(E_phi_reshape).'))); shading flat;
+
+figure;
+
+surface(x_f, y_f, db((abs(E_z_reshape).')./max(abs(E_z_reshape).'))); shading flat;
+
 
 % figure;
 % 
@@ -225,6 +270,32 @@ y = rho .* sin(phi);
 figure;
 surface(x, y, db((abs(E_aperture))./max(abs(E_aperture)))); shading flat;
 
+figure;
+
+h = pcolor(x,y, db(abs(E_aperture_rho)./max(E_aperture_rho)));
+
+set(h,'ZData',-1+zeros(size(E_aperture_rho)))
+hold on;
+
+shading interp;
+
+figure;
+
+h = pcolor(x,y, db(abs(E_aperture_phi)./max(E_aperture_phi)));
+
+set(h,'ZData',-1+zeros(size(E_aperture_rho)))
+hold on;
+
+shading interp;
+
+figure;
+
+h = pcolor(x,y, db(abs(E_aperture_z)./max(E_aperture_z)));
+
+set(h,'ZData',-1+zeros(size(E_aperture_rho)))
+hold on;
+
+shading interp;
 
 
 [ficname,pathname] = uigetfile('*.efe','fichier ''.efe'' a convertir ?');
@@ -265,9 +336,27 @@ E_tot = sqrt(abs(E_rho).^2 + abs(E_phi).^2); % + abs(E_z).^2);
 
 E_tot_reshape = reshape(E_tot, 100, 360);
 
+E_rho_reshape = reshape(E_rho, 100, 360);
+E_phi_reshape = reshape(E_phi, 100, 360);
+E_z_reshape = reshape(E_z, 100, 360);
+
+
 figure;
 
-surface(x_f, y_f, db((abs(E_tot_reshape'))./max(abs(E_tot_reshape')))); shading flat;
+surface(x_f, y_f, db((abs(E_tot_reshape).')./max(abs(E_tot_reshape).'))); shading flat;
+
+figure;
+
+surface(x_f, y_f, db((abs(E_rho_reshape).')./max(abs(E_rho_reshape).'))); shading flat;
+
+figure;
+
+surface(x_f, y_f, db((abs(E_phi_reshape).')./max(abs(E_phi_reshape).'))); shading flat;
+
+figure;
+
+surface(x_f, y_f, db((abs(E_z_reshape).')./max(abs(E_z_reshape).'))); shading flat;
+
 
 % <<<<<<< HEAD
 figure;

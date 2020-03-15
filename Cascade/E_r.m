@@ -17,7 +17,7 @@ function [Erho, Ephi, Ez] = E_r(Nr, rho, phi, F, r, z, epsilon, mu)
             omega = 2 .* pi .* F;
             
             if mode == "TE"
-                    A = 1;
+                    A = (pi/2 .* (xmn.^2 - m.^2) .* (besselj(m, xmn)).^2).^(-1);
    
                     C1 = 1; % C1 and D1 are for the rho component
                     D1 = 0; 
@@ -28,12 +28,12 @@ function [Erho, Ephi, Ez] = E_r(Nr, rho, phi, F, r, z, epsilon, mu)
                         + D1 .* cos(m .* phi)) .* exp(-1j .* beta_z .* z);
                     Ephi(i, :, :) = A .* beta_rho./epsilon .* besselj_der(m, beta_rho .* rho) .* (C1 .* cos(m .* phi)...
                         + D1 .* sin(m .* phi)) .* exp(-1j .* beta_z .* z);
-                    Ez(i, :, :) = zeros(size(rho));
+                    Ez(i, :, :) = ones(size(rho)) .* 1e-5;
                     
 %                     E_i(i, :, :) = sqrt(Erho.^2 + Ephi.^2 + Ez.^2);
                 
             elseif mode == "TM"
-                   B = 1;
+                   B = (pi/2 .* (xmn).^2 .* (besselj_der(m, xmn)).^2).^(-1);
    
                    C = 1;
                    D = 0;

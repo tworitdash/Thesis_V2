@@ -65,105 +65,24 @@ y = rho .* sin(phi);
 
 figure;
 
-h = pcolor(x,y, db(abs(E_aperture)./max(abs(E_aperture))));
-
-set(h,'ZData',-1+zeros(size(E_aperture_rho)))
-hold on;
-
-shading interp;
-
+% surface(x,y, db(abs(E_aperture)./max(abs(E_aperture)))); shading flat;
+surface(x,y, (abs(E_aperture))); shading flat;
+colormap('jet');
+% figure;
+% 
+% surface(x,y, db(abs(E_aperture_rho)./max(abs(E_aperture_rho)))); shading flat;
+% 
+% figure;
+%  
+% surface(x,y, db(abs(E_aperture_phi)./max(abs(E_aperture_phi)))); shading flat;
+% 
 figure;
 
-h = pcolor(x,y, db(abs(E_aperture_rho)./max(abs(E_aperture_rho))));
+surface(x,y, db(abs(E_aperture_z)./max(abs(E_aperture_z)))); shading flat;
+colormap('jet');
 
-set(h,'ZData',-1+zeros(size(E_aperture_rho)))
-hold on;
+plot_feko_NF;
 
-shading interp;
-
-figure;
-
-h = pcolor(x,y, db(abs(E_aperture_phi)./max(abs(E_aperture_phi))));
-
-set(h,'ZData',-1+zeros(size(E_aperture_rho)))
-hold on;
-
-shading interp;
-
-figure;
-
-h = pcolor(x,y, db(abs(E_aperture_z)./max(abs(E_aperture_z))));
-
-set(h,'ZData',-1+zeros(size(E_aperture_rho)))
-hold on;
-
-shading interp;
-
-
-
-
-[ficname,pathname] = uigetfile('*.efe','fichier ''.efe'' a convertir ?');
-nomfic = [pathname ficname];
-i0 = find(ficname=='.');
-
-system(['sed -e "/^#/d;/^*/d" ',' "',nomfic,'"| tr -s " " " " > result.txt']);  
-
-A = load('result.txt');
-
-rho_f = A(1:100, 1);
-phi_f = A(1:100:36000, 2) * pi/180;
-z_f = A(1, 1);
-aux = A(:, 4:9);
-
-[rho_f, phi_f] = meshgrid(rho_f, pi - phi_f);
-
-x_f = rho_f .* cos(phi_f);
-y_f = rho_f .* sin(phi_f);
-
-% f = 20*36000:1:21*36000 - 1;
-
-f = 1:1:36000;
-
-E_rho = sqrt(aux(f, 1).^2 + aux(f, 2).^2);
-E_phi = sqrt(aux(f, 3).^2 + aux(f, 4).^2);
-E_z = sqrt(aux(f, 5).^2 + aux(f, 6).^2);
-
-% E_tot = sqrt(abs(E_rho).^2 + abs(E_phi).^2); % + abs(E_z).^2);
-
-E_tot = sqrt(abs(E_rho).^2 + abs(E_phi).^2 + abs(E_z).^2);
-
-E_tot_reshape = reshape(E_tot, 100, 360);
-
-E_rho_reshape = reshape(E_rho, 100, 360);
-E_phi_reshape = reshape(E_phi, 100, 360);
-E_z_reshape = reshape(E_z, 100, 360);
-
-
-figure;
-
-surface(x_f, y_f, db((abs(E_tot_reshape).')./max(abs(E_tot_reshape).'))); shading flat;
-
-figure;
-
-surface(x_f, y_f, db((abs(E_rho_reshape).')./max(abs(E_rho_reshape).'))); shading flat;
-
-figure;
-
-surface(x_f, y_f, db((abs(E_phi_reshape).')./max(abs(E_phi_reshape).'))); shading flat;
-
-figure;
-
-surface(x_f, y_f, db((abs(E_z_reshape).')./max(abs(E_z_reshape).'))); shading flat;
-
-
-figure;
-
-polar(phi(:, 1), (abs(E_aperture(:, 30)/max(abs(E_aperture(:, 30))))));
-hold on;
-
-polar(phi_f(:, 1), (abs(E_tot_reshape(30, :).'/max(abs(E_tot_reshape(30, :).')))));
-
-grid on;
 
 
 %%  ----------------------------------------------------------------------------------------------------------
@@ -199,113 +118,24 @@ x = rho .* cos(phi);
 y = rho .* sin(phi);
 % 
 figure;
-surface(x, y, db((abs(E_aperture))./max(abs(E_aperture)))); shading flat;
+surface(x, y, ((abs(E_aperture))./max(abs(E_aperture)))); shading flat;
 
-figure;
+% surface(x, y, (abs(E_aperture))); shading flat;
 
-h = pcolor(x,y, db(abs(E_aperture_rho)./max(E_aperture_rho)));
+colormap('jet');
+% figure;
+% 
+% surface(x,y, db(abs(E_aperture_rho)./max(E_aperture_rho))); shading flat;
+% 
+% 
+% figure;
+% 
+% surface(x,y, db(abs(E_aperture_phi)./max(E_aperture_phi))); shading flat;
+% 
 
-set(h,'ZData',-1+zeros(size(E_aperture_rho)))
-hold on;
+% figure;
 
-shading interp;
-
-figure;
-
-h = pcolor(x,y, db(abs(E_aperture_phi)./max(E_aperture_phi)));
-
-set(h,'ZData',-1+zeros(size(E_aperture_rho)))
-hold on;
-
-shading interp;
-
-figure;
-
-h = pcolor(x,y, db(abs(E_aperture_z)./max(E_aperture_z)));
-
-set(h,'ZData',-1+zeros(size(E_aperture_rho)))
-hold on;
-
-shading interp;
-
-[ficname,pathname] = uigetfile('*.efe','fichier ''.efe'' a convertir ?');
-nomfic = [pathname ficname];
-i0 = find(ficname=='.');
-% <<<<<<< HEAD
-% system(['"C:\Program Files (x86)\GnuWin32\bin\sed" -e "/^#/d;/^*/d" ',' "',nomfic,'"| "C:\Program Files (x86)\GnuWin32\bin\tr" -s " " " " > result.txt']);    
-% =======
-system(['sed -e "/^#/d;/^*/d" ',' "',nomfic,'"| tr -s " " " " > result.txt']);  
-% >>>>>>> 37893f8e2e343fb0a1d771a64115f47cd4bdd608
-A = load('result.txt');
-
-rho_f = A(1:100, 1);
-phi_f = A(1:100:36000, 2) * pi/180;
-z_f = A(1, 1);
-aux = A(:, 4:9);
-
-% <<<<<<< HEAD
-[rho_f, phi_f] = meshgrid(rho_f, pi - phi_f);
-% =======
-% [rho_f, phi_f] = meshgrid(rho_f, phi_f);
-% >>>>>>> 37893f8e2e343fb0a1d771a64115f47cd4bdd608
-
-x_f = rho_f .* cos(phi_f);
-y_f = rho_f .* sin(phi_f);
-
-% f = 20*36000:1:21*36000 - 1;
-
-f = 1:1:36000;
-
-E_rho = sqrt(aux(f, 1).^2 + aux(f, 2).^2);
-E_phi = sqrt(aux(f, 3).^2 + aux(f, 4).^2);
-E_z = sqrt(aux(f, 5).^2 + aux(f, 6).^2);
-
-E_tot = sqrt(abs(E_rho).^2 + abs(E_phi).^2 + abs(E_z).^2);
-
-% E_tot = sqrt(abs(E_rho).^2 + abs(E_phi).^2); % + abs(E_z).^2);
-
-E_tot_reshape = reshape(E_tot, 100, 360);
-
-E_rho_reshape = reshape(E_rho, 100, 360);
-E_phi_reshape = reshape(E_phi, 100, 360);
-E_z_reshape = reshape(E_z, 100, 360);
+% surface(x,y, (abs(E_aperture_z)./max(E_aperture_z))); shading flat;
 
 
-figure;
-
-surface(x_f, y_f, db((abs(E_tot_reshape).')./max(abs(E_tot_reshape).'))); shading flat;
-
-figure;
-
-surface(x_f, y_f, db((abs(E_rho_reshape).')./max(abs(E_rho_reshape).'))); shading flat;
-
-figure;
-
-surface(x_f, y_f, db((abs(E_phi_reshape).')./max(abs(E_phi_reshape).'))); shading flat;
-
-figure;
-
-surface(x_f, y_f, db((abs(E_z_reshape).')./max(abs(E_z_reshape).'))); shading flat;
-
-
-figure;
-
-plot(rho(1, :), db(abs(E_aperture(90, :)/max(abs(E_aperture(90, :))))));
-hold on;
-
-plot(rho_f(1, :), db(abs(E_tot_reshape(:, 90)'/max(abs(E_tot_reshape(:, 90)))')));
-
-grid on;
-
-
-
-figure;
-
-polar(phi(:, 1), (abs(E_aperture(:, 30)/max(abs(E_aperture(:, 30))))));
-hold on;
-
-polar(phi_f(:, 1), (abs(E_tot_reshape(30, :).'/max(abs(E_tot_reshape(30, :).')))));
-
-grid on;
-
-system('rm result.txt');
+plot_feko_NF;

@@ -42,24 +42,24 @@ figure(1);
 
 % plot(F * 1e-9, db(abs(squeeze(s_params_5(6, 6, :))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(Spp(i).Spp_i(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(Spp(i).Spp_i(:, 1, 1)))), 'LineWidth', 2); grid on;
 
 figure(2);
 
 % plot(F * 1e-9, db(abs(squeeze(s_params_5(6, 1, :))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(Spr(i).Spr_i(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(Spr(i).Spr_i(:, 1, 1)))), 'LineWidth', 2); grid on;
 
 figure(3);
 
 % plot(F * 1e-9, db(abs(squeeze(s_params_5(1, 6, :))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(Srp(i).Srp_i(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(Srp(i).Srp_i(:, 1, 1)))), 'LineWidth', 2); grid on;
 
 figure(4);
 
 % plot(F * 1e-9, db(abs(squeeze(s_params_5(1, 1, :))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(Srr(i).Srr_i(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(Srr(i).Srr_i(:, 1, 1)))), 'LineWidth', 2); grid on;
 
 end

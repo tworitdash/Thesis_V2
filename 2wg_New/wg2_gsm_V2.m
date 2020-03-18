@@ -43,10 +43,10 @@ parfor k = 1:length(F)
 Slp = SL(rr, F(k), Np, 0.001);
 Slr = SL(rp, F(k), Nr, 0.001);
 
-Spp(k, :, :) = Slp * Spp_ * Slp.';
-Spr(k, :, :) = Slp * Spr_ * Slr.';
-Srp(k, :, :) = Slr * Srp_ * Slp.';
-Srr(k, :, :) = Slr * Srr_ * Slr.';
+Spp(k, :, :) = Slp * Spp_ * Slp';
+Spr(k, :, :) = Slp * Spr_ * Slr';
+Srp(k, :, :) = Slr * Srp_ * Slp';
+Srr(k, :, :) = Slr * Srr_ * Slr';
 
 S = [Spp_ Spr_; Srp_ Srr_];
 S*S

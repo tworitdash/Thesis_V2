@@ -63,3 +63,9 @@ hold on;
 plot(F * 1e-9, db(abs(squeeze(Srr(i).Srr_i(:, 1, 1)))), 'LineWidth', 2); grid on;
 
 end
+
+save('SPP_conv', 'Spp');
+save('SPR_conv', 'Spr');
+save('SRP_conv', 'Srp');
+save('SRR_conv', 'Srr');
+

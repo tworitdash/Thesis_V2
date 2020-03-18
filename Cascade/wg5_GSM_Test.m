@@ -14,7 +14,9 @@ R = [rr rp rt rd re]; % radius vector
 
 n = length(R);
 
+
 F = 4e9:0.5e9:21e9; % Frequency of operation
+F_feko = F;
 
 er = ones(1, n); % Relative Permittivity of each WG section
 mur = ones(1, n); % Relative Permeability of each WG section
@@ -97,20 +99,26 @@ save('Str5_ratio_1_modes_variable_test', 'STR');
 save('Srt5_ratio_1_modes_variable_test', 'SRT');
 save('Srr5_ratio_1_modes_variable_test', 'SRR');
 
-
+data5_feko = read(rfdata.data,'../../../feko/5wg_V1_feko.s20p');
+s_params_5_feko = extract(data5_feko,'S_PARAMETERS');
 
 figure;
 
 % plot(F * 1e-9, db(abs(squeeze(s_params_5(1, 1, :))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(STT(:, 1, 1))))/2, 'LineWidth', 2); grid on;
-
+plot(F * 1e-9, db(abs(squeeze(STR(:, 3, 3))))/2, 'LineWidth', 2); grid on;
+hold on;
+hold on;
+plot(F_feko * 1e-9, db(abs(squeeze(s_params_5_feko(3, 13, :)))), 'LineWidth', 2); grid on;
 
 figure;
 
 % plot(F * 1e-9, (angle(squeeze(s_params_5(1, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, (angle(squeeze(STT(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F * 1e-9, (angle(squeeze(STR(:, 3, 3)))) * 180/pi, 'LineWidth', 2); grid on;
+hold on;
+plot(F_feko * 1e-9, angle((squeeze(s_params_5_feko(3, 13, :)))) * 180/pi, 'LineWidth', 2); grid on;
+
 
 %% Plot from files
 % % 

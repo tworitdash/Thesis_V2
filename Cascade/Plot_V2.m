@@ -34,10 +34,10 @@ E_phi_reshape = reshape(E_phi, 100, 360);
 E_z_reshape = reshape(E_z, 100, 360);
 
 
-% figure;
-% 
-% surface(x_f, y_f, db((abs(E_tot_reshape).'))); shading flat;
-% colormap('jet');
+figure;
+
+surface(x_f, y_f, db((abs(E_tot_reshape).'))); shading flat;
+colormap('jet');
 
 % surface(x_f, y_f, db((abs(E_tot_reshape).')./max(abs(E_tot_reshape).'))); shading flat;
 % 
@@ -54,8 +54,8 @@ E_z_reshape = reshape(E_z, 100, 360);
 % surface(x_f, y_f, db((abs(E_phi_reshape).')./max(abs(E_phi_reshape).'))); shading flat;
 
 figure;
-
-surface(x_f, y_f, db((abs(E_z_reshape).')./max(abs(E_z_reshape).'))); shading flat;
+surface(x_f, y_f, ((abs(E_z_reshape).'))); shading flat;
+% surface(x_f, y_f, db((abs(E_z_reshape).')./max(abs(E_z_reshape).'))); shading flat;
 colormap('jet');
 
 %% cuts

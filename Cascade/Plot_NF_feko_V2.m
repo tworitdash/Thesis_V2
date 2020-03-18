@@ -26,7 +26,7 @@ E_z = sqrt(aux(f, 5).^2 + aux(f, 6).^2);
 
 % E_tot = sqrt(abs(E_rho).^2 + abs(E_phi).^2); % + abs(E_z).^2);
 
-E_tot = sqrt(abs(E_rho).^2 + abs(E_phi).^2 + abs(E_z).^2);
+E_tot = sqrt(abs(E_rho).^2 + abs(E_phi).^2);% + abs(E_z).^2);
 
 E_tot_reshape = reshape(E_tot, 100, 360);
 E_rho_reshape = reshape(E_rho, 100, 360);
@@ -34,29 +34,35 @@ E_phi_reshape = reshape(E_phi, 100, 360);
 E_z_reshape = reshape(E_z, 100, 360);
 
 
-% figure;
-% 
-% surface(x_f, y_f, db((abs(E_tot_reshape).'))); shading flat;
-% colormap('jet');
+figure;
 
-% surface(x_f, y_f, db((abs(E_tot_reshape).')./max(abs(E_tot_reshape).'))); shading flat;
+% surface(x_f, y_f, db((abs(E_tot_reshape).'))); shading flat;
+
+surface(x_f, y_f, db((abs(E_tot_reshape).')./max(abs(E_tot_reshape).'))); shading flat;
+
+colormap('jet');
+
 % 
 % % surface(x_f, y_f, (abs(E_tot_reshape).')); shading flat;
 % 
 % colormap('jet');
 
-% figure;
-% 
-% surface(x_f, y_f, db((abs(E_rho_reshape).')./max(abs(E_rho_reshape).'))); shading flat;
-% 
-% figure;
-% 
-% surface(x_f, y_f, db((abs(E_phi_reshape).')./max(abs(E_phi_reshape).'))); shading flat;
+figure;
+
+surface(x_f, y_f, db((abs(E_rho_reshape).')./max(abs(E_rho_reshape).'))); shading flat;
+colormap('jet');
+
 
 figure;
 
-surface(x_f, y_f, db((abs(E_z_reshape).')./max(abs(E_z_reshape).'))); shading flat;
+surface(x_f, y_f, db((abs(E_phi_reshape).')./max(abs(E_phi_reshape).'))); shading flat;
 colormap('jet');
+
+
+% figure;
+% 
+% surface(x_f, y_f, db((abs(E_z_reshape).')./max(abs(E_z_reshape).'))); shading flat;
+% colormap('jet');
 
 %% cuts
 

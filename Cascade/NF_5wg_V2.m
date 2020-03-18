@@ -1,31 +1,32 @@
 clear;
 
-rr = 2e-2; % Base radius
-rt = 4e-2; % Top redius
-n = 40; % number of transitions
-
 
 er0 = 8.85418782e-12; % Free space permittivity
 mu0 = 1.25663706e-6;  % Free Space Permeability
 
-R = linspace(rr, rt, n); % radius vector
+
+rt = 0.0405319403216/1.9;
+rp = 0.0405319403216/2; % radius of the waveguide
+rr = 0.0405319403216/2.1;
+rd = 2.2e-2;
+re = 2.3e-2;
+
+
+
+
+R = [rr rp rt rd re]; % radius vector
 
 n = length(R);
 
-F = 14e9; % Frequency of operation
+F = 12e9; % Frequency of operation
 
 er = ones(1, n); % Relative Permittivity of each WG section
-mur = ones(1, n); % Relative Permeability of each WG section
+mur = ones(1, n); % Relative Permeability of each WG sectio
 
 epsilon = er .* er0;
 mu = mur .* mu0;
 
-
-Length = 5e-2; % height of the cone
-
-L = ones(1, n) .* Length/n; % length of each waveguide section
-% L(1) = L(1)/2;
-% L(end) = L(end)/2;
+L = 1e-3 * [0.5 1 1 20 0.5]; % length of each waveguide section
 
 [STT, STR, SRT, SRR, N] = GSM_N(R, L, er, mur, F);
 
@@ -65,24 +66,23 @@ y = rho .* sin(phi);
 figure;
 
 surface(x,y, db(abs(E_aperture)./max(abs(E_aperture)))); shading flat;
+% surface(x,y, (abs(E_aperture))); shading flat;
 colormap('jet');
-
 figure;
 
 surface(x,y, db(abs(E_aperture_rho)./max(abs(E_aperture_rho)))); shading flat;
 colormap('jet');
 figure;
-
+ 
 surface(x,y, db(abs(E_aperture_phi)./max(abs(E_aperture_phi)))); shading flat;
 colormap('jet');
-% 
 % figure;
 % 
-% surface(x,y, db(abs(E_aperture_z)./max(E_aperture_z))); shading flat;
-
+% surface(x,y, db(abs(E_aperture_z)./max(abs(E_aperture_z)))); shading flat;
 % colormap('jet');
 
 Plot_NF_feko_V2;
+
 
 
 %%  ----------------------------------------------------------------------------------------------------------
@@ -110,15 +110,18 @@ for k = 1:N(end)
     E_aperture_z = E_aperture_z + squeeze(Ep_z(k, :, :)) .* (Gamma_sum(k));
 end
 
-E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2 + abs(E_aperture_z).^2);
+% E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2 + abs(E_aperture_z).^2);
 
-% E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2);
+E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2);
 
 x = rho .* cos(phi);
 y = rho .* sin(phi);
 % 
 figure;
 surface(x, y, db((abs(E_aperture))./max(abs(E_aperture)))); shading flat;
+
+% surface(x, y, (abs(E_aperture))); shading flat;
+
 colormap('jet');
 figure;
 
@@ -131,12 +134,7 @@ surface(x,y, db(abs(E_aperture_phi)./max(abs(E_aperture_phi)))); shading flat;
 colormap('jet');
 
 % figure;
-% 
-% surface(x,y, db(abs(E_aperture_z)./max(abs(E_aperture_z))));
+
+% surface(x,y, (abs(E_aperture_z)./max(E_aperture_z))); shading flat;
 
 Plot_NF_feko_V2;
-
-
-
-
-

@@ -22,11 +22,11 @@ SRR = c_rr.Srr;
 %% SPP 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(SPP(:, 4, 4)))), 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(SPP(:, 1, 9)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(6,6, :)))), 'LineWidth', 2); grid on;
+% plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(3,3, :)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(14, 14, :)))), 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(11, 19, :)))), 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S in  dB', 'FontSize', 12, 'FontWeight', 'bold');
@@ -40,11 +40,11 @@ xlim([5 21]);
 
 figure;
 
-plot(F * 1e-9, angle((squeeze(SPP(:, 4, 4)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(SPP(:, 1, 9)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(6, 6, :)))) * 180/pi, 'LineWidth', 2); grid on;
+% plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(3, 3, :)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, angle((squeeze(s_params_5_feko(14, 14, :)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(s_params_5_feko(11, 19, :)))) * 180/pi, 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S parameter Phase in deg', 'FontSize', 12, 'FontWeight', 'bold');
@@ -60,11 +60,11 @@ xlim([5 21]);
 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(SPR(:, 1, 1)))), 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(SPR(:, 3, 3)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(1,42, :)))), 'LineWidth', 2); grid on;
+% plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(3,44, :)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(11, 1, :)))), 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(13, 3, :)))), 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S in  dB', 'FontSize', 12, 'FontWeight', 'bold');
@@ -78,11 +78,11 @@ xlim([5 21]);
 
 figure;
 
-plot(F * 1e-9, angle((squeeze(SPR(:, 1, 1)))) * 180/pi, '*', 'LineWidth', 1); grid on;
+plot(F * 1e-9, angle((squeeze(SPR(:, 3, 3)))) * 180/pi, '*', 'LineWidth', 1); grid on;
 hold on;
-plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(1, 42, :)))) * 180/pi, 'LineWidth', 2); grid on;
+% plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(3, 44, :)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, angle((squeeze(s_params_5_feko(11, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(s_params_5_feko(3, 13, :)))) * 180/pi, 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S parameter Phase in deg', 'FontSize', 12, 'FontWeight', 'bold');
@@ -99,11 +99,11 @@ xlim([5 21]);
 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(SRP(:, 1, 1)))), 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(SRP(:, 6, 6)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(42,1, :)))), 'LineWidth', 2); grid on;
+% plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(43,3, :)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(1, 11, :)))), 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(6, 16, :)))), 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S in  dB', 'FontSize', 12, 'FontWeight', 'bold');
@@ -118,11 +118,11 @@ xlim([5 21]);
 
 figure;
 
-plot(F * 1e-9, angle((squeeze(SRP(:, 1, 1)))) * 180/pi, '*', 'LineWidth', 1); grid on;
+plot(F * 1e-9, angle((squeeze(SRP(:, 6, 6)))) * 180/pi, '*', 'LineWidth', 1); grid on;
 hold on;
-plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(42, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
+% plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(43, 3, :)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, angle((squeeze(s_params_5_feko(1, 11, :)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(s_params_5_feko(6, 16, :)))) * 180/pi, 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S parameter Phase in deg', 'FontSize', 12, 'FontWeight', 'bold');
@@ -138,11 +138,11 @@ xlim([5 21]);
 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(SRR(:, 1, 1)))), 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(SRR(:, 1, 9)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(42,42, :)))), 'LineWidth', 2); grid on;
+% plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(42,42, :)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(1, 1, :)))), 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(1, 9, :)))), 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S in  dB', 'FontSize', 12, 'FontWeight', 'bold');
@@ -159,9 +159,9 @@ figure;
 
 plot(F * 1e-9, angle((squeeze(SRR(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(42, 42, :)))) * 180/pi, 'LineWidth', 2); grid on;
+% plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(42, 42, :)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, angle((squeeze(s_params_5_feko(1, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(s_params_5_feko(1, 9, :)))) * 180/pi, 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S parameter Phase in deg', 'FontSize', 12, 'FontWeight', 'bold');

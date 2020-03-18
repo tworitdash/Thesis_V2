@@ -44,9 +44,9 @@ Slp = SL(rr, F(k), Np, 0.001);
 Slr = SL(rp, F(k), Nr, 0.001);
 
 Spp(k, :, :) = Slp * Spp_ * Slp.';
-Spr(k, :, :) = Slp * Spr_ * Slr;
-Srp(k, :, :) = Slr * Srp_ * Slp;
-Srr(k, :, :) = Slr * Srr_ * Slr;
+Spr(k, :, :) = Slp * Spr_ * Slr.';
+Srp(k, :, :) = Slr * Srp_ * Slp.';
+Srr(k, :, :) = Slr * Srr_ * Slr.';
 
 S = [Spp_ Spr_; Srp_ Srr_];
 S*S
@@ -56,10 +56,10 @@ end
 
 
 
-% save('Spp2_ratio_1_modes_20', 'Spp');
-% save('Spr2_ratio_1_modes_20', 'Spr');
-% save('Srp2_ratio_1_modes_20', 'Srp');
-% save('Srr2_ratio_1_modes_20', 'Srr');
+save('Spp2_ratio_1_modes_20_test', 'Spp');
+save('Spr2_ratio_1_modes_20_test', 'Spr');
+save('Srp2_ratio_1_modes_20_test', 'Srp');
+save('Srr2_ratio_1_modes_20_test', 'Srr');
 
 
 %%

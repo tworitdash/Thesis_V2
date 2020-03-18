@@ -40,7 +40,7 @@ parfor k = 1:length(F)
 % Srp(k, :, :) = Srp_;
 % Srr(k, :, :) = Srr_;
 
-Slp = SL(rr, F(k), Np, 0.001);
+Slp = SL(rr, F(k), Np, -0.001);
 Slr = SL(rp, F(k), Nr, 0.001);
 
 Spp(k, :, :) = Slp * Spp_ * Slp';

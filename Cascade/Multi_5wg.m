@@ -85,17 +85,17 @@ slr = SL(R(1), F(k), 1:1:N(1), L(1));
 slt = SL(R(end), F(k), 1:1:N(end), L(end));
 
 STT(k, :, :) = slt * STT_ * slt'; 
-STR(k, :, :) = slt * STR_ * slr'; 
-SRT(k, :, :) = slr * SRT_ * slt'; 
-SRR(k, :, :) = slr * SRR_ * slr';
+STR(k, :, :) = slt * STR_ * slr; 
+SRT(k, :, :) = slr * SRT_ * slt; 
+SRR(k, :, :) = slr * SRR_ * slr;
 
 end
 
 
-save('Stt5_ratio_1_modes_variable_test', 'STT');
-save('Str5_ratio_1_modes_variable_test', 'STR');
-save('Srt5_ratio_1_modes_variable_test', 'SRT');
-save('Srr5_ratio_1_modes_variable_test', 'SRR');
+% save('Stt5_ratio_1_modes_variable_test', 'STT');
+% save('Str5_ratio_1_modes_variable_test', 'STR');
+% save('Srt5_ratio_1_modes_variable_test', 'SRT');
+% save('Srr5_ratio_1_modes_variable_test', 'SRR');
 
 
 

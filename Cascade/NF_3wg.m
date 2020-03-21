@@ -12,13 +12,11 @@ rd = 2.2e-2;
 re = 2.3e-2;
 
 
-
-
-R = [rr rp rt rd re]; % radius vector
+R = [rr rp rt]; % radius vector
 
 n = length(R);
 
-F = 14e9; % Frequency of operation
+F = 8e9; % Frequency of operation
 
 er = ones(1, n); % Relative Permittivity of each WG section
 mur = ones(1, n); % Relative Permeability of each WG sectio
@@ -26,9 +24,14 @@ mur = ones(1, n); % Relative Permeability of each WG sectio
 epsilon = er .* er0;
 mu = mur .* mu0;
 
-L = 1e-3 * [0.5 1 1 20 0.5]; % length of each waveguide section
+L = 1e-3 * [0.5 20 0.5]; % length of each waveguide section
 
 [STT, STR, SRT, SRR, N] = GSM_N(R, L, er, mur, F);
+
+% STR(1, 3, 3) = 0.0223 + 1j * 0.993;
+% 
+% SRT(1, 3, 3) = 0.0223 + 1j * 0.993;
+
 % 
 % STR(1, 3:5, 3:5) = -real(STR(1, 3:5, 3:5)) - 1j .* imag(STR(1, 3:5, 3:5));
 % SRT(1, 3:5, 3:5) = -real(SRT(1, 3:5, 3:5)) - 1j .* imag(SRT(1, 3:5, 3:5));
@@ -36,7 +39,7 @@ L = 1e-3 * [0.5 1 1 20 0.5]; % length of each waveguide section
 %% 
 [rho, phi] = meshgrid(eps:R(1)/100:R(1),  eps:pi/180:2*pi-eps);
 
-z = 0;
+z = 0.0005;
 
 [Er_rho, Er_phi, Er_z] = E_r(1:1:N(1), rho, phi, F, R(1), z, epsilon(1), mu(1));
 
@@ -44,7 +47,7 @@ ap = zeros(N(end), 1);
 ar = ones(N(1), 1);
 
 
-br = squeeze(SRT(1, :, :)) * ap + squeeze(SRR(1, :, :)) * ar;
+br = squeeze(SRT(1, 1:N(1), 1:N(1))) * ap + squeeze(SRR(1, 1:N(1), 1:N(1))) * ar;
 
 Gamma_sum = ar + br;
 
@@ -100,7 +103,7 @@ z = 0;
 ap = zeros(N(end), 1);
 ar = ones(N(1), 1);
 
-bp = squeeze(STT(1, :, :)) * ap + squeeze(STR(1, :, :)) * ar;
+bp = squeeze(STT(1, 1:N(end), 1:N(end))) * ap + squeeze(STR(1, 1:N(end), 1:N(end))) * ar;
 Gamma_sum = ap + bp;
 
 E_aperture_rho = zeros(size(rho));
@@ -110,7 +113,7 @@ E_aperture_z = zeros(size(rho));
 for k = 1:N(end)
     E_aperture_rho = E_aperture_rho + squeeze(Ep_rho(k, :, :)) .* (Gamma_sum(k));
     E_aperture_phi = E_aperture_phi + squeeze(Ep_phi(k, :, :)) .* (Gamma_sum(k));
-    E_aperture_z = E_aperture_z + squeeze(Ep_z(k, :, :)) .* (Gamma_sum(k));
+%     E_aperture_z = E_aperture_z + squeeze(Ep_z(k, :, :)) .* (Gamma_sum(k));
 end
 
 % E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2 + abs(E_aperture_z).^2);

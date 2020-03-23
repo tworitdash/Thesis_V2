@@ -6,12 +6,12 @@ clear;
 
 rr = 2e-2; % Base radius
 rt = 4e-2; % Top redius
-n = 35; % number of transitions
+n = 5; % number of transitions
 
 R = linspace(rr, rt, n); % radius vector
 
 
-F = 1e9:0.5e9:41e9; % Frequency of operation
+F = 4e9:0.5e9:21e9; % Frequency of operation
 
 er = ones(1, n); % Relative Permittivity of each WG section
 mur = ones(1, n); % Relative Permeability of each WG section
@@ -20,7 +20,13 @@ Length = 5e-2; % height of the cone
 
 L = ones(1, n) .* Length/n; % length of each waveguide section
 
-N = round(linspace(5, 25, n));
+for i = 1:n
+    f =  fc(R(i), er(i), mur(i));
+    N_i  =  find(f < F(end));
+    N(i) = length(N_i);
+end
+
+% N = round(linspace(24, 82, n));
 
 % N = 1:1:5 ; % Number of modes
 
@@ -72,10 +78,10 @@ SRR(k, :, :) = slr * SRR_ * slr;
 end
 
 
-save('Stt_cone_replica_35', 'STT');
-save('Str_cone_replica_35', 'STR');
-save('Srt_cone_replica_35', 'SRT');
-save('Srr_cone_replica_35', 'SRR');
+save('Stt_cone_replica_5_conv', 'STT');
+save('Str_cone_replica_5_conv', 'STR');
+save('Srt_cone_replica_5_conv', 'SRT');
+save('Srr_cone_replica_5_conv', 'SRR');
 
 
 

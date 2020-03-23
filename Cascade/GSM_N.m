@@ -1,4 +1,4 @@
-function [STT, STR, SRT, SRR, N_] = GSM_N(R, L, er, mur, F)
+function [STT, STR, SRT, SRR, N] = GSM_N(R, L, er, mur, F)
 
 
 n = length(R);
@@ -6,12 +6,12 @@ n = length(R);
 for i = 1:n
     f =  fc(R(i), er(i), mur(i));
     N_i  =  find(f < F);
-    N_(i) = length(N_i);
+    N(i) = length(N_i);
 end
 
 % N = round(linspace(5, 25, n));
 
-N = [20 20 20] ; % Number of modes
+% N = [20 20 20] ; % Number of modes
 
 J = length(R) - 1; % Number of Junctions
 %% Frequency independent inner cross product 

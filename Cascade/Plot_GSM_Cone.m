@@ -15,13 +15,13 @@ s_params_5_feko = extract(data5_feko,'S_PARAMETERS');
 
 %%
 
-c_pp = load('Stt_cone_replica_5_conv.mat');
+c_pp = load('Stt_cone_replica_10_conv.mat');
 SPP = c_pp.STT;
-c_pr = load('Str_cone_replica_5_conv.mat');
+c_pr = load('Str_cone_replica_10_conv.mat');
 SPR = c_pr.STR;
-c_rp = load('Srt_cone_replica_5_conv.mat');
+c_rp = load('Srt_cone_replica_10_conv.mat');
 SRP = c_rp.SRT;
-c_rr = load('Srr_cone_replica_5_conv.mat');
+c_rr = load('Srr_cone_replica_10_conv.mat');
 SRR = c_rr.SRR;
 
 %% SPP 

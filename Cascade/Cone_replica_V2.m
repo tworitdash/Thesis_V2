@@ -6,7 +6,7 @@ clear;
 
 rr = 2e-2; % Base radius
 rt = 4e-2; % Top redius
-n = 25; % number of transitions
+n = 30; % number of transitions
 
 R = linspace(rr, rt, n); % radius vector
 
@@ -78,10 +78,10 @@ SRR(k, :, :) = slr * SRR_ * slr;
 end
 
 
-save('Stt_cone_replica_25_conv', 'STT');
-save('Str_cone_replica_25_conv', 'STR');
-save('Srt_cone_replica_25_conv', 'SRT');
-save('Srr_cone_replica_25_conv', 'SRR');
+save('Stt_cone_replica_30_conv', 'STT');
+save('Str_cone_replica_30_conv', 'STR');
+save('Srt_cone_replica_30_conv', 'SRT');
+save('Srr_cone_replica_30_conv', 'SRR');
 
 
 

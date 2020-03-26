@@ -13,7 +13,7 @@ N = 30;
 parfor i = 1:N
 
 Nr = 1:1:i;
-Np = 1:1:2 * i;
+% Np = 1:1:2 * i;
 
 erp = 1;
 murp = 1;
@@ -22,6 +22,10 @@ murr = 1;
 
 f =  fc(rr, 1, 1);
 F = f(i) + eps;
+
+f1 = fc(rp, 1, 1);
+[d, ix] = min(abs(f1 - F));
+Np = 1:1:ix;
 
 [X_til_pr] = Inner_p(Nr, Np, rp, rr, erp, murp, err, murr);
 
@@ -40,10 +44,10 @@ F = f(i) + eps;
 
 end
 
-save('Spp_conv_N_ratio_2_V2', 'Spp');
-save('Spr_conv_N_ratio_2_V2', 'Spr');
-save('Srp_conv_N_ratio_2_V2', 'Srp');
-save('Srr_conv_N_ratio_2_V2', 'Srr');
+save('Spp_conv_N_ratio_2_fc', 'Spp');
+save('Spr_conv_N_ratio_2_fc', 'Spr');
+save('Srp_conv_N_ratio_2_fc', 'Srp');
+save('Srr_conv_N_ratio_2_fc', 'Srr');
 % data5 = read(rfdata.data,'S_Feko_5modes_each.s10p');
 % s_params_5 = extract(data5,'S_PARAMETERS');
 

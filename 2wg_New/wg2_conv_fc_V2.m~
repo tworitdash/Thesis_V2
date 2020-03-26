@@ -2,15 +2,18 @@ clear;
 
 % F = 4e9:0.5e9:21e9;
 
-rp = 0.0405319403216/2;   % radius of the bigger waveguide
-rr = 0.0405319403216/2.1; % radius of the smaller waveguide
+% rp = 0.0405319403216/2;   % radius of the bigger waveguide
+% rr = 0.0405319403216/2.1; % radius of the smaller waveguide
+
+rp = 0.04;
+rr = 0.02;
 
 N = 30;
 
 parfor i = 1:N
 
 Nr = 1:1:i;
-Np = 1:1:i;
+% Np = 1:1:2 * i;
 
 erp = 1;
 murp = 1;
@@ -18,7 +21,10 @@ err = 1;
 murr = 1;
 
 f =  fc(rr, 1, 1);
-F = f(i);
+F = f(i) + eps;
+
+f1 = fc(rp, 1, 1);
+
 
 [X_til_pr] = Inner_p(Nr, Np, rp, rr, erp, murp, err, murr);
 
@@ -37,10 +43,10 @@ F = f(i);
 
 end
 
-save('Spp_conv_N', 'Spp');
-save('Spr_conv_N', 'Spr');
-save('Srp_conv_N', 'Srp');
-save('Srr_conv_N', 'Srr');
+save('Spp_conv_N_ratio_2_fc', 'Spp');
+save('Spr_conv_N_ratio_2_fc', 'Spr');
+save('Srp_conv_N_ratio_2_fc', 'Srp');
+save('Srr_conv_N_ratio_2_fc', 'Srr');
 % data5 = read(rfdata.data,'S_Feko_5modes_each.s10p');
 % s_params_5 = extract(data5,'S_PARAMETERS');
 

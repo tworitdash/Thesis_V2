@@ -77,10 +77,9 @@ for i = 1:1:N(end)
     [rho, phi] = meshgrid(eps:r(k)/100:r(k),  eps:pi/180:2*pi-eps);
     
     if mode == "TM"
-        Pot =  besselj(m, beta_rho .* rho) .* cos(m .* phi) .* (2./sqrt(beta_z)) .* ...
-            exp(-1j .* xmn .*((tan(Psi(2)) - Psi(2))) - (tan(Psi(1)) - Psi(1)));
-        E_z_i(i, :, :) = sqrt(K) .* sqrt(Z_i) .* (beta_rho.^2./beta_z) .* Pot; 
-        E_rho_i = 
+        F = 
+        E_z_i(i, :, :) = sqrt(K) .* sqrt(Z_i) .* (beta_rho.^2./beta_z) .* besselj(m, beta_rho .* rho) .* cos(m .* phi) .* (2./sqrt(beta_z)) .* ...
+            exp(-1j .* xmn .*((tan(Psi(2)) - Psi(2))) - (tan(Psi(1)) - Psi(1))); 
     
     else 
         

@@ -26,65 +26,65 @@ mur = ones(1, n); % Relative Permeability of each WG sectio
 epsilon = er .* er0;
 mu = mur .* mu0;
 
-L = 1e-3 * [0.5 1 1 20 0.5]; % length of each waveguide section
+L = 1e-3 * [1 1 1 20 5]; % length of each waveguide section
 
 [STT, STR, SRT, SRR, N] = GSM_N(R, L, er, mur, F);
 % 
 % STR(1, 3:5, 3:5) = -real(STR(1, 3:5, 3:5)) - 1j .* imag(STR(1, 3:5, 3:5));
 % SRT(1, 3:5, 3:5) = -real(SRT(1, 3:5, 3:5)) - 1j .* imag(SRT(1, 3:5, 3:5));
 
-%% 
-[rho, phi] = meshgrid(eps:R(1)/100:R(1),  eps:pi/180:2*pi-eps);
-
-z = 0;
-
-[Er_rho, Er_phi, Er_z] = E_r(1:1:N(1), rho, phi, F, R(1), z, epsilon(1), mu(1));
-
-ap = zeros(N(end), 1);
-ar = ones(N(1), 1);
-
-
-br = squeeze(SRT(1, :, :)) * ap + squeeze(SRR(1, :, :)) * ar;
-
-Gamma_sum = ar + br;
-
-E_aperture_rho = zeros(size(rho));
-E_aperture_phi = zeros(size(rho));
-E_aperture_z = zeros(size(rho));
-
-for k = 1:N(1)
-    E_aperture_rho = E_aperture_rho + squeeze(Er_rho(k, :, :)) .* abs(Gamma_sum(k));
-    E_aperture_phi = E_aperture_phi + squeeze(Er_phi(k, :, :)) .* abs(Gamma_sum(k));
-    E_aperture_z = E_aperture_z + squeeze(Er_z(k, :, :));% .* abs(Gamma_sum(k));
-end
-
-% E_aperture = sqrt(squeeze(abs(Er_rho(5, :, :))).^2 + squeeze(abs(Er_phi(5, :, :))).^2 + squeeze(abs(Er_z(5, :, :))).^2);
-E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2); % + abs(E_aperture_z).^2);
+% %% 
+% [rho, phi] = meshgrid(eps:R(1)/100:R(1),  eps:pi/180:2*pi-eps);
+% 
+% z = 0;
+% 
+% [Er_rho, Er_phi, Er_z] = E_r(1:1:N(1), rho, phi, F, R(1), z, epsilon(1), mu(1));
+% 
+% ap = zeros(N(end), 1);
+% ar = ones(N(1), 1);
+% 
+% 
+% br = squeeze(SRT(1, :, :)) * ap + squeeze(SRR(1, :, :)) * ar;
+% 
+% Gamma_sum = ar + br;
+% 
+% E_aperture_rho = zeros(size(rho));
+% E_aperture_phi = zeros(size(rho));
+% E_aperture_z = zeros(size(rho));
+% 
+% for k = 1:N(1)
+%     E_aperture_rho = E_aperture_rho + squeeze(Er_rho(k, :, :)) .* abs(Gamma_sum(k));
+%     E_aperture_phi = E_aperture_phi + squeeze(Er_phi(k, :, :)) .* abs(Gamma_sum(k));
+%     E_aperture_z = E_aperture_z + squeeze(Er_z(k, :, :));% .* abs(Gamma_sum(k));
+% end
+% 
+% % E_aperture = sqrt(squeeze(abs(Er_rho(5, :, :))).^2 + squeeze(abs(Er_phi(5, :, :))).^2 + squeeze(abs(Er_z(5, :, :))).^2);
 % E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2); % + abs(E_aperture_z).^2);
-
-
-x = rho .* cos(phi);
-y = rho .* sin(phi);
-
-figure;
-
-surface(x,y, db(abs(E_aperture)./max(abs(E_aperture)))); shading flat;
-% surface(x,y, (abs(E_aperture))); shading flat;
-colormap('jet');
-figure;
-
-surface(x,y, db(abs(E_aperture_rho)./max(abs(E_aperture_rho)))); shading flat;
-colormap('jet');
-figure;
- 
-surface(x,y, db(abs(E_aperture_phi)./max(abs(E_aperture_phi)))); shading flat;
-colormap('jet');
+% % E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2); % + abs(E_aperture_z).^2);
+% 
+% 
+% x = rho .* cos(phi);
+% y = rho .* sin(phi);
+% 
 % figure;
 % 
-% surface(x,y, db(abs(E_aperture_z)./max(abs(E_aperture_z)))); shading flat;
+% surface(x,y, db(abs(E_aperture)./max(abs(E_aperture)))); shading flat;
+% % surface(x,y, (abs(E_aperture))); shading flat;
 % colormap('jet');
-
-Plot_NF_feko_V2;
+% figure;
+% 
+% surface(x,y, db(abs(E_aperture_rho)./max(abs(E_aperture_rho)))); shading flat;
+% colormap('jet');
+% figure;
+%  
+% surface(x,y, db(abs(E_aperture_phi)./max(abs(E_aperture_phi)))); shading flat;
+% colormap('jet');
+% % figure;
+% % 
+% % surface(x,y, db(abs(E_aperture_z)./max(abs(E_aperture_z)))); shading flat;
+% % colormap('jet');
+% 
+% Plot_NF_feko_V2;
 
 
 

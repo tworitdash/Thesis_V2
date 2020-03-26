@@ -1,22 +1,16 @@
-A = load('SPP_conv.mat');
+A = load('Spp_conv_N.mat');
+Spp = A.Spp;
 
-F = 4e9:0.5e9:21e9;
+N = 1:1:30;
 
-R = 0.0405319403216/2.1;
+figure;
 
-f =  fc(R, 1, 1);
-    
+plot(N, db(abs((Spp))), 'LineWidth', 2); grid on;
 
-for i = 23:30
-    freq = f(i) + eps;
-    j = find(abs(F - freq) < 1e8);
-    if isempty(j)
-        j = find(abs(F - freq) < 4e8);
-        j = min(j);
-    elseif isempty(j)
-        j = find(abs(F - freq) < 1e9);
-        j = min(j);
-    end
-    Spp(i) = A.Spp(i).Spp_i(j);
-end
+
+xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
+ylabel('S in dB', 'FontSize', 12, 'FontWeight', 'bold');
+title(['S_{pp} magnitude of TE_{11}'], 'FontSize', 12, 'FontWeight', 'bold')
+
+xlim([1 30]);
 

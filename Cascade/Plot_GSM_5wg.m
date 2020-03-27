@@ -24,7 +24,7 @@ c_rr = load('Srr5_ratio_1_modes_20.mat');
 SRR = c_rr.SRR;
 
 
-SPR(:, 3:5, 3:5) = -real(SPR(:, 3:5, 3:5)) - 1j .* imag(SPR(:, 3:5, 3:5));
+% SPR(:, 3:5, 3:5) = -real(SPR(:, 3:5, 3:5)) - 1j .* imag(SPR(:, 3:5, 3:5));
 % SRT(1, 3:5, 3:5) = -real(SRT(1, 3:5, 3:5)) + imag(STR(1, 3:5, 3:5));
 
 %% SPP 
@@ -96,8 +96,8 @@ xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S parameter Phase in deg', 'FontSize', 12, 'FontWeight', 'bold');
 title(['S parameter Phase'], 'FontSize', 12, 'FontWeight', 'bold')
 
-legend({'S_{TR} of TE_{11} MM', 'S_{TR} of TE_{11} CST',...
-    'S_{TR} of TE_{11} FEKO'},...
+legend({'S_{TR} of TE_{21} MM', 'S_{TR} of TE_{21} CST',...
+    'S_{TR} of TE_{21} FEKO'},...
     'FontSize', 12, 'FontWeight', 'bold');
 
 xlim([5 21]);

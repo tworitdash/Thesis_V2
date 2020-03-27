@@ -1,4 +1,4 @@
-A = load('Spr_conv_N_ratio_2.mat');
+A = load('Spr_conv_N_ratio_2_fc.mat');
 Spp = A.Spr;
 
 N = 1:1:30;

@@ -11,7 +11,7 @@ phi_f = A(1:100:36000, 2) * pi/180;
 z_f = A(1, 1);
 aux = A(:, 4:9);
 
-[rho_f, phi_f] = meshgrid(rho_f, pi - phi_f);
+[rho_f, phi_f] = meshgrid(rho_f, phi_f);
 
 x_f = rho_f .* cos(phi_f);
 y_f = rho_f .* sin(phi_f);

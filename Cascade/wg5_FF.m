@@ -1,6 +1,6 @@
 c0 = 3e8;
 
-F = 18e9; % Frequency at which far field is requested
+F = 14e9; % Frequency at which far field is requested
 
 er0 = 8.85418782e-12; % Free space permittivity
 mu0 = 1.25663706e-6;  % Free Space Permeability

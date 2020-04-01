@@ -26,7 +26,7 @@ mur = ones(1, n); % Relative Permeability of each WG sectio
 epsilon = er .* er0;
 mu = mur .* mu0;
 
-L = 1e-3 * [1 1 1 20 5]; % length of each waveguide section
+L = 1e-3 * [1 1 1 20 1]; % length of each waveguide section
 
 [STT, STR, SRT, SRR, N] = GSM_N(R, L, er, mur, F);
 % 

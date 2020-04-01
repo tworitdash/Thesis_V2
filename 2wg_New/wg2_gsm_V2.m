@@ -1,3 +1,4 @@
+tic;
 
 clear;
 
@@ -56,10 +57,10 @@ end
 
 
 
-save('Spp2_ratio_1_modes_20_test', 'Spp');
-save('Spr2_ratio_1_modes_20_test', 'Spr');
-save('Srp2_ratio_1_modes_20_test', 'Srp');
-save('Srr2_ratio_1_modes_20_test', 'Srr');
+% save('Spp2_ratio_1_modes_20_test', 'Spp');
+% save('Spr2_ratio_1_modes_20_test', 'Spr');
+% save('Srp2_ratio_1_modes_20_test', 'Srp');
+% save('Srr2_ratio_1_modes_20_test', 'Srr');
 
 
 %%
@@ -99,20 +100,22 @@ save('Srr2_ratio_1_modes_20_test', 'Srr');
 
 %% 
 
-figure;
+% figure;
+% 
+% hold on;
+% 
+% plot(F * 1e-9, db(abs(squeeze(Srr(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+% hold on;
+% 
+% figure;
+% 
+% plot(F * 1e-9, db(abs(squeeze(Spr(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+% hold on;
+% plot(F * 1e-9, db(abs(squeeze(Srp(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+% 
+% figure;
+% 
+% plot(F * 1e-9, db(abs(squeeze(Srr(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+% hold on;
 
-hold on;
-
-plot(F * 1e-9, db(abs(squeeze(Srr(:, 1, 1))))/2, 'LineWidth', 2); grid on;
-hold on;
-
-figure;
-
-plot(F * 1e-9, db(abs(squeeze(Spr(:, 1, 1))))/2, 'LineWidth', 2); grid on;
-hold on;
-plot(F * 1e-9, db(abs(squeeze(Srp(:, 1, 1))))/2, 'LineWidth', 2); grid on;
-
-figure;
-
-plot(F * 1e-9, db(abs(squeeze(Srr(:, 1, 1))))/2, 'LineWidth', 2); grid on;
-hold on;
+wg2_time = toc;

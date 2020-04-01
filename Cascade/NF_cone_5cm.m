@@ -2,7 +2,7 @@ clear;
 
 rr = 2e-2; % Base radius
 rt = 4e-2; % Top redius
-n = 40; % number of transitions
+n = 20; % number of transitions
 
 
 er0 = 8.85418782e-12; % Free space permittivity

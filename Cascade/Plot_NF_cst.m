@@ -23,9 +23,6 @@ E_x = sqrt(aux(f, 1).Var4.^2 + aux(f, 2).Var5.^2);
 E_y = sqrt(aux(f, 3).Var6.^2 + aux(f, 4).Var7.^2);
 E_z = sqrt(aux(f, 5).Var8.^2 + aux(f, 6).Var9.^2);
 
-E_rho = sqrt(abs(E_x).^2 + abs(E_y).^2);
-E_phi = atan(E_y./E_x);
-
 
 
 E_tot = sqrt(abs(E_x).^2 + abs(E_y).^2);% + abs(E_z).^2);

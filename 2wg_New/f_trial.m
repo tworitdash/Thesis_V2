@@ -13,10 +13,10 @@ mur = 1;
 % r = 0.0405319403216/1.9;
 % =======
 %r = 0.0405319403216/2;
-r = 0.02;
+% r = 0.02;
 % >>>>>>> 37893f8e2e343fb0a1d771a64115f47cd4bdd608
 % >>>>>>> 6b2fa7a377ba53aa8926e3d7fc38c64120eda933
-
+r = 2e-2;
 c0 = 3e8;
 er0 = 8.85418782e-12; % Free space permittivity
 mu0 = 1.25663706e-6;  % Free Space Permeability

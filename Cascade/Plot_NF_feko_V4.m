@@ -39,31 +39,64 @@ E_rho_reshape = reshape(E_rho, 100, 360);
 E_phi_reshape = reshape(E_phi, 100, 360);
 E_z_reshape = reshape(E_z, 100, 360);
 
-
-figure;
-
-% surface(x_f, y_f, db((abs(E_tot_reshape).'))); shading flat;
-
-surface(x_f, y_f, db((abs(E_tot_reshape).')./max(max(abs(E_tot_reshape).')))); shading flat;
-
-colormap('jet');
-
 % 
-% % surface(x_f, y_f, (abs(E_tot_reshape).')); shading flat;
+% figure;
+% 
+% % surface(x_f, y_f, db((abs(E_tot_reshape).'))); shading flat;
+% 
+% surface(x_f, y_f, db((abs(E_tot_reshape).')./max(max(abs(E_tot_reshape).')))); shading flat;
 % 
 % colormap('jet');
+% 
+% % 
+figure;
+surface(x_f, y_f, db(abs(E_tot_reshape).')); shading flat;
+
+colormap('jet');
 
 figure;
 
-surface(x_f, y_f, db((abs(E_rho_reshape).')./max(max(abs(E_rho_reshape).')))); shading flat;
+surface(x_f, y_f, db((abs(E_rho_reshape).'))); shading flat;
 colormap('jet');
 
 
 figure;
 
-surface(x_f, y_f, db((abs(E_phi_reshape).')./max(max(abs(E_phi_reshape).')))); shading flat;
+surface(x_f, y_f, db((abs(E_phi_reshape).'))); shading flat;
 colormap('jet');
 
+
+
+% figure;
+% 
+% surface(x_f, y_f, (real(E_rho_reshape_).')); shading flat;
+% title('Re E_{\rho}')
+% 
+% % max(max(abs(E_rho)))
+% 
+% colormap('jet');
+% 
+% figure;
+% 
+% surface(x_f, y_f, (real(E_phi_reshape_).')); shading flat;
+% title('Re E_{\phi}')
+% 
+% colormap('jet');
+% 
+% 
+% figure;
+% 
+% surface(x_f, y_f, (imag(E_rho_reshape_).')); shading flat;
+% title('Im E_{\rho}')
+% % max(max(abs(E_rho)))
+% 
+% colormap('jet');
+% 
+% figure;
+% 
+% surface(x_f, y_f, (imag(E_phi_reshape_).')); shading flat;
+% title('Im E_{\phi}')
+% colormap('jet');
 
 % figure;
 % 
@@ -101,17 +134,15 @@ colormap('jet');
 % grid on;
 
 
-figure;
-
-surface(x_f, y_f, angle((E_rho_reshape_).')); shading flat;
-
-colormap('jet');
-
-figure;
-
-surface(x_f, y_f, angle((E_phi_reshape_).')); shading flat;
-colormap('jet');
-
-system('rm result.txt');
-
-
+% figure;
+% 
+% surface(x_f, y_f, angle((E_rho_reshape).')); shading flat;
+% 
+% colormap('jet');
+% 
+% figure;
+% 
+% surface(x_f, y_f, angle((E_phi_reshape).')); shading flat;
+% colormap('jet');
+% 
+% system('rm result.txt');

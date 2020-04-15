@@ -2,7 +2,7 @@ clear;
 
 rr = 2e-2; % Base radius
 rt = 4e-2; % Top redius
-n = 40; % number of transitions
+n = 20; % number of transitions
 
 
 er0 = 8.85418782e-12; % Free space permittivity
@@ -12,7 +12,7 @@ R = linspace(rr, rt, n); % radius vector
 
 n = length(R);
 
-F = 14e9; % Frequency of operation
+F = 20.38e9; % Frequency of operation
 
 er = ones(1, n); % Relative Permittivity of each WG section
 mur = ones(1, n); % Relative Permeability of each WG section
@@ -24,10 +24,12 @@ mu = mur .* mu0;
 Length = 5e-2; % height of the cone
 
 L = ones(1, n) .* Length/n; % length of each waveguide section
-% L(1) = L(1)/2;
-% L(end) = L(end)/2;
+L(1) = 5 * L(1);
+L(end) = 7.5e-3;
 
-[STT, STR, SRT, SRR, N] = GSM_N(R, L, er, mur, F);
+k = 0; % number of evanascent modes considered in the analysis
+
+[STT, STR, SRT, SRR, N] = GSM_N(R, L, er, mur, F, 0);
 
 %% 
 % [rho, phi] = meshgrid(eps:R(1)/100:R(1),  eps:pi/180:2*pi-eps);
@@ -87,6 +89,8 @@ L = ones(1, n) .* Length/n; % length of each waveguide section
 
 %%  ----------------------------------------------------------------------------------------------------------
 
+
+
 [rho, phi] = meshgrid(eps:R(end)/100:R(end), eps:pi/180:2*pi+eps);
 
 z = 0;
@@ -99,6 +103,7 @@ ar = ones(N(1), 1);
 
 bp = squeeze(STT(1, :, :)) * ap + squeeze(STR(1, :, :)) * ar;
 Gamma_sum = ap + bp;
+% Gamma_sum = ones(size(ap));
 
 E_aperture_rho = zeros(size(rho));
 E_aperture_phi = zeros(size(rho));
@@ -151,5 +156,20 @@ Plot_NF_feko_V2;
 
 
 
+%% 
+
+% 
+% figure;
+% surface(x, y, db((abs(E_aperture))./max(max(abs(E_aperture))))); shading flat;
+% colormap('jet');
+% figure;
+% 
+% surface(x,y, db(abs(E_aperture_rho))); shading flat;
+% colormap('jet');
+% 
+% figure;
+% 
+% surface(x,y, db(abs(E_aperture_phi))); shading flat;
+% colormap('jet');
 
 

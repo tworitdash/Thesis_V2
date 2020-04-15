@@ -1,4 +1,4 @@
-function [STT, STR, SRT, SRR, N] = GSM_N(R, L, er, mur, F, k)
+function [STT, STR, SRT, SRR, N_] = GSM_N(R, L, er, mur, F, k)
 
 
 n = length(R);
@@ -9,7 +9,7 @@ for i = 1:n
     N_(i) = length(N_i);
 end
 
-if (n == 2) && (N_(end) < 30)
+if (N_(end) < 30)
     %N = [20 round(20 * (R(end)/R(1))^2)];
     N = N_ + k;
 else

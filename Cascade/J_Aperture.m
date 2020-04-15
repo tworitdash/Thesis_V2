@@ -5,7 +5,7 @@ function [J_ft_x, J_ft_y, J_ft_z] = J_Aperture(J_cx, J_cy, J_cz, drho, dphi, k0,
     J_ft_z = zeros(size(theta_obs, 1), size(theta_obs, 2));
     
      for i = 1:size(theta_obs, 1)
-         for j = 1:size(theta_obs, 2) %for reflector
+         for j = 1:size(theta_obs, 2) 
 
             J_i_x = J_cx .* exp(1j * k0 .* rho .* sin(theta_obs(i, j)) .* cos(phi_obs(i, j) - ph)) .* rho ;
             J_i_y = J_cy .* exp(1j * k0 .* rho .* sin(theta_obs(i, j)) .* cos(phi_obs(i, j) - ph)) .* rho ;

@@ -10,7 +10,7 @@ th = A.Theta_deg_;
 E_phi_0 = A.Phi_0Deg_V_;
 E_phi_90 = A.Phi_90Deg_V_;
 
-
+figure(102)
 hold on;
 plot(th, db(abs(E_phi_0)/max(abs(E_phi_0))), 'LineWidth', 2);
 hold on;

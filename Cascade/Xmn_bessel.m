@@ -2,6 +2,8 @@
 clear;
 
 m = 0:1:100;
+% m = 1:1:100;
+% m = 1;
 
 for j = 1:length(m)
 

@@ -92,12 +92,13 @@ L = 1e-3 * [1 1 1 20 0.5]; % length of each waveguide section
 
 
 
-
+drho = R(end)/100;
+dphi = pi/180;
 [rho, phi] = meshgrid(eps:R(end)/100:R(end), eps:pi/180:2*pi+eps);
 
 z = 0;
 
-[Ep_rho, Ep_phi, Ep_z] = E_r(1:1:N(end), rho, phi, F, R(end), z, epsilon(end), mu(end));
+[Ep_rho, Ep_phi] = E_n(1:1:N(end), rho, phi, F, R(end), z, epsilon(end), mu(end), drho, dphi);
 
 
 ap = zeros(N(end), 1);

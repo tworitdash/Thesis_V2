@@ -29,7 +29,7 @@ s_obs = squeeze(STR(1, :, :));
 
 angle_diff = (angle(str) - angle(s_obs)) * 180/pi;
 
-abs_diff = abs(str) - abs(s_obs);
+abs_diff = abs(abs(str) - abs(s_obs));
 
 real_diff = abs(real(str) - real(s_obs));
 imag_diff = abs(imag(str) - imag(s_obs));
@@ -41,12 +41,14 @@ imag_diff_abs = (abs(imag(str)) - abs(imag(s_obs)));
 figure;
 
 surface(1:1:10, 1:1:38, (angle_diff), 'LineWidth', 2); shading flat;
+colorbar;
 
 grid on;
 
 figure;
 
 surface(1:1:10, 1:1:38, (abs_diff), 'LineWidth', 2); shading flat;
+colorbar;
 
 grid on;
 % 
@@ -90,11 +92,11 @@ grid on;
 figure;
 
 surface(1:1:10, 1:1:38, abs(str), 'LineWidth', 2); shading flat;
-
+colorbar;
 grid on;
 
 figure;
 
-surface(1:1:20, 1:1:78, db(abs(s_obs)), 'LineWidth', 2); shading flat;
-
+surface(1:1:10, 1:1:38, (abs(s_obs)), 'LineWidth', 2); shading flat;
+colorbar;
 grid on;

@@ -1,4 +1,5 @@
 clear;
+tic;
 
 % M = 10; % Number of elements in between the first and last waveguide
 
@@ -31,7 +32,7 @@ murp = 1;
 murr = 1;
 
 % [X_til_rp] = Inner_p(Nr, Np, rp, rr, erp, murp, err, murr);
-[X_til_rp] = Inner_p(N1, N2, r(2), r(1), erp, murp, err, murr);
+[X_til_rp] = Inner_p2(N1, N2, r(2), r(1), erp, murp, err, murr);
 
 %% Inner Cross Product of Last junction (larger dimension)
 
@@ -49,7 +50,7 @@ murp = 1;
 
 % [X_til_pt] = Inner_p(Np, Nt, rt, rp, ert, murt, erp, murp);
 
-[X_til_pt] = Inner_p(Ns, Ne, r(end), r(end - 1), ert, murt, erp, murp);
+[X_til_pt] = Inner_p2(Ns, Ne, r(end), r(end - 1), ert, murt, erp, murp);
 
 %% Frequency dependent terms:
 parfor k = 1:length(F)
@@ -61,8 +62,8 @@ disp(k);
 % [S11, S12, S21, S22] = GSM(Np, Nt, F(k), rt, rp, erp, murp, err, murr, X_til_pt);
 
 
-[S33, S34, S43, S44] = GSM(N1, N2, F(k), r(2), r(1), erp, murp, err, murr, X_til_rp);
-[S11, S12, S21, S22] = GSM(Ns, Ne, F(k), r(end), r(end - 1), erp, murp, err, murr, X_til_pt);
+[S33, S34, S43, S44] = GSM_V2(N1, N2, F(k), r(2), r(1), erp, murp, err, murr, X_til_rp);
+[S11, S12, S21, S22] = GSM_V2(Ns, Ne, F(k), r(end), r(end - 1), erp, murp, err, murr, X_til_pt);
 
 Sl = eye(length(N2), length(N2));
 
@@ -105,11 +106,11 @@ SRR(k, :, :) = Slr * (S44 + S43 * Sl * U1 * S22 * Sl * S34) * Slr;
 end
 %% Plots
 
-
-save('Stt3_ratio_1_modes_20_1mm', 'STT');
-save('Str3_ratio_1_modes_20_1mm', 'STR');
-save('Srt3_ratio_1_modes_20_1mm', 'SRT');
-save('Srr3_ratio_1_modes_20_1mm', 'SRR');
+% 
+% save('Stt3_ratio_1_modes_20_1mm', 'STT');
+% save('Str3_ratio_1_modes_20_1mm', 'STR');
+% save('Srt3_ratio_1_modes_20_1mm', 'SRT');
+% save('Srr3_ratio_1_modes_20_1mm', 'SRR');
 
 F_cst = linspace(4e9, 21e9, 1001);
 % data5_cst = read(rfdata.data,'../../Thesis/Bessel/Thesis_circ_step/Cascade/3wg_V1.s39p');
@@ -124,23 +125,25 @@ s_params_5_feko = extract(data5_feko,'S_PARAMETERS');
 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(STR(:, 1, 1))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(SRR(:, 1, 1)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(1, 21, :))))/2, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(21, 21, :)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(11, 1, :))))/2, 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(1, 1, :)))), 'LineWidth', 2); grid on;
 
 
-xlim([5 21])
+xlim([5 21]);
 
 
 figure;
 
-plot(F * 1e-9, angle((squeeze(STR(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(SRR(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(1, 21, :)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(21, 21, :)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, angle((squeeze(s_params_5_feko(11, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(s_params_5_feko(1, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
 
 
-xlim([5 21])
+xlim([5 21]);
+
+wg3_time = toc;

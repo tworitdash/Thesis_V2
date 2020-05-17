@@ -1,4 +1,4 @@
-function [E_aperture_rho, E_aperture_phi] = Near_field_fun(er, mur, R, F, L, rho, phi, k, drho, dphi)
+function [E_aperture_rho, E_aperture_phi] = Near_field_fun(er, mur, R, F, L, rho, phi, k, drho, dphi, A)
 
 
 er0 = 8.85418782e-12; % Free space permittivity
@@ -30,32 +30,42 @@ E_aperture_phi = zeros(size(rho));
 % E_aperture_z = zeros(size(rho));
 
 for k = 1:N(end)
-    E_aperture_rho = E_aperture_rho + squeeze(Ep_rho(k, :, :)) .* (Gamma_sum(k)) .* exp(1j .* pi/2);
-    E_aperture_phi = E_aperture_phi + squeeze(Ep_phi(k, :, :)) .* (Gamma_sum(k)) .* exp(1j .* pi/2);
+    if (k == 2) || (k == 10)
+        j = 1;
+    else
+        j = 2;
+    end
+    if (k == 4)
+        l = 2;
+    else
+        l = 1;
+    end
+    E_aperture_rho = E_aperture_rho + squeeze(Ep_rho(k, :, :)) .* (Gamma_sum(k)) .* exp(1j .* pi/2) .* A(l, k);
+    E_aperture_phi = E_aperture_phi + squeeze(Ep_phi(k, :, :)) .* (Gamma_sum(k)) .* exp(1j .* pi/2) .* A(j, k);
 %     E_aperture_z = E_aperture_z + squeeze(Ep_z(k, :, :)) .* (Gamma_sum(k));
 end
 
 % E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2 + abs(E_aperture_z).^2);
 
-% E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2);
+E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2);
 
-% x = rho .* cos(phi);
-% y = rho .* sin(phi);
-% 
-% figure;
-% surface(x, y, db((abs(E_aperture))./max(max(abs(E_aperture))))); shading flat;
-% 
+x = rho .* cos(phi);
+y = rho .* sin(phi);
+
+figure;
+surface(x, y, db((abs(E_aperture))./max(max(abs(E_aperture))))); shading flat;
+
 % % surface(x, y, (abs(E_aperture))); shading flat;
 % 
 % colormap('jet');
-% figure;
-% 
-% surface(x,y, db(abs(E_aperture_rho)./max(max(abs(E_aperture_rho))))); shading flat;
-% colormap('jet');
-% 
-% figure;
-% 
-% surface(x,y, db(abs(E_aperture_phi)./max(max(abs(E_aperture_phi))))); shading flat;
-% colormap('jet');
+figure;
+
+surface(x,y, db(abs(E_aperture_rho)./max(max(abs(E_aperture_rho))))); shading flat;
+colormap('jet');
+
+figure;
+
+surface(x,y, db(abs(E_aperture_phi)./(max(max(abs(E_aperture_phi))+ eps)))); shading flat;
+colormap('jet');
 
 end

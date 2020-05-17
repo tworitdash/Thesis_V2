@@ -1,11 +1,14 @@
 c0 = 3e8;
 
-F = 14e9;
+F = 20e9;
+
 lamb = c0/F;
 
-N = 3;
+N = 200;
 
-R = 2.3e-2;
+R = rr;
+
+r = R;
 
 z = 0.005; % + lamb/4;
 
@@ -58,13 +61,19 @@ E_abs_full = sqrt(abs(E_rho).^2 + abs(E_phi).^2);
 
 figure;
 
-surface(rho .* cos(phi), rho .* sin(phi), db(abs(E_abs_full)./max(max((abs(E_abs_full)))))); shading flat;
+surface(rho .* cos(phi), rho .* sin(phi), db(abs(E_abs_full)./(max(max((abs(E_abs_full))))))); shading flat;
+
+% surface(rho .* cos(phi), rho .* sin(phi), db(abs(E_abs_full))); shading flat;
+
 
 colormap('jet');
 
 figure;
 
-surface(rho .* cos(phi), rho .* sin(phi), db(abs(E_rho)./max(max((abs(E_rho)))))); shading flat;
+surface(rho .* cos(phi), rho .* sin(phi), db(abs(E_rho)./(max(max((abs(E_rho))))))); shading flat;
+
+% surface(rho .* cos(phi), rho .* sin(phi), db(abs(E_rho))); shading flat;
+
 
 % max(max(abs(E_rho)))
 
@@ -72,25 +81,26 @@ colormap('jet');
 
 figure;
 
-surface(rho .* cos(phi), rho .* sin(phi), db(abs(E_phi)./max(max((abs(E_phi)))))); shading flat;
+surface(rho .* cos(phi), rho .* sin(phi), db(abs(E_phi)./(eps + max(max((abs(E_phi))))))); shading flat;
+% surface(rho .* cos(phi), rho .* sin(phi), db(abs(E_phi))); shading flat;
 
 colormap('jet');
 
 %% figure;
 
-figure;
-
-surface(rho .* cos(phi), rho .* sin(phi), db(abs(Ex)./max(max((abs(Ex)))))); shading flat;
-
-% max(max(abs(E_rho)))
-
-colormap('jet');
-
-figure;
-
-surface(rho .* cos(phi), rho .* sin(phi), db(abs(Ey)./max(max((abs(Ey)))))); shading flat;
-
-colormap('jet');
+% figure;
+% 
+% surface(rho .* cos(phi), rho .* sin(phi), db(abs(Ex)./max(max((abs(Ex)))))); shading flat;
+% 
+% % max(max(abs(E_rho)))
+% 
+% colormap('jet');
+% 
+% figure;
+% 
+% surface(rho .* cos(phi), rho .* sin(phi), db(abs(Ey)./max(max((abs(Ey)))))); shading flat;
+% 
+% colormap('jet');
 
 %%
 
@@ -105,5 +115,5 @@ figure;
 surface(rho .* cos(phi), rho .* sin(phi), angle((E_phi))); shading flat;
 colormap('jet');
 % % 
-Plot_NF_feko_V2;
+Plot_NF_feko_V4;
 % 

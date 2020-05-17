@@ -34,7 +34,7 @@ K = 10;
 
 for k = 1:length(K)
 
-[E_aperture_rho, E_aperture_phi] = Near_field_fun(er, mur, R, F, L, rho, ph, K(k), drho, dphi);
+[E_aperture_rho, E_aperture_phi] = Near_field_fun_2(er, mur, R, F, L, rho, ph, K(k), drho, dphi);
 
 
 
@@ -49,31 +49,35 @@ y = rho .* sin(ph);
 E_aperture = sqrt(abs(E_aperture_rho).^2 + abs(E_aperture_phi).^2);
 
 
-figure(502)
+figure(501)
 surface(x,y, db(abs(E_aperture)./max(max(abs(E_aperture))))); shading flat;
+colormap('jet');
+
+figure(502);
+
+surface(x,y, db(abs(E_aperture_rho)./max(max(abs(E_aperture_rho))))); shading flat;
+% surface(x,y, db(abs(E_aperture_rho))); shading flat;
 colormap('jet');
 
 figure(503);
 
-surface(x,y, db(abs(E_aperture_rho)./max(max(abs(E_aperture_rho))))); shading flat;
+surface(x,y, db(abs(E_aperture_phi)./max(max(abs(E_aperture_phi))))); shading flat;
+% surface(x,y, db(abs(E_aperture_phi))); shading flat;
 colormap('jet');
+
 
 figure(504);
-
-surface(x,y, db(abs(E_aperture_phi)./max(max(abs(E_aperture_phi))))); shading flat;
-colormap('jet');
-
-
-figure(505);
 
 surface(x, y, angle((E_aperture_rho))); shading flat;
 
 colormap('jet');
 
-figure(506);
+figure(505);
 
 surface(x, y, angle((E_aperture_phi))); shading flat;
 colormap('jet');
+
+Plot_NF_feko_V2;
 
 %% Magnetic equivalent current on the aperture
 

@@ -17,7 +17,7 @@ R = rho_f(end);
 x_f = rho_f .* cos(phi_f);
 y_f = rho_f .* sin(phi_f);
 
-F = 14e9;
+F = 5e9;
 
 % f = 20*36000:1:21*36000 - 1;
 
@@ -48,14 +48,14 @@ E_z_reshape = reshape(E_z, 100, 360);
 % % surface(x_f, y_f, db((abs(E_tot_reshape).'))); shading flat;
 % 
 % surface(x_f, y_f, db((abs(E_tot_reshape).')./max(max(abs(E_tot_reshape).')))); shading flat;
-% 
+% % 
 % colormap('jet');
 
-% 
-% % surface(x_f, y_f, (abs(E_tot_reshape).')); shading flat;
+% % 
+% surface(x_f, y_f, (abs(E_tot_reshape).')); shading flat;
 % 
 % colormap('jet');
-
+% 
 % figure;
 % 
 % surface(x_f, y_f, db((abs(E_rho_reshape).')./max(max(abs(E_rho_reshape).')))); shading flat;
@@ -86,7 +86,7 @@ dphi = pi/180;
 [rho, ph] = meshgrid(linspace(eps, R, 100), linspace(eps, 2*pi+eps, 360));
 
 [theta, phi] = meshgrid(-pi/2-eps:pi/180:pi/2-eps, eps:pi/180:2*pi+eps);
-%% 
+%
 % [Ex, Ey, Ez, Hx, Hy, Hz] = FF_M(E_rho_reshape_.', E_phi_reshape_.', rho, ph, theta, phi, F, drho, dphi);
 % 
 % E_abs = sqrt(Ex.^2 + Ey.^2 + Ez.^2);
@@ -97,6 +97,8 @@ dphi = pi/180;
 
 [Eth, Eph] = FF_M_V2(E_rho_reshape_.', E_phi_reshape_.', rho, ph, theta, phi, F, drho, dphi);
 E_abs = sqrt(abs(Eth).^2 + abs(Eph).^2);
+
+% patternCustom(E_abs,theta,phi);
 
 % figure(20);
 % % 
@@ -115,13 +117,15 @@ E_abs = sqrt(abs(Eth).^2 + abs(Eph).^2);
 % 
 % ylim([-50 0]);
 
-figure(101);
+figure(96);
 
 hold on;
-plot(theta(1, :)*(180/pi), db(abs(E_abs(1, :))/max(abs(E_abs(1, :)))), 'LineWidth', 2);
+% plot(theta(1, :)*(180/pi), db((abs(E_abs(1, :))/max(abs(E_abs(1, :))))), '*', 'LineWidth', 0.5);
+plot(theta(1, :)*(180/pi), db((abs(E_abs(1, :)))), '*', 'LineWidth', 0.5);
+% figure(42)
 hold on;
-plot(theta(90, :)*(180/pi), db(abs(E_abs(90, :))/max(abs(E_abs(90, :)))), 'LineWidth', 2);
-
+% plot(theta(90, :)*(180/pi), db((abs(E_abs(90, :))/max(abs(E_abs(90, :))))), '*', 'LineWidth', 0.5);
+plot(theta(90, :)*(180/pi), db((abs(E_abs(90, :)))), '*', 'LineWidth', 0.5);
 
 xlabel('\theta(Deg)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('E_{abs} (dB)', 'FontSize', 12, 'FontWeight', 'bold');

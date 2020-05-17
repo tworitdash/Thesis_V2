@@ -1,4 +1,4 @@
-function [Erho_n, Ephi_n] = E_n(Nr, rho, phi, F, r, z, epsilon, mu, drho, dphi)
+function [Erho_n, Ephi_n, Ez_n, Hrho_n, Hphi_n, Hz_n] = E_n(Nr, rho, phi, F, r, z, epsilon, mu, drho, dphi)
         c0 = 3e8;
         Str = load('Xmn.mat');
         Xmn = Str.Xmn;
@@ -6,10 +6,10 @@ function [Erho_n, Ephi_n] = E_n(Nr, rho, phi, F, r, z, epsilon, mu, drho, dphi)
         
         
         for i = 1:length(Nr)
-            disp(i);
-            mode = Xmn(i).mode;
-            m = Xmn(i).m;
-            xmn = Xmn(i).xmn;
+            disp(Nr(i));
+            mode = Xmn(Nr(i)).mode;
+            m = Xmn(Nr(i)).m;
+            xmn = Xmn(Nr(i)).xmn;
             
             beta_rho = xmn./r;
             beta = (2 .* pi .* F)./c0;
@@ -24,8 +24,9 @@ function [Erho_n, Ephi_n] = E_n(Nr, rho, phi, F, r, z, epsilon, mu, drho, dphi)
 
                     beta_z = -1j .* sqrt(-(beta.^2 - beta_rho.^2));
                     
-                    [Erho, Ephi, ~] = E_TE(epsilon, m, rho, phi, beta_rho, z, beta);
-                    [Hrho, Hphi, ~] = H_TE(epsilon, m, rho, phi, beta_rho, z, beta, omega, mu);
+%                     [Erho, Ephi, ~] = E_TE(epsilon, m, rho, phi, beta_rho, z, beta);
+                     [Erho, Ephi, Ez, Hrho, Hphi, Hz] = E_TE_FEKOstyle(mu, m, rho, phi, beta_rho, z, beta);
+                    %[Hrho, Hphi, ~] = H_TE(epsilon, m, rho, phi, beta_rho, z, beta, omega, mu);
 
 %                     Erho = -A .* m./(epsilon .* rho) .* besselj(m, beta_rho .* rho) .* (-C1 .* sin(m .* phi)...
 %                         + D1 .* cos(m .* phi)) .* exp(-1j .* beta_z .* z);
@@ -42,10 +43,15 @@ function [Erho_n, Ephi_n] = E_n(Nr, rho, phi, F, r, z, epsilon, mu, drho, dphi)
 %                     Hphi = -A .* (m .* beta_z ./ (omega .* mu .* epsilon .* rho)) .* besselj(m, beta_rho .* rho) .* (-C1 .* sin(m .* phi)...
 %                         + D1 .* cos(m .* phi)) .* exp(-1j .* beta_z .* z);
                     
-                    Power = P(Erho, Ephi, Hrho, Hphi, rho, drho, dphi);
-                    
+%                     Power = P(Erho, Ephi, Hrho, Hphi, rho, drho, dphi);
+%                     
                     Erho_n(i, :, :) = Erho; % ./ sqrt(Power);
                     Ephi_n(i, :, :) = Ephi; % ./ sqrt(Power);
+                    Ez_n(i, :, :) = Ez;
+                    
+                    Hrho_n(i, :, :) = Hrho;
+                    Hphi_n(i, :, :) = Hphi;
+                    Hz_n(i, :, :) = Hz;
                     
 %                     E_i(i, :, :) = sqrt(Erho.^2 + Ephi.^2 + Ez.^2);
                 
@@ -58,8 +64,8 @@ function [Erho_n, Ephi_n] = E_n(Nr, rho, phi, F, r, z, epsilon, mu, drho, dphi)
     
                     beta_z = -1j .* sqrt(-(beta.^2 - beta_rho.^2));
                     
-                    [Erho, Ephi, ~] = E_TM(epsilon, m, rho, phi, beta_rho, z, beta, omega, mu);
-                    [Hrho, Hphi, ~] = H_TM(mu, m, rho, phi, beta_rho, z, beta);
+                    [Erho, Ephi, Ez, Hrho, Hphi, Hz] = E_TM_FEKOstyle(epsilon, m, rho, phi, beta_rho, z, beta, omega, mu);
+%                     [Hrho, Hphi, ~] = H_TM(mu, m, rho, phi, beta_rho, z, beta);
     
 %                     Erho = -B .* (beta_rho .* beta_z ./ (omega .* mu .* epsilon)) .* besselj_der(m, beta_rho .* rho).* (C .* cos(m .* phi)...
 %         + D .* sin(m .* phi)) * exp(-1j .* beta_z .* z);
@@ -73,10 +79,15 @@ function [Erho_n, Ephi_n] = E_n(Nr, rho, phi, F, r, z, epsilon, mu, drho, dphi)
 %                     Hphi = A .* beta_rho./mu .* besselj_der(m, beta_rho .* rho) .* (C1 .* cos(m .* phi)...
 %                         + D1 .* sin(m .* phi)) .* exp(-1j .* beta_z .* z);
                     
-                    Power = P(Erho, Ephi, Hrho, Hphi, rho, drho, dphi);
+%                     Power = P(Erho, Ephi, Hrho, Hphi, rho, drho, dphi);
                     
                     Erho_n(i, :, :) = Erho; % ./ sqrt(Power);
                     Ephi_n(i, :, :) = Ephi; % ./ sqrt(Power);
+                    Ez_n(i, :, :) = Ez;
+                    
+                    Hrho_n(i, :, :) = Hrho;
+                    Hphi_n(i, :, :) = Hphi;
+                    Hz_n(i, :, :) = Hz;
 %                    
             end
             

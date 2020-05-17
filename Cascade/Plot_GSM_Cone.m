@@ -14,24 +14,24 @@ s_params_5_feko = extract(data5_feko,'S_PARAMETERS');
 
 %%
 
-c_pp = load('Stt_cone_replica_25_conv.mat');
+c_pp = load('Stt_cone_replica_30_conv_2.mat');
 SPP = c_pp.STT;
-c_pr = load('Str_cone_replica_25_conv.mat');
+c_pr = load('Str_cone_replica_30_conv_2.mat');
 SPR = c_pr.STR;
-c_rp = load('Srt_cone_replica_25_conv.mat');
+c_rp = load('Srt_cone_replica_30_conv_2.mat');
 SRP = c_rp.SRT;
-c_rr = load('Srr_cone_replica_25_conv.mat');
+c_rr = load('Srr_cone_replica_30_conv_2.mat');
 SRR = c_rr.SRR;
 
 %% SPP 
 figure;
 hold on;
 
-plot(F * 1e-9, db(abs(squeeze(SPP(:, 2, 2)))), 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(SPP(:, 1, 1)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(3, 3, :)))), 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(1, 1, :)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F_feko * 1e-9, db(abs(squeeze(s_params_5_feko(2, 2, :)))), 'LineWidth', 2); grid on;
+plot(F_feko * 1e-9, db(abs(squeeze(s_params_5_feko(1, 1, :)))), 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S in  dB', 'FontSize', 12, 'FontWeight', 'bold');
@@ -46,11 +46,11 @@ xlim([5 21]);
 
 figure;
 hold on;
-plot(F * 1e-9, angle((squeeze(SPP(:, 2, 2)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F * 1e-9, angle((squeeze(SPP(:, 1, 1)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(3, 3, :)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, angle((squeeze(s_params_5_cst(1, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
 hold on;
-plot(F_feko * 1e-9, angle((squeeze(s_params_5_feko(2, 2, :)))) * 180/pi, 'LineWidth', 2); grid on;
+plot(F_feko * 1e-9, angle((squeeze(s_params_5_feko(1, 1, :)))) * 180/pi, 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S parameter Phase in deg', 'FontSize', 12, 'FontWeight', 'bold');

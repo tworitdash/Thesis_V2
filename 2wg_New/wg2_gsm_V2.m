@@ -1,4 +1,4 @@
-tic;
+ntic;
 
 clear;
 

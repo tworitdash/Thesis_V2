@@ -1,4 +1,4 @@
-function [Erho, Ephi, Ez] = E_r(Nr, rho, phi, F, r, z, epsilon, mu)
+function [Erho, Ephi, Ez, Hrho, Hphi, Hz] = E_r(Nr, rho, phi, F, r, z, epsilon, mu)
         c0 = 3e8;
         Str = load('Xmn.mat');
         Xmn = Str.Xmn;
@@ -37,6 +37,8 @@ function [Erho, Ephi, Ez] = E_r(Nr, rho, phi, F, r, z, epsilon, mu)
                         + D1 .* sin(m .* phi)) .* exp(-1j .* beta_z .* z);
                     Ez(i, :, :) = ones(size(rho)) .* 1e-5;
                     
+                   [Hrho(i, :, :), Hphi(i, :, :), Hz(i, :, :)] = H_TE(epsilon, m, rho, phi, beta_rho, z, beta, omega, mu);
+                    
 %                     E_i(i, :, :) = sqrt(Erho.^2 + Ephi.^2 + Ez.^2);
                 
             elseif mode == "TM"
@@ -55,6 +57,8 @@ function [Erho, Ephi, Ez] = E_r(Nr, rho, phi, F, r, z, epsilon, mu)
         + D .* cos(m .* phi)) .* exp(-1j .* beta_z .* z);
                     Ez(i, :, :) = -1j .* B .* (beta_rho.^2 ./ (omega .* mu .* epsilon)) .* besselj(m, beta_rho .* rho) .*  (C .* cos(m .* phi)...
         + D .* sin(m .* phi)) * exp(-1j .* beta_z .* z);
+    
+                    [Hrho(i, :, :), Hphi(i, :, :), Hz(i, :, :)] = H_TM(mu, m, rho, phi, beta_rho, z, beta);
                     
 %                     E_i(i, :, :) = sqrt(Erho.^2 + Ephi.^2 + Ez.^2);
             end

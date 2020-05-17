@@ -11,7 +11,7 @@ phi_f = A(1:100:36000, 2) * pi/180;
 z_f = A(1, 1);
 aux = A(:, 4:9);
 
-[rho_f, phi_f] = meshgrid(rho_f, phi_f);
+[rho_f, phi_f] = meshgrid(rho_f, pi - phi_f);
 
 x_f = rho_f .* cos(phi_f);
 y_f = rho_f .* sin(phi_f);
@@ -40,13 +40,13 @@ E_phi_reshape = reshape(E_phi, 100, 360);
 E_z_reshape = reshape(E_z, 100, 360);
 
 
-figure;
-
-% surface(x_f, y_f, db((abs(E_tot_reshape).'))); shading flat;
-
-surface(x_f, y_f, db((abs(E_tot_reshape).')./max(max(abs(E_tot_reshape).')))); shading flat;
-
-colormap('jet');
+% figure;
+% 
+% % surface(x_f, y_f, db((abs(E_tot_reshape).'))); shading flat;
+% 
+% surface(x_f, y_f, db((abs(E_tot_reshape).')./max(max(abs(E_tot_reshape).')))); shading flat;
+% 
+% colormap('jet');
 
 % 
 % % surface(x_f, y_f, (abs(E_tot_reshape).')); shading flat;
@@ -65,10 +65,10 @@ surface(x_f, y_f, db((abs(E_phi_reshape).')./max(max(abs(E_phi_reshape).')))); s
 colormap('jet');
 
 
-% figure;
-% 
-% surface(x_f, y_f, db((abs(E_z_reshape).')./max(abs(E_z_reshape).'))); shading flat;
-% colormap('jet');
+figure;
+
+surface(x_f, y_f, db((abs(E_z_reshape).')./max(max(abs(E_z_reshape).')))); shading flat;
+colormap('jet');
 
 %% cuts
 
@@ -100,18 +100,18 @@ colormap('jet');
 % 
 % grid on;
 
-
-figure;
-
-surface(x_f, y_f, angle((E_rho_reshape_).')); shading flat;
-
-colormap('jet');
-
-figure;
-
-surface(x_f, y_f, angle((E_phi_reshape_).')); shading flat;
-colormap('jet');
-
-system('rm result.txt');
+% 
+% figure;
+% 
+% surface(x_f, y_f, angle((E_rho_reshape_).')); shading flat;
+% 
+% colormap('jet');
+% 
+% figure;
+% 
+% surface(x_f, y_f, angle((E_phi_reshape_).')); shading flat;
+% colormap('jet');
+% 
+% system('rm result.txt');
 
 

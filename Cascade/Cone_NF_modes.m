@@ -12,7 +12,7 @@ R = linspace(rr, rt, n); % radius vector
 
 n = length(R);
 
-F = 20.38e9; % Frequency of operation
+F = 14e9; % Frequency of operation
 
 er = ones(1, n); % Relative Permittivity of each WG section
 mur = ones(1, n); % Relative Permeability of each WG section

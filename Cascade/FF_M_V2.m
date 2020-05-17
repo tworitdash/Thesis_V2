@@ -34,7 +34,7 @@ r_obs = 10000 * 2 * pi * F ./ c0;
 
 % [Hx, Hy, Hz] = FF(c2, SGFxx, SGFxy, SGFxz, SGFyx, SGFyy, SGFyz, SGFzx, SGFzy, SGFzz, M_ft_x, M_ft_y, M_ft_z);
 
-c2 = 1j .* k0 .* exp(-1j * k0 * r_obs) / (4 * pi * r_obs);
+c2 = 1j .* k0 .* exp(-1j * k0 * r_obs) / (4 * pi);
 
 Eth = c2 .* (E_ft_x .* cos(phi) + E_ft_y .* sin(phi));
 Eph = c2 .* cos(theta) .* (E_ft_y .* cos(phi) - E_ft_x .* sin(phi));

@@ -1,0 +1,52 @@
+clear;
+
+c0 = 3e8;
+er0 = 8.85418782e-12; % Free space permittivity
+mu0 = 1.25663706e-6;  % Free Space Permeability
+
+F = 5e9;
+ 
+Str = load('Xmn.mat');
+Xmn = Str.Xmn;
+
+lamb = c0./F;
+
+rr = 2e-2; % Base radius
+% rt = 4e-2; % Top redius
+rt = rr .* 4;
+
+n = 150; % number of transitions
+
+Length = 5e-2;
+
+R = linspace(rr, rt, n); % radius vector
+
+drho = R(end)/100;
+dphi = pi/180;
+
+[rho, ph] = meshgrid(eps:drho:R(end), eps:dphi:2*pi+eps);
+
+n = length(R);
+
+er = ones(1, n); % Relative Permittivity of each WG section
+mur = ones(1, n); % Relative Permeability of each WG sectio
+
+epsilon = er .* er0;
+mu = mur .* mu0;
+
+L = ones(1, n) .* Length/n; % length of each waveguide section
+
+L(1) = 2.5 * L(1);
+L(end) = 1.25e-2;
+
+
+% [E_aperture_rho, E_aperture_phi] = Near_field_fun_2(er, mur, R, F, L, rho, ph, 20, drho, dphi);
+
+
+[STT, STR, SRT, SRR, N] = GSM_N_SameAzimuth(R, L, er, mur, F, 0);
+
+Str = load('Xmn_azimuthal_inc_TE.mat');
+
+str = Str.xmn_TE;
+
+

@@ -1,7 +1,7 @@
 
 clear;
-a = 3.42e-2;
-b = 3.42e-2;
+a = 3.4e-2;
+b = 3.4e-2;
 
 c0 = 3e8;
 
@@ -42,10 +42,12 @@ beta_z10 = -1j .* sqrt(-(k1.^2 - kc1.^2));
 Y10 = beta_z10./(omega .* mu1);
 
 
-M = 100;
-L = 20:5:300;
+M = 5;
+L = 100;
 
 for o = 1:length(L)
+    disp('Iteration over L');
+    disp(o);
 
 for p = 1:length(M)
     
@@ -77,9 +79,11 @@ end
 
 Dm = Ymn_mut\(-Yrhs.');
 
-Y11 = Ymn_numerical(k2, a, b, 1, 1, omega, mu2, L(o));
+Dm_(o, :) = Ymn_mut\(-Yrhs.');
 
-yap(o) = (Y11 + Dm.' * Yrhs.')./Y10;
+Y11(o) = Ymn_numerical(k2, a, b, 1, 1, omega, mu2, L(o));
+
+yap(o) = (Y11(o) + Dm.' * Yrhs.')./Y10;
 
 yap_(o) = (Dm.' * Yrhs.')./Y10;
 
@@ -88,24 +92,36 @@ Gamma(o) = (1 - yap(o))./(1 + yap(o));
 
 end
 end
-% figure(2);
-% hold on;
-% plot(L, abs(Gamma), 'Linewidth', 2);
+
+% for p = 1:5
+%     hold on;
+%     plot(m, db(abs(Dm_(p, :))), 'Linewidth', 2);
+%     hold on;
+% end
+figure;
+hold on;
+plot(L, db(abs(Gamma)), 'Linewidth', 2);
+grid on;
+% 
+figure;
+hold on;
+plot(L, angle(Gamma)*180/pi, 'Linewidth', 2);
+grid on;
+
+figure;
+plot(modes, db(abs(Dm)), 'Linewidth', 2);
+grid on;
+
+% figure;
+% plot(L, (abs(yap)), 'Linewidth', 2);
 % grid on;
-% % 
-% figure(3);
-% hold on;
-% plot(L, angle(Gamma)*180/pi, 'Linewidth', 2);
+% 
+% figure;
+% plot(L, (abs(yap_)), 'Linewidth', 2);
 % grid on;
-
-figure(1)
-plot(m, db(abs(Dm)), 'Linewidth', 2);
-grid on;
-
-figure(2)
-plot(L, db(abs(yap)), 'Linewidth', 2);
-grid on;
-
-figure(2)
-plot(L, db(abs(yap_)), 'Linewidth', 2);
-grid on;
+% 
+% figure;
+% plot(L, real((yap - yap_).*Y10), 'Linewidth', 2);
+% hold on;
+% plot(L, imag((yap - yap_).*Y10), 'Linewidth', 2);
+% grid on;

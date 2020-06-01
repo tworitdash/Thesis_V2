@@ -1,0 +1,135 @@
+c0 = 3e8; % speed of light
+R = 2e-2; % Radius of the waveguide
+
+er = 1;
+mur = 1;
+
+er0 = 8.85418782e-12; % Free space permittivity
+mu0 = 1.25663706e-6;  % Free Space Permeability
+
+epsilon = er * er0;
+mu = mur .* mu0;
+
+F = 5e9;
+
+lamb = c0/F;
+omega = 2 * pi * F;
+
+k0 = omega./c0;
+
+L = 1000;
+
+N = 2:1:20;
+
+Str = load('Xmn_azimuthal_inc_TE.mat');
+
+str = Str.xmn_TE;
+
+for i = 1:length(N)
+    
+    xmn(i) = str(N(i)).xmn;
+    beta_rho(i) = xmn(i)./R;
+    M(i) = str(N(i)).m;
+    beta_z(i) = -1j .* sqrt(-(k0.^2 - (beta_rho(i)).^2));
+    YTE(i) = beta_z(i)./(omega .* mu);
+    ZTE(i) = 1./YTE(i);
+    
+end
+
+for l = 1:length(N)
+    for p = 1:length(N)
+        if l == p
+            Ymut(l, p) = Yin_Circular(N(l), N(p), k0, R, er, mur, L) + YTE(p);
+        else
+            Ymut(l, p) = Yin_Circular(N(l), N(p), k0, R, er, mur, L);
+        end
+    end
+end
+
+for l = 1:length(N)
+    Y_rhs(l) = Yin_Circular(1, N(l), k0, R, er, mur, L);
+end
+
+Dm = Ymut\(-Y_rhs.');
+
+Y11 = Yin_Circular(1, 1, k0, R, er, mur, L);
+
+xmn11 = str(1).xmn;
+beta_rho11 = xmn11./R;
+
+beta_z11 = -1j .* sqrt(-(k0.^2 - beta_rho11.^2));
+YTE11 = beta_z11./(omega .* mu);
+ZTE11 = 1./YTE11;
+
+yap = (Y11 + Dm.' * Y_rhs.')./YTE11;
+
+Gamma = (1 - yap)./(1 + yap);
+
+
+%%
+
+
+drho = R/100;
+dph = pi/180;
+
+[rho, ph] = meshgrid(eps:drho:R, eps:dph:2*pi);
+
+
+
+NTE11_FEKO = 1j.* beta_z11 ./ (beta_rho11).^2 .* ZTE11;
+
+ETE_fundamental_rho = NTE11_FEKO .* 1./rho .* besselj(1, beta_rho11 .* rho) .* sin(ph);
+ETE_fundamental_ph = NTE11_FEKO .* beta_rho11 .* besselj_der(1, beta_rho11 .* rho) .* cos(ph);
+
+ETE_fundamental = sqrt(abs(ETE_fundamental_rho).^2 + abs(ETE_fundamental_ph).^2);
+
+ETE_higher_rho = zeros(size(rho));
+ETE_higher_ph = zeros(size(rho));
+
+for b = 1:length(N)
+
+    NTE_FEKO(b) = 1j.* beta_z(b) ./ (beta_rho(b)).^2 .* ZTE(b);
+    ETE_higher_rho = ETE_higher_rho + Dm(b) .* NTE_FEKO(b) .* M(b)./rho .* besselj(M(b), beta_rho(b) .* rho) .* sin(M(b).*ph);
+    ETE_higher_ph = ETE_higher_ph + Dm(b) .* NTE_FEKO(b) .* beta_rho(b) .* besselj_der(M(b), beta_rho(b) .* rho) .* cos(M(b).*ph);
+
+end
+
+ETE_ap_rho = (1 + Gamma) .* (ETE_fundamental_rho + ETE_higher_rho);
+ETE_ap_ph = (1 + Gamma) .* (ETE_fundamental_ph + ETE_higher_ph);
+
+ETE_ap = sqrt(abs(ETE_ap_rho).^2 + abs(ETE_ap_ph).^2);
+
+figure;
+surface(rho .* cos(ph), rho .* sin(ph), (abs(ETE_ap))); shading flat;
+colorbar;
+colormap('jet');
+xlabel('x[m]');
+xlabel('y[m]');
+title('E field on the aperture of a finite length circular waveguide');
+
+figure;
+surface(rho .* cos(ph), rho .* sin(ph), (abs(ETE_fundamental))); shading flat;
+xlabel('x[m]');
+xlabel('y[m]');
+title('E field on the aperture of an infinitely long circular waveguide');
+colorbar;
+colormap('jet');
+
+figure;
+surface(rho .* cos(ph), rho .* sin(ph), (abs(ETE_fundamental) - abs(ETE_ap))); shading flat;
+xlabel('x[m]');
+xlabel('y[m]');
+title('Diff E field (\infty long and finite length)');
+colorbar;
+colormap('jet');
+
+% x = rho.*cos(ph);
+% y = rho.*sin(ph);
+% 
+figure;
+surface(x(1:360, :), y(1:360, :), db(abs(E_tot_reshape.') - abs(ETE_ap(1:360, :)))); shading flat;
+xlabel('x[m]');
+xlabel('y[m]');
+title('Diff E field FEKO and MATLAB');
+colorbar;
+colormap('jet');

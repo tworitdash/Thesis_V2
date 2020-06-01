@@ -52,9 +52,10 @@ E_z_reshape = reshape(E_z, 100, 360);
 % colormap('jet');
 
 % % 
-% surface(x_f, y_f, (abs(E_tot_reshape).')); shading flat;
-% 
-% colormap('jet');
+figure;
+surface(x_f, y_f, (abs(E_tot_reshape).')); shading flat;
+
+colormap('jet');
 % 
 % figure;
 % 

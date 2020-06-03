@@ -1,3 +1,5 @@
+clear;
+
 c0 = 3e8; % speed of light
 R = 2e-2; % Radius of the waveguide
 
@@ -17,7 +19,7 @@ omega = 2 * pi * F;
 
 k0 = omega./c0;
 
-L = 1000;
+L = 100;
 
 N = 2:1:30;
 
@@ -83,24 +85,52 @@ ETE_fundamental_ph = NTE11_FEKO .* beta_rho11 .* besselj_der(1, beta_rho11 .* rh
 
 ETE_fundamental = sqrt(abs(ETE_fundamental_rho).^2 + abs(ETE_fundamental_ph).^2);
 
+
+HTE_fundamental_ph = ETE_fundamental_rho./ZTE11;
+HTE_fundamental_rho = -ETE_fundamental_ph./ZTE11;
+
+HTE_fundamental = sqrt(abs(HTE_fundamental_rho).^2 + abs(HTE_fundamental_ph).^2);
+
+
 ETE_higher_rho = zeros(size(rho));
 ETE_higher_ph = zeros(size(rho));
+
+HTE_higher_rho = zeros(size(rho));
+HTE_higher_ph = zeros(size(rho));
 
 for b = 1:length(N)
 
     NTE_FEKO(b) = 1j.* beta_z(b) ./ (beta_rho(b)).^2 .* ZTE(b);
-    ETE_higher_rho = ETE_higher_rho + Dm(b) .* NTE_FEKO(b) .* M(b)./rho .* besselj(M(b), beta_rho(b) .* rho) .* sin(M(b).*ph);
-    ETE_higher_ph = ETE_higher_ph + Dm(b) .* NTE_FEKO(b) .* beta_rho(b) .* besselj_der(M(b), beta_rho(b) .* rho) .* cos(M(b).*ph);
-
+%     NTE_FEKO(b) = sqrt((pi*(1)/2 .* (xmn(b).^2 - M(b).^2) .* (besselj(1, xmn(b))).^2).^(-1));
+    ETE_higher_rho_i = (Dm(b)) .* NTE_FEKO(b) .* M(b)./rho .* besselj(M(b), beta_rho(b) .* rho) .* sin(M(b).*ph);
+    ETE_higher_ph_i = (Dm(b)) .* NTE_FEKO(b) .* beta_rho(b) .* besselj_der(M(b), beta_rho(b) .* rho) .* cos(M(b).*ph);
+    
+    ETE_higher_rho = ETE_higher_rho + ETE_higher_rho_i;
+    ETE_higher_ph = ETE_higher_ph + ETE_higher_ph_i;
+    
+    HTE_higher_ph = HTE_higher_ph - ETE_higher_rho_i./ZTE(b);
+    HTE_higher_rho = HTE_higher_rho + ETE_higher_ph_i./ZTE(b);
+    
 end
+
+
 
 ETE_ap_rho = (1 + Gamma) .* (ETE_fundamental_rho + ETE_higher_rho);
 ETE_ap_ph = (1 + Gamma) .* (ETE_fundamental_ph + ETE_higher_ph);
 
 ETE_ap = sqrt(abs(ETE_ap_rho).^2 + abs(ETE_ap_ph).^2);
 
+HTE_ap_rho = (1 - Gamma) .* (HTE_fundamental_rho) + (1 + Gamma) .* HTE_higher_rho;
+HTE_ap_ph = (1 - Gamma) .* (HTE_fundamental_ph) + (1 + Gamma) .* HTE_higher_ph;
+
+HTE_ap = sqrt(abs(HTE_ap_rho).^2 + abs(HTE_ap_ph).^2);
+
+x = rho.*cos(ph);
+y = rho.*sin(ph);
+
+
 figure;
-surface(rho .* cos(ph), rho .* sin(ph), (abs(ETE_ap))); shading flat;
+surface(x, y, db(abs(ETE_ap))); shading flat;
 colorbar;
 colormap('jet');
 xlabel('x[m]');
@@ -108,23 +138,39 @@ xlabel('y[m]');
 title('E field on the aperture of a finite length circular waveguide');
 
 figure;
-surface(rho .* cos(ph), rho .* sin(ph), (abs(ETE_fundamental))); shading flat;
+surface(x, y, db(abs(HTE_ap))); shading flat;
+colorbar;
+colormap('jet');
 xlabel('x[m]');
-xlabel('y[m]');
+ylabel('y[m]');
+title('H field on the aperture of a finite length circular waveguide');
+
+figure;
+surface(x, y, db(abs(ETE_fundamental))); shading flat;
+xlabel('x[m]');
+ylabel('y[m]');
 title('E field on the aperture of an infinitely long circular waveguide');
 colorbar;
 colormap('jet');
 
 figure;
-surface(rho .* cos(ph), rho .* sin(ph), (abs(ETE_fundamental) - abs(ETE_ap))); shading flat;
+surface(x, y, db(abs(HTE_fundamental))); shading flat;
 xlabel('x[m]');
-xlabel('y[m]');
-title('Diff E field (\infty long and finite length)');
+ylabel('y[m]');
+title('H field on the aperture of an infinitely long circular waveguide');
 colorbar;
 colormap('jet');
 
-x = rho.*cos(ph);
-y = rho.*sin(ph);
+% figure;
+% surface(x, y, (abs(ETE_fundamental) - abs(ETE_ap))); shading flat;
+% xlabel('x[m]');
+% ylabel('y[m]');
+% title('Diff E field (\infty long and finite length)');
+% colorbar;
+% colormap('jet');
+
+% x = rho.*cos(ph);
+% y = rho.*sin(ph);
 % 
 % figure;
 % surface(x(1:360, :), y(1:360, :), db(abs(E_tot_reshape.') - abs(ETE_ap(1:360, :)))); shading flat;
@@ -133,3 +179,76 @@ y = rho.*sin(ph);
 % title('Diff E field FEKO and MATLAB');
 % colorbar;
 % colormap('jet');
+
+%% Far fields
+
+drho = R./100;
+dphi = pi./180;
+[theta, phi] = meshgrid(-pi/2-eps:pi/180:pi/2-eps, eps:pi/180:2*pi+eps);
+
+[Eth, Eph] = FF_apertureFSCir(length(N)+1, [1, Dm.'], Gamma, theta, phi, F, er, mur, R);
+
+E_abs = sqrt(abs(Eth).^2 + abs(Eph).^2);
+% 
+% [Eth_num, Eph_num] = FF_M_V2(ETE_ap_rho, ETE_ap_ph, rho, ph, theta, phi, F, drho, dphi);
+% 
+% E_abs_num = sqrt(abs(Eth_num).^2 + abs(Eph_num).^2);
+
+% 
+% [Eth_fund_ref, Eph_fund_ref] = FF_apertureFSCir(1, 1, Gamma, theta, phi, F, er, mur, R);
+% 
+% E_abs_fund_ref = sqrt(abs(Eth_fund_ref).^2 + abs(Eph_fund_ref).^2);
+% 
+[Eth_fund, Eph_fund] = FF_apertureFSCir(1, 1, 0, theta, phi, F, er, mur, R);
+
+E_abs_fund = sqrt(abs(Eth_fund).^2 + abs(Eph_fund).^2);
+
+% [Eth_fund_num, Eph_fund_num] = FF_M_V2(ETE_fundamental_rho, ETE_fundamental_ph, rho, ph, theta, phi, F, drho, dphi);
+% 
+% E_abs_fund_num = sqrt(abs(Eth_fund_num).^2 + abs(Eph_fund_num).^2);
+
+
+figure(72);
+
+hold on;  
+plot(theta(1, :)*(180/pi), db(abs(E_abs(1, :))), '-.', 'LineWidth', 2);
+hold on;
+plot(theta(91, :)*(180/pi), db(abs(E_abs(91, :))), '-.', 'LineWidth', 2);
+
+% 
+% hold on;  
+% plot(theta(1, :)*(180/pi), db(abs(E_abs_num(1, :))), '--', 'LineWidth', 2);
+% hold on;
+% plot(theta(91, :)*(180/pi), db(abs(E_abs_num(91, :))), '--', 'LineWidth', 2);
+
+% hold on;  
+% plot(theta(1, :)*(180/pi), db(abs(E_abs_fund_ref(1, :))), '--', 'LineWidth', 2);
+% hold on;
+% plot(theta(91, :)*(180/pi), db(abs(E_abs_fund_ref(91, :))), '--', 'LineWidth', 2);
+% 
+hold on;  
+plot(theta(1, :)*(180/pi), db(abs(E_abs_fund(1, :))), '*', 'LineWidth', 1);
+hold on;
+plot(theta(91, :)*(180/pi), db(abs(E_abs_fund(91, :))), '*', 'LineWidth', 1);
+hold on;  
+% plot(theta(1, :)*(180/pi), db(abs(E_abs_fund_num(1, :))), '-.', 'LineWidth', 2);
+% hold on;
+% plot(theta(91, :)*(180/pi), db(abs(E_abs_fund_num(91, :))), '-.', 'LineWidth', 2);
+
+xlabel('\theta(Deg)', 'FontSize', 12, 'FontWeight', 'bold');
+ylabel('E_{abs}(dB)', 'FontSize', 12, 'FontWeight', 'bold');
+title('Far electric field', 'FontSize', 12, 'FontWeight', 'bold');
+legend({'\phi = 0 Finite length waveguide K space Rumsey', ...
+    '\phi = 90 Finite length waveguide K space Rumsey', ...
+    '\phi = 0 Infinite length waveguide analytical', ...
+    '\phi = 90 Infinite length waveguide analytical', ...
+    '\phi = 0 Finite length waveguide FEKO NF MATLAB FF', ...
+    '\phi = 90 Finite length waveguide FEKO NF MATLAB FF', ...
+    '\phi = 0 Infinite length waveguide FEKO NF MATLAB FF', ...
+    '\phi = 90 Infinite length waveguide FEKO NF MATLAB FF'}, 'FontSize', 12, 'FontWeight', 'bold');
+
+grid on;
+
+ylim([-50 10]);
+
+

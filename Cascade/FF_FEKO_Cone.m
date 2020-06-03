@@ -1,4 +1,5 @@
 [ficname,pathname] = uigetfile('*.efe','fichier ''.efe'' a convertir ?');
+% [ficname,pathname] = uigetfile('*.hfe','fichier ''.hfe'' a convertir ?');
 nomfic = [pathname ficname];
 i0 = find(ficname=='.');
 
@@ -52,10 +53,12 @@ E_z_reshape = reshape(E_z, 100, 360);
 % colormap('jet');
 
 % % 
-figure;
-surface(x_f, y_f, (abs(E_tot_reshape).')); shading flat;
-
-colormap('jet');
+% figure;
+% surface(x_f, y_f, db(abs(E_tot_reshape).')); shading flat; colorbar;
+% xlabel('x[m]');
+% ylabel('y[m]');
+% 
+% colormap('jet');
 % 
 % figure;
 % 
@@ -117,24 +120,24 @@ E_abs = sqrt(abs(Eth).^2 + abs(Eph).^2);
 % grid on;
 % 
 % ylim([-50 0]);
-
-figure(96);
+%%
+figure(72);
 
 hold on;
 % plot(theta(1, :)*(180/pi), db((abs(E_abs(1, :))/max(abs(E_abs(1, :))))), '*', 'LineWidth', 0.5);
-plot(theta(1, :)*(180/pi), db((abs(E_abs(1, :)))), '*', 'LineWidth', 0.5);
+plot(theta(1, :)*(180/pi), db((abs(E_abs(1, :)))), 'o', 'LineWidth', 1);
 % figure(42)
 hold on;
 % plot(theta(90, :)*(180/pi), db((abs(E_abs(90, :))/max(abs(E_abs(90, :))))), '*', 'LineWidth', 0.5);
-plot(theta(90, :)*(180/pi), db((abs(E_abs(90, :)))), '*', 'LineWidth', 0.5);
+plot(theta(90, :)*(180/pi), db((abs(E_abs(90, :)))), 'o', 'LineWidth', 1);
 
 xlabel('\theta(Deg)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('E_{abs} (dB)', 'FontSize', 12, 'FontWeight', 'bold');
 title('Far electric field', 'FontSize', 12, 'FontWeight', 'bold');
-legend({'\phi = 0', '\phi = 90'}, 'FontSize', 12, 'FontWeight', 'bold');
+% legend({'\phi = 0', '\phi = 90'}, 'FontSize', 12, 'FontWeight', 'bold');
 
 grid on;
 
-ylim([-50 0]);
+ylim([-40 5]);
 
 system('rm result.txt');

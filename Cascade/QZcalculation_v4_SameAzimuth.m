@@ -32,7 +32,7 @@ beta = 2 * pi ./ lamb;
 % N_i  =  find(f < F);
 
 Str = load('Xmn_azimuthal_inc_TE.mat');
-Xmn = Str.Xmn;
+Xmn = Str.xmn_TE;
 
 x = vertcat(Xmn(1:1:length(N)).xmn);
 beta_rho = x./r;

@@ -13,7 +13,7 @@ mur = mu0 * murr;
 
 
 Str = load('Xmn_azimuthal_inc_TE.mat');
-Xmn = Str.Xmn;
+Xmn = Str.xmn_TE;
 
 
 drho = rr/100;

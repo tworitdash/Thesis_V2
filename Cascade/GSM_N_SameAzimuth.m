@@ -7,12 +7,16 @@ Str = load('Xmn_azimuthal_inc_TE.mat');
 
 str = Str.xmn_TE;
 XMN = horzcat(str.xmn);
+M = horzcat(str.m);
+id = find(M == 1);
+XMN = XMN(id);
+
 
 for i = 1:n
     f =  fc(R(i), er(i), mur(i));
 %     N_i  =  find(f < F);
-    xmn_i = 2.*pi.*R(i)./c0 .* f(end);
-    idx = find(XMN <= xmn_i);
+    xmn_i = 2.*pi.*R(i)./c0 .* F;
+    idx = find(XMN < xmn_i);
     N_(i) = length(idx);
 end
 

@@ -1,6 +1,6 @@
 clear;
-R = 1.93e-2;
-F = 14e9;
+R = 4e-2;
+F = 5e9;
 
 er0 = 8.85418782e-12; % Free space permittivity
 mu0 = 1.25663706e-6;  % Free Space Permeability
@@ -15,7 +15,7 @@ mu = mur .* mu0;
 
 z = 0.0005;
 
-N = 1:1:10;
+N = 1;
 
 [Er_rho, Er_phi, Er_z] = E_r(N, rho, phi, F, R, z, epsilon, mu);
 
@@ -39,7 +39,7 @@ x = rho .* cos(phi);
 y = rho .* sin(phi);
 
 figure;
-surface(x, y, db((abs(E_aperture))./max(abs(E_aperture)))); shading flat;
+surface(x, y, db((abs(E_aperture)))); shading flat; colormap('jet');
 % 
 % figure;
 % 
@@ -59,9 +59,9 @@ surface(x, y, db((abs(E_aperture))./max(abs(E_aperture)))); shading flat;
 % 
 % shading interp;
 
-figure;
-
-surface(x,y, db(abs(E_aperture_z)./max(abs(E_aperture_z)))); shading flat;
+% figure;
+% 
+% surface(x,y, db(abs(E_aperture_z)./max(abs(E_aperture_z)))); shading flat;
 
 % figure;
 % 
@@ -72,7 +72,7 @@ surface(x,y, db(abs(E_aperture_z)./max(abs(E_aperture_z)))); shading flat;
 % 
 % shading interp;
 
-
+%% 
 [ficname,pathname] = uigetfile('*.efe','fichier ''.efe'' a convertir ?');
 nomfic = [pathname ficname];
 i0 = find(ficname=='.');

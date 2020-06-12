@@ -5,16 +5,20 @@ er0 = 8.85418782e-12; % Free space permittivity
 mu0 = 1.25663706e-6;  % Free Space Permeability
 
 F = 5e9;
+omega = 2 * pi * F;
 
 lamb = c0./F;
 
+k0 = 2.*pi./lamb;
+
 rr = 2e-2; % Base radius
 % rt = 4e-2; % Top redius
-rt = rr .* 4;
+rt = rr .* 3;
 
-n = 150; % number of transitions
+n = 15; % number of transitions
 
-Length = 5e-2;
+% Length = 5e-2;
+Length = 2 .* lamb;
 
 R = linspace(rr, rt, n); % radius vector
 
@@ -33,77 +37,229 @@ mu = mur .* mu0;
 
 L = ones(1, n) .* Length/n; % length of each waveguide section
 
-L(1) = 2.5 * L(1);
-L(end) = 1.25e-2;
-
+% L(1) = 2.5 * L(1);
+% L(end) = 1.25e-2;
+L(1) = L(1) + lamb./4;
 
 % [E_aperture_rho, E_aperture_phi] = Near_field_fun_2(er, mur, R, F, L, rho, ph, 20, drho, dphi);
 
 
-[STT, STR, SRT, SRR, N] = GSM_N_SameAzimuth(R, L, er, mur, F, 0);
+[STT, STR, SRT, SRR, N] = GSM_N_SameAzimuth(R, L, er, mur, F, 20);
 
 Str = load('Xmn_azimuthal_inc_TE.mat');
 
 str = Str.xmn_TE;
-
+%% 
 ModeNumberAper = N(end);
 
-HigherModes = N(end)+1:1:N(end)+20;
-
-for i = 1:length(HigherModes)
+for i = 1:ModeNumberAper
+    HigherModes = i+1:1:1+20;
     
-    xmn(i) = str(HigherModes(i)).xmn;
-    beta_rho(i) = xmn(i)./R;
-    M(i) = str(HigherModes(i)).m;
-    beta_z(i) = -1j .* sqrt(-(k0.^2 - (beta_rho(i)).^2));
-    YTE(i) = beta_z(i)./(omega .* mu);
-    ZTE(i) = 1./YTE(i);
+    for d = 1:length(HigherModes)
     
-end
-
-for l = 1:length(N)
-    for p = 1:length(N)
+        xmn(d) = str(HigherModes(d)).xmn;
+        beta_rho(d) = xmn(d)./R(end);
+        M(d) = str(HigherModes(d)).m;
+        beta_z(d) = -1j .* sqrt(-(k0.^2 - (beta_rho(d)).^2));
+        YTE(d) = beta_z(d)./(omega .* mu(end));
+        ZTE(d) = 1./YTE(d);
+    
+    end
+    
+ for l = 1:length(HigherModes)
+    for p = 1:length(HigherModes)
         disp('iteration inside');
         disp(p);
         disp('iteration outside');
         disp(l);
         
         if l == p
-            Ymut(l, p) = Yin_Circular(N(l), N(p), k0, R, er, mur, L) + YTE(p);
+            Ymut(l, p) = Yin_Circular(HigherModes(l), HigherModes(p), k0, R(end), er(end), mur(end), 100) + YTE(p);
         else
-            Ymut(l, p) = Yin_Circular(N(l), N(p), k0, R, er, mur, L);
+            Ymut(l, p) = Yin_Circular(HigherModes(l), HigherModes(p), k0, R(end), er(end), mur(end), 100);
         end
     end
 end
 
-for l = 1:length(N)
-    Y_rhs(l) = Yin_Circular(1, N(l), k0, R, er, mur, L);
+for e = 1:length(HigherModes)
+    Y_rhs(e) = Yin_Circular(i, HigherModes(e), k0, R(end), er(end), mur(end), 100);
 end
 
-Dm(b, :) = Ymut\(-Y_rhs.');
+Dm(i, :) = Ymut\(-Y_rhs.');
 
-Y11 = Yin_Circular(1, 1, k0, R, er, mur, L);
-
-
-xmn11 = str(1).xmn;
-beta_rho11 = xmn11./R;
-
-beta_z11 = -1j .* sqrt(-(k0.^2 - beta_rho11.^2));
-YTE11 = beta_z11./(omega .* mu);
-ZTE11 = 1./YTE11;
-
-y11(b) = Y11./YTE11;
-
-yap(b) = (Y11 + Dm(b, :) * Y_rhs.')./YTE11;
-
-Gamma(b) = (1 - yap(b))./(1 + yap(b));
-Gamma_TE11(b) = (1 - y11(b))./(1 + y11(b));
+Yii = Yin_Circular(i, i, k0, R(end), er(end), mur(end), 100);
 
 
+xmnii = str(i).xmn;
+beta_rhoii = xmnii./R(end);
+
+beta_zii = -1j .* sqrt(-(k0.^2 - beta_rhoii.^2));
+YTEii = beta_zii./(omega .* mu(end));
+ZTEii = 1./YTEii;
+
+yii(i) = Yii./YTEii;
+
+yap(i) = (Yii + Dm(i, :) * Y_rhs.')./YTEii;
+
+Gamma(i) = (1 - yap(i))./(1 + yap(i));
+% Gamma_TE11(b) = (1 - y11(b))./(1 + y11(b));
     
     
 
 
+% figure;
+% plot(1:2, abs(Gamma), 'LineWidth', 2); grid on; 
+% 
+
+%NF
+
+drho = R/100;
+dph = pi/180;
+
+[rho, ph] = meshgrid(eps:drho:R(end), eps:dph:2*pi);
 
 
+
+NTEii_FEKO = 1j.* beta_zii ./ (beta_rhoii).^2 .* ZTEii;
+
+ETE_i_rho(i, :, :) = NTEii_FEKO .* 1./rho .* besselj(1, beta_rhoii .* rho) .* sin(ph);
+ETE_i_ph(i, :, :) = NTEii_FEKO .* beta_rhoii .* besselj_der(1, beta_rhoii .* rho) .* cos(ph);
+
+% ETE_i = sqrt(abs(ETE_i_rho).^2 + abs(ETE_i_ph).^2);
+
+
+HTE_i_ph(i, :, :) = squeeze(ETE_i_rho(i, :, :))./ZTEii;
+HTE_i_rho(i, :, :) = -squeeze(ETE_i_ph(i, :, :))./ZTEii;
+
+% HTE_fundamental = sqrt(abs(HTE_i_rho).^2 + abs(HTE_i_ph).^2);
+
+
+ETE_higher_rho = zeros(size(rho));
+ETE_higher_ph = zeros(size(rho));
+
+HTE_higher_rho = zeros(size(rho));
+HTE_higher_ph = zeros(size(rho));
+
+for b = 1:length(HigherModes)
+
+    NTE_FEKO(b) = 1j.* beta_z(b) ./ (beta_rho(b)).^2 .* ZTE(b);
+%     NTE_FEKO(b) = sqrt((pi*(1)/2 .* (xmn(b).^2 - M(b).^2) .* (besselj(1, xmn(b))).^2).^(-1));
+    ETE_higher_rho_b = (Dm(b)) .* NTE_FEKO(b) .* M(b)./rho .* besselj(M(b), beta_rho(b) .* rho) .* sin(M(b).*ph);
+    ETE_higher_ph_b = (Dm(b)) .* NTE_FEKO(b) .* beta_rho(b) .* besselj_der(M(b), beta_rho(b) .* rho) .* cos(M(b).*ph);
+    
+    ETE_higher_rho = ETE_higher_rho + ETE_higher_rho_b;
+    ETE_higher_ph = ETE_higher_ph + ETE_higher_ph_b;
+    
+    HTE_higher_ph = HTE_higher_ph - ETE_higher_rho_b./ZTE(b);
+    HTE_higher_rho = HTE_higher_rho + ETE_higher_ph_b./ZTE(b);
+    
+end
+
+ETE_ap_rho(i, :, :) = (1 + Gamma(i)) .* (squeeze(ETE_i_rho(i, :, :)));% + ETE_higher_rho);
+ETE_ap_ph(i, :, :) = (1 + Gamma(i)) .* (squeeze(ETE_i_ph(i, :, :)));% + ETE_higher_ph);
+
+HTE_ap_rho(i, :, :) = (1 - Gamma(i)) .* (squeeze(HTE_i_rho(i, :, :)));% + (1 + Gamma(i)) .* HTE_higher_rho;
+HTE_ap_ph(i, :, :) = (1 - Gamma(i)) .* (squeeze(HTE_i_ph(i, :, :)));% + (1 + Gamma(i)) .* HTE_higher_ph;
+
+end
+
+
+E_inf_rho = zeros(size(rho));
+E_inf_ph = zeros(size(rho));
+E_fin_rho = zeros(size(rho));
+E_fin_ph = zeros(size(rho));
+H_inf_rho = zeros(size(rho));
+H_inf_ph = zeros(size(rho));
+H_fin_rho = zeros(size(rho));
+H_fin_ph = zeros(size(rho));
+
+%% 
+ap = zeros(N(end), 1);
+ar = ones(N(1), 1);
+
+if N(1) == 1
+    STR_req = STR(1, 1:N(end));
+else
+    STR_req = squeeze(STR(1, 1:N(end), 1:N(1)));
+end
+
+bp =  STR_req * ar;  %+ squeeze(STT(1, 1:N(end), 1:N(end))) * ap;
+Transmission_sum = bp;
+
+for g = 1:ModeNumberAper
+    
+    E_inf_rho = E_inf_rho + squeeze(ETE_i_rho(g, :, :)) .* Transmission_sum(g);
+    E_inf_ph = E_inf_ph + squeeze(ETE_i_ph(g, :, :)) .* Transmission_sum(g);
+    
+    H_inf_rho = H_inf_rho - squeeze(HTE_i_rho(g, :, :)) .* Transmission_sum(g);
+    H_inf_ph = H_inf_ph - squeeze(HTE_i_ph(g, :, :)) .* Transmission_sum(g);
+    
+    E_fin_rho = E_fin_rho + squeeze(ETE_ap_rho(g, :, :)) .* Transmission_sum(g);
+    E_fin_ph = E_fin_ph + squeeze(ETE_ap_ph(g, :, :)) .* Transmission_sum(g);
+    
+    H_fin_rho = H_fin_rho + squeeze(HTE_ap_rho(g, :, :)) .* Transmission_sum(g);
+    H_fin_ph = H_fin_ph + squeeze(HTE_ap_ph(g, :, :)) .* Transmission_sum(g);
+end
+
+
+E_inf_ap = sqrt(abs(E_inf_rho).^2 + abs(E_inf_ph).^2);
+E_fin_ap = sqrt(abs(E_fin_rho).^2 + abs(E_fin_ph).^2);
+
+H_inf_ap = sqrt(abs(H_inf_rho).^2 + abs(H_inf_ph).^2);
+H_fin_ap = sqrt(abs(H_fin_rho).^2 + abs(H_fin_ph).^2);
+
+
+
+x = rho.*cos(ph);
+y = rho.*sin(ph);
+
+
+figure;
+surface(x, y, db(abs(E_fin_ap))); shading flat;
+colorbar;
+colormap('jet');
+xlabel('x[m]');
+xlabel('y[m]');
+title('E field on the aperture of a finite length circular waveguide');
+
+figure;
+surface(x, y, db(abs(H_fin_ap))); shading flat;
+colorbar;
+colormap('jet');
+xlabel('x[m]');
+ylabel('y[m]');
+title('H field on the aperture of a finite length circular waveguide');
+
+figure;
+surface(x, y, db(abs(E_inf_ap))); shading flat;
+xlabel('x[m]');
+ylabel('y[m]');
+title('E field on the aperture of an infinitely long circular waveguide');
+colorbar;
+colormap('jet');
+
+figure;
+surface(x, y, db(abs(H_inf_ap))); shading flat;
+xlabel('x[m]');
+ylabel('y[m]');
+title('H field on the aperture of an infinitely long circular waveguide');
+colorbar;
+colormap('jet');
+
+
+figure;
+surface(x, y, ((E_inf_ap - E_fin_ap))); shading flat;
+xlabel('x[m]');
+ylabel('y[m]');
+title('diff E Inf - fin');
+colorbar;
+colormap('jet');
+
+figure;
+surface(x, y, ((H_inf_ap - H_fin_ap))); shading flat;
+xlabel('x[m]');
+ylabel('y[m]');
+title('diff H Inf - fin');
+colorbar;
+colormap('jet');
 

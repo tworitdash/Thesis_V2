@@ -14,7 +14,7 @@ mu = mur .* mu0;
 % F = 5e9;
 % lamb = c0/F;
 
-x = linspace(0.6, 1, 10);
+x = linspace(0.6, 1, 41);
 lamb = 2.*R./x;
 
 f = c0./lamb;
@@ -92,25 +92,29 @@ Gamma_TE11(b) = (1 - y11(b))./(1 + y11(b));
 
 end
 
-figure;
+figure(1);
+hold on;
 plot(x, real(yap), 'LineWidth', 2); grid on; hold on; plot(x, imag(yap), 'LineWidth', 2);
 hold on;
-plot(x, real(y11), 'LineWidth', 2); grid on; hold on; plot(x, imag(y11), 'LineWidth', 2);
-
-figure;
+plot(x, real(y11), '-.', 'LineWidth', 1); grid on; hold on; plot(x, imag(y11), '-.', 'LineWidth', 1);
+% 
+figure(3);
+hold on;
 plot(x, db(abs(Gamma)), 'LineWidth', 2); grid on;
-figure;
+figure(4);
 plot(x, angle(Gamma)*180/pi, 'LineWidth', 2); grid on;
 
-figure;
-surf(x, N, db(abs(Dm.'))); shading flat;
-xlabel('2 r/\lambda', 'FontSize', 12, 'FontWeight', 'bold');
-ylabel('n in TE_{1, n} at the aperture', 'FontSize', 12, 'FontWeight', 'bold');
-title('Higher order mode excitations at the aperture (D_m) in dB');
-colorbar;
-colormap('jet');
+% figure;
+% surf(x, N, db(abs(Dm.'))); shading flat;
+% xlabel('2 r/\lambda', 'FontSize', 12, 'FontWeight', 'bold');
+% ylabel('n in TE_{1, n} at the aperture', 'FontSize', 12, 'FontWeight', 'bold');
+% title('Higher order mode excitations at the aperture (D_m) in dB');
+% colorbar;
+% colormap('jet');
 
-figure;
+figure(3);
+hold on;
 plot(x, db(abs(Gamma_TE11)), 'LineWidth', 2); grid on;
-figure;
+figure(4);
+hold on;
 plot(x, angle(Gamma_TE11)*180/pi, 'LineWidth', 2); grid on;

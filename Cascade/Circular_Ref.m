@@ -129,6 +129,8 @@ x = rho.*cos(ph);
 y = rho.*sin(ph);
 
 
+
+
 figure;
 surface(x, y, db(abs(ETE_ap))); shading flat;
 colorbar;
@@ -137,13 +139,13 @@ xlabel('x[m]');
 xlabel('y[m]');
 title('E field on the aperture of a finite length circular waveguide');
 
-figure;
-surface(x, y, db(abs(HTE_ap))); shading flat;
-colorbar;
-colormap('jet');
-xlabel('x[m]');
-ylabel('y[m]');
-title('H field on the aperture of a finite length circular waveguide');
+% figure;
+% surface(x, y, db(abs(HTE_ap))); shading flat;
+% colorbar;
+% colormap('jet');
+% xlabel('x[m]');
+% ylabel('y[m]');
+% title('H field on the aperture of a finite length circular waveguide');
 
 figure;
 surface(x, y, db(abs(ETE_fundamental))); shading flat;
@@ -153,21 +155,21 @@ title('E field on the aperture of an infinitely long circular waveguide');
 colorbar;
 colormap('jet');
 
-figure;
-surface(x, y, db(abs(HTE_fundamental))); shading flat;
-xlabel('x[m]');
-ylabel('y[m]');
-title('H field on the aperture of an infinitely long circular waveguide');
-colorbar;
-colormap('jet');
-
 % figure;
-% surface(x, y, (abs(ETE_fundamental) - abs(ETE_ap))); shading flat;
+% surface(x, y, db(abs(HTE_fundamental))); shading flat;
 % xlabel('x[m]');
 % ylabel('y[m]');
-% title('Diff E field (\infty long and finite length)');
+% title('H field on the aperture of an infinitely long circular waveguide');
 % colorbar;
 % colormap('jet');
+
+figure;
+surface(x, y, (abs(ETE_fundamental) - abs(ETE_ap))); shading flat;
+xlabel('x[m]');
+ylabel('y[m]');
+title('Diff E field (\infty long and finite length)');
+colorbar;
+colormap('jet');
 
 % x = rho.*cos(ph);
 % y = rho.*sin(ph);

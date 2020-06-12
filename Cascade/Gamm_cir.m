@@ -72,7 +72,7 @@ legend({'g_{in} K space integrals', 'b_{in} K space integrals', 'Mishustin integ
     }, 'location', 'northeast', 'FontWeight', 'bold', 'FontSize', 16);
 
 
-figure(2);
+figure(3);
 hold on;
 % plot(2*R./lamb, abs(Gamma), 'Linewidth', 2);
 % hold on;
@@ -83,9 +83,10 @@ xlabel('2r/ \lambda', 'FontWeight', 'bold', 'FontSize', 16);
 ylabel('\Gamma in dB', 'FontWeight', 'bold', 'FontSize', 16);
 title('Reflection coefficient', 'FontWeight', 'bold', 'FontSize', 16);
 
-legend({'K Space Integrals', 'Mishustin'}, 'location', 'northeast', 'FontWeight', 'bold', 'FontSize', 16);
+legend({'K Space integrals 19 higher order modes', 'Mishustin integrals only with TE11/TE11'...
+    , 'K Space integrals only with TE11/TE11'}, 'location', 'northeast', 'FontWeight', 'bold', 'FontSize', 16);
 
-figure(3);
+figure(4);
 hold on;
 % plot(2*R./lamb, abs(Gamma), 'Linewidth', 2);
 % hold on;
@@ -96,4 +97,5 @@ xlabel('2r/ \lambda', 'FontWeight', 'bold', 'FontSize', 16);
 ylabel('Phase of \Gamma in deg ', 'FontWeight', 'bold', 'FontSize', 16);
 title('Reflection coefficient', 'FontWeight', 'bold', 'FontSize', 16);
 
-legend({'K Space Integrals', 'Mishustin'}, 'location', 'northeast', 'FontWeight', 'bold', 'FontSize', 16);
+legend({'K Space integrals 19 higher order modes', 'Mishustin integrals only with TE11/TE11'...
+    , 'K Space integrals only with TE11/TE11'}, 'location', 'northeast', 'FontWeight', 'bold', 'FontSize', 16);

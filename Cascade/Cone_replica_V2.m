@@ -83,14 +83,14 @@ save('Str_cone_replica_30_conv_2', 'STR');
 save('Srt_cone_replica_30_conv_2', 'SRT');
 save('Srr_cone_replica_30_conv_2', 'SRR');
 
-
+SRR = load('Srr_cone_replica_5_conv.mat');
 
 figure;
 
 % plot(F * 1e-9, db(abs(squeeze(s_params_5(1, 1, :))))/2, 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(STT(:, 1, 1)))), 'LineWidth', 2); grid on;
-
+plot(F * 1e-9, db(abs(squeeze(SRR.SRR(:, 1, 1)))), 'LineWidth', 2); grid on;
+xlim([5 21]);
 
 figure;
 

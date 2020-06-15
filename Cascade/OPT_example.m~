@@ -14,7 +14,7 @@ fun = @(x) GSM_N_opt(x(1), x(2), x(3), Len, F, 20);
 
 x0 = [2e-2, 4e-2, round(Len./(lamb./10))];
 
-% a = fun(x0)
+a = fun(x0)
 
 A = [];
 b = [];

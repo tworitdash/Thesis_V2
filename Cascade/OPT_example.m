@@ -6,9 +6,12 @@ F = 5e9;
 
 lamb = c0./F;
 
-Len = 5e-2;
+Len = 6 .* lamb;
 
-fun = @(x) GSM_N_opt(2e-2, 9e-2, x(1), Len, F, 2);
+R1 = 2e-2;
+Rend = 2 .* lamb;
+
+fun = @(x) GSM_N_opt(R1, Rend, x(1), Len, F, 0);
 
 % [x, fval] = ga(fun, 2, [], [], [], [], [2e-2 4e-2], [4e-2 8e-2]);
 
@@ -32,7 +35,8 @@ tic;
 
 %options = optimoptions('simulannealbnd','Display', 'iter');
 
-options = optimoptions(@ga,'PlotFcn','gaplotbestf');
+options = optimoptions(@ga,'PlotFcn', {'gaplotbestf', 'gaplotscores'},...
+    'InitialPopulationMatrix', [round(Len./(lamb./40))], 'UseParallel', true);
 
 [x, fval, exf, ouput, population] = ga(fun, 1, A, b, Aeq, beq, lb, ub, [], options);
 

@@ -269,10 +269,5 @@ drho = R./100;
 dphi = pi./180;
 [theta, phi] = meshgrid(-pi/2-eps:pi/180:pi/2-eps, eps:pi/180:2*pi+eps);
 
-for o = 1:ModeNumberAper
-    
+[Eth, Eph] = FF_apertureFSCir(length(N)+1, [1, Dm.'], Gamma, theta, phi, F, er, mur, R);
 
-    [Eth, Eph] = FF_apertureFSCir(length(N)+1, [1, Dm.'], Gamma, theta, phi, F, er, mur, R);
-
-
-end

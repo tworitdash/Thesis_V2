@@ -1,4 +1,4 @@
-function [SRR_TE11] = GSM_N_opt(R1, Rend, E, Len, F, k)
+function [RLRR_TE11] = GSM_N_opt(R1, Rend, E, Len, F, k)
 
 c0 = 3e8;
 
@@ -92,5 +92,5 @@ SRR(k, :, :) = slr * SRR_ * slr;
 
 
 end
-SRR_TE11 = abs(SRR(k, 1, 1));
+RLRR_TE11 = sum(sum(abs(SRR(k, :, :)).^2)); % Return loss at waveguide R
 end

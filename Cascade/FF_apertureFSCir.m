@@ -1,4 +1,4 @@
-function [Eth, Eph] = FF_apertureFSCir(N, Dm, Gamma, theta, phi, F, er, mur, R) 
+function [Eth, Eph] = FF_apertureFSCir(o, N, Dm, Gamma, theta, phi, F, er, mur, R) 
 
 c0 = 3e8;
 v = c0./sqrt(er);
@@ -19,7 +19,7 @@ str = Str.xmn_TE;
 Eth = zeros(size(theta));
 Eph = zeros(size(theta));
 
-for i = 1:N
+for i = o:N
 
 xmn = str(i).xmn;
 m = str(i).m;

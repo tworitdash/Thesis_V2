@@ -1,5 +1,5 @@
-% [ficname,pathname] = uigetfile('*.efe','fichier ''.efe'' a convertir ?');
-[ficname,pathname] = uigetfile('*.hfe','fichier ''.hfe'' a convertir ?');
+[ficname,pathname] = uigetfile('*.efe','fichier ''.efe'' a convertir ?');
+% [ficname,pathname] = uigetfile('*.hfe','fichier ''.hfe'' a convertir ?');
 nomfic = [pathname ficname];
 i0 = find(ficname=='.');
 

@@ -11,13 +11,15 @@ Len = 6 .* lamb;
 R1 = 2e-2;
 Rend = 2 .* lamb;
 
-fun = @(x) GSM_N_opt(R1, Rend, x(1), Len, F, 0);
+% funct = @(x) GSM_N_opt(R1, Rend, x(1), Len, F, 0);
 
 
-problem.fun = fun;
+problem.objective =  @(x) GSM_N_opt(R1, Rend, x(1), Len, F, 0);
 problem.x0 = [round(Len./(lamb./40))];
 problem.lb = [7];
 problem.ub = [round(Len./(lamb./40))];
+problem.solver = 'fmincon';
+
 
 tic;
 
@@ -25,7 +27,7 @@ tic;
 %     'InitialPopulationMatrix', [round(Len./(lamb./40))], 'UseParallel', true);
 
 problem.options = optimoptions(@fmincon,'PlotFcn', ...
-    {'optimplotx', 'optimplotfirstorderopt', 'optimplotfvalconstr', },...
+    {'optimplotx', 'optimplotfirstorderopt'},...
      'UseParallel', true);
 
 [x, fval, exf, ouput] = fmincon(problem);

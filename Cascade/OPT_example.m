@@ -20,13 +20,14 @@ problem.lb = [7];
 problem.ub = [round(Len./(lamb./40))];
 problem.solver = 'fmincon';
 
+
 tic;
 
 % problem.options = optimoptions(@ga,'PlotFcn', {'gaplotbestf', 'gaplotscores'},...
 %     'InitialPopulationMatrix', [round(Len./(lamb./40))], 'UseParallel', true);
 
 problem.options = optimoptions(@fmincon,'PlotFcn', ...
-    {'optimplotx', 'optimplotfirstorderopt', 'optimplotfvalconstr', },...
+    {'optimplotx', 'optimplotfirstorderopt'},...
      'UseParallel', true);
 
 [x, fval, exf, ouput] = fmincon(problem);

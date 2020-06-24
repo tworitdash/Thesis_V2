@@ -38,7 +38,7 @@ tic;
 options = optimoptions(@ga,'PlotFcn', {'gaplotbestf', 'gaplotscores'},...
     'InitialPopulationMatrix', [round(Len./(lamb./40))], 'UseParallel', true, 'FitnessLimit',  10^(-15/20));
 
-[x, fval, exf, ouput, population] = ga(fun, 1, A, b, Aeq, beq, lb, ub, [], options);
+[x, fval, exf, ouput, population] = ga(fun, 1, A, b, Aeq, beq, lb, ub, [], [1], options);
 
 time_opt = toc;
 

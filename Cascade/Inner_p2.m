@@ -27,7 +27,7 @@ X_til = zeros(length(Nr), length(Np));
 for p = 1:length(Np)
       for r = 1:length(Nr)
 %                 disp('Iteration:')
-%                 
+% %                 
 %                 disp(p);
 %                 disp(r);
                 

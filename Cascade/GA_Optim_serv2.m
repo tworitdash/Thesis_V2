@@ -6,19 +6,18 @@ lamb = c0./F;
 
 Len = 6 .* lamb;
 
-R1 = 2e-2;
-Rend = 2 .* lamb;
-
-fun = @(x) GSM_N_opt(R1, Rend, x(1), Len, F, 0);
+% R1 = 2e-2;
+% Rend = 2 .* lamb;
+fun = @(x) GSM_N_opt(x(2), x(3), x(1), Len, F, 0);
 
 problem.fitnessfcn = fun;
-problem.nvars = 1;
-problem.lb = [7];
-problem.ub = [round(Len./(lamb./40))];
+problem.nvars = 3;
+problem.lb = [7 2e-2 4e-2];
+problem.ub = [round(Len./(lamb./10)) 4e-2 8e-2];
 problem.IntCon = 1;
 problem.options = optimoptions(@ga, 'PlotFcn', {'gaplotbestf', 'gaplotbestindiv'}, 'Display', 'iter',... 
-    'InitialPopulationMatrix', [round(Len./(lamb./40))], 'UseParallel',...
-    true, 'FitnessLimit',  10^(-15/20));
+    'InitialPopulationMatrix', [7 2e-2 5e-2], 'UseParallel',...
+    true, 'FitnessLimit',  10^(-35/20));
 tic;
 
 [x, fval, exf, out] = ga(problem);

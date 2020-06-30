@@ -18,12 +18,12 @@ k0 = 2.*pi./lamb;
 rr = 2e-2; % Base radius
 % rt = 4e-2; % Top redius
 % rt = rr .* 3;
-rt = 1.5 .* lamb;
+rt = 2 .* lamb;
 
 n = 15; % number of transitions
 
 % Length = 5e-2;
-Length = 0.5 .* lamb;
+Length = 6 .* lamb;
 
 R = linspace(rr, rt, n); % radius vector
 

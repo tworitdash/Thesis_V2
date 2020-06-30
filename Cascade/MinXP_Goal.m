@@ -13,7 +13,7 @@ dph = pi/180;
 
 [Gamma, Dm, ModeNumberAper, Transmission_sum]  = Feed_Gamma_Dm_opt(R, L, F, k, er, mur, timesk0, HM);
 
-[~, ~, ~, Exp, ~, ~] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, th, ph, F, er, mur, R, Transmission_sum);
+[~, ~, ~, Exp, ~, ~] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, th, ph, F, er, mur, R, Transmission_sum, HM);
 
 Max_Exp = max(Exp(46, :));
 

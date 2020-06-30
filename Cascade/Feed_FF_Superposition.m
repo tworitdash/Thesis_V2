@@ -1,4 +1,4 @@
-function [Eth, Eph, Eco, Exp, CO, XP] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, theta, phi, F, er, mur, R, Transmission_sum)
+function [Eth, Eph, Eco, Exp, CO, XP] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, theta, phi, F, er, mur, R, Transmission_sum, HM)
 
 Eth = zeros(size(theta));
 Eph = zeros(size(theta));
@@ -10,7 +10,7 @@ XP = zeros(size(theta));
 
 for o = 1:ModeNumberAper
     
-    HigherModes = o+1:1:20;
+    HigherModes = o+1:1:HM;
     
     [Eth_o, Eph_o, Eco_o, Exp_o, CO, XP] = FF_apertureFSCir(o, length(HigherModes)+1, [1, Dm(o, :)], Gamma(o), theta, phi, F, er(end), mur(end), R(end));
     Eth = Eth + Eth_o .* Transmission_sum(o);

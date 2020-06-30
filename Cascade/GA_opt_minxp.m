@@ -59,7 +59,7 @@ tic;
 
 problem2.options = optimoptions(@ga, 'PlotFcn', {'gaplotbestf', 'gaplotbestindiv'}, 'Display', 'iter',... 
     'InitialPopulationMatrix', [IP], 'UseParallel',...
-    true);
+    true, 'Fitnesslimit', 10^(10/20));
 
 [r, fval2, exf2, ouput2] = ga(problem2);
 

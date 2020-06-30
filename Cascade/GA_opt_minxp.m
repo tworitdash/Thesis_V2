@@ -14,7 +14,7 @@ R_test = linspace(R1, Rend, N);
 l1 = lamb/4;
 l = ones(N-1, 1) * Len/N;
 
-problem2.fitnessfcn = @(x) MinXP_Goal([x(1:N)], [l1 x(N+1:2*N-1)], F, 0, 10, HM);
+problem2.fitnessfcn = @(x) MinXP_Goal([x(1:N)], [l1 x(N+1:2*N-1)], F, 0, 10, 6);
 problem2.nvars = 2*N - 1;
 % problem2.x0 = [linspace(R1, Rend, N)];
 

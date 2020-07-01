@@ -15,6 +15,6 @@ dph = pi/180;
 
 [~, ~, ~, Exp, ~, ~] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, th, ph, F, er, mur, R, Transmission_sum, HM);
 
-Max_Exp = max(Exp(46, :));
+Max_Exp = max(abs(Exp(46, :)));
 
 end

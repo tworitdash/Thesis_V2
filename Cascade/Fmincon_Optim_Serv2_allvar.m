@@ -58,7 +58,7 @@ L = [l1 L];
 
 problem2.options = optimoptions(@fmincon,'PlotFcn', ...
     {'optimplotx', 'optimplotfirstorderopt'},...
-     'UseParallel', true);
+     'UseParallel', true, 'MaxFunEval', Inf, 'MaxIter', Inf);
 
 [r, fval2, exf2, ouput2] = fmincon(problem2);
 
@@ -70,4 +70,4 @@ fmin2.exf = exf2;
 fmin2.output = ouput2;
 fmin2.time_consumed = time_opt2;
 
-save('fmincon_allvar_ms3serv2.mat', 'fmin2');
+save('fmincon_allvar_ms3serv2_V2.mat', 'fmin2');

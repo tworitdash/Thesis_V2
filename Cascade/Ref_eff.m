@@ -29,7 +29,7 @@ dph = pi/180;
 
 [Gamma, Dm, ModeNumberAper, Transmission_sum]  = Feed_Gamma_Dm(R, Length, F, 5, er, mur);
 
-[Eth, Eph, Eco, Exp, CO, XP] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, th, ph, F, er, mur, R, Transmission_sum);
+[Eth, Eph, Eco, Exp, CO, XP] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, th, ph, F, er, mur, R, Transmission_sum, 20);
 
 
 % [Eth, Eph]  = Feed_FF(rr, rt, n, F, th, ph);
@@ -83,18 +83,20 @@ for i = 1:length(d)
         
         
     eta_s(i) = n_f(i)/d_f(i);
+    
+    % Taper efficiency (eta_t)
 %     
-%     % Taper efficiency (eta_t)
-% %     
-% %     Eth_ = Eth(:, th(1,:)<=theta_);
-% %     Eph_ = Eph(:, th(1,:)<=theta_);
-%     
-%     [Eth_, Eph_] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, theta_, phi, F, er, mur, R, Transmission_sum);
-% 
-%     C = ((4 .* focal_length)./(4 .* focal_length.^2 + rho.^2));
-%     
-%     Erho_ = - Eth_ .* C;
-%     Eph_ = - Eph_ .* C;
+%     Eth_ = Eth(:, th(1,:)<=theta_);
+%     Eph_ = Eph(:, th(1,:)<=theta_);
+    
+    %[Eth_, Eph_, Eco_, Exp_, CO_, XP_] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, theta_, phi, F, er, mur, R, Transmission_sum, 20);
+    [Eth_, Eph_, Eco_, ~, ~, ~] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, theta_, phi, F, er, mur, R, Transmission_sum, 20);
+    
+    C = ((4 .* focal_length)./(4 .* focal_length.^2 + rho.^2));
+    
+    Erho_ = - Eth_ .* C;
+    Eph_ = - Eph_ .* C;
+    Ecoa = - Eco_ .* C;
 %    
 %     Int_etp_n_rho = Erho_ .* rho .* drho .* dphi;
 %     etp_n_rho(i) = sum(sum(Int_etp_n_rho));
@@ -103,16 +105,17 @@ for i = 1:length(d)
 %     etp_n_phi(i) = sum(sum(Int_etp_n_phi));
 %     
 %     etp_n(i) = abs(etp_n_rho(i)).^2 + abs(etp_n_phi(i)).^2;
-%     
-%     E_abs_rpz = abs(Erho_).^2 + abs(Eph_).^2;
-%     Int_etp_d = E_abs_rpz .* rho .* drho .* dphi;
-%     etp_d(i) = sum(sum(Int_etp_d));
+    etp_n(i) = abs(sum(sum(Ecoa .* rho .* drho .* dphi))).^2;
+    
+    E_abs_rpz = abs(Erho_).^2 + abs(Eph_).^2;
+    Int_etp_d = E_abs_rpz .* rho .* drho .* dphi;
+    etp_d(i) = sum(sum(Int_etp_d));
     
     
-%     Area(i) = pi .* (d(i)^2)/4;
-%     
-%     e_tp(i) =  (1/Area(i)) * etp_n(i)./etp_d(i);
-%     
+    Area(i) = pi .* (d(i)^2)/4;
+    
+    e_tp(i) =  (1/Area(i)) * etp_n(i)./etp_d(i);
+    
 
 %Illumination efficiency
 
@@ -134,14 +137,16 @@ eta_pol(i) = eta_pol_n(i)./eta_pol_d(i);
 
 end
 
-e_ap = eta_s .* eta_pol;
+e_ap = eta_s .* eta_pol .* e_tp;
 
 figure;
 plot(d, eta_s, 'LineWidth', 2);
 hold on;
-plot(d, eta_ill, 'LineWidth', 2);
+% plot(d, eta_ill, 'LineWidth', 2);
 hold on;
 plot(d, eta_pol, 'LineWidth', 2);
+hold on; 
+plot(d, e_tp, 'LineWidth', 2);
 hold on;
 plot(d, e_ap, 'LineWidth', 2);
 

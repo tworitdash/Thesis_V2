@@ -269,7 +269,7 @@ dtheta = pi/180;
 dphi = pi/180;
 
  
-[theta, phi] = meshgrid(-pi/2-eps:dtheta:pi/2-eps, eps:dphi:2*pi+eps);
+[theta, phi] = meshgrid(-pi/2+eps:dtheta:pi/2+eps, eps:dphi:2*pi+eps);
 
 % [theta, phi] = meshgrid(eps:dtheta:pi+eps, eps:dphi:2*pi+eps);
 
@@ -280,11 +280,16 @@ for o = 1:ModeNumberAper
     
     HigherModes = o+1:1:o+20;
     
-    [Eth_o, Eph_o] = FF_apertureFSCir(o, length(HigherModes)+1, [1, Dm(o, :)], Gamma(o), theta, phi, F, er(end), mur(end), R(end));
+    [Eth_o, Eph_o] = FF_apertureFSCir(o, length(HigherModes), [1, Dm(o, :)], Gamma(o), theta, phi, F, er(end), mur(end), R(end));
     Eth = Eth + Eth_o .* Transmission_sum(o);
     Eph = Eph + Eph_o .* Transmission_sum(o);
 
 end
+
+% [Eth, Eph] = FF_apertureFSCir(1, 1, 1, Gamma(1), theta, phi, F, er(end), mur(end), R(end));
+% Eth = Eth .* Transmission_sum(1);
+% Eph = Eph + Eph .* Transmission_sum(1);
+
 
 E_FF = sqrt(abs(Eth).^2 + abs(Eph).^2);
 
@@ -312,9 +317,9 @@ D = 4 .* pi .* U ./ P_rad;
 
 
 figure;
-plot(theta(1, :), db(D(1, :))/2, 'LineWidth', 2);
+plot(theta(1, :)*180/pi, db(D(1, :))/2, 'LineWidth', 2);
 hold on;
-plot(theta(91, :), db(D(91, :))/2, 'LineWidth', 2);
+plot(theta(91, :)*180/pi, db(D(91, :))/2, 'LineWidth', 2);
 
 grid on;
 

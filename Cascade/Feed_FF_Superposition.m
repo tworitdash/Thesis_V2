@@ -12,11 +12,11 @@ for o = 1:ModeNumberAper
     
     HigherModes = o+1:1:HM;
     
-    [Eth_o, Eph_o, Eco_o, Exp_o, CO, XP] = FF_apertureFSCir(o, length(HigherModes)+1, [1, Dm(o, :)], Gamma(o), theta, phi, F, er(end), mur(end), R(end));
+    [Eth_o, Eph_o, Eco_o, Exp_o, CO_o, XP_o] = FF_apertureFSCir(o, length(HigherModes), [1, Dm(o, :)], Gamma(o), theta, phi, F, er(end), mur(end), R(end));
     Eth = Eth + Eth_o .* Transmission_sum(o);
     Eph = Eph + Eph_o .* Transmission_sum(o);
     Eco = Eco + Eco_o .* Transmission_sum(o);
     Exp = Exp + Exp_o .* Transmission_sum(o);
-    CO = CO + CO .* Transmission_sum(o);
-    XP = XP + XP .* Transmission_sum(o);
+    CO = CO + CO_o .* Transmission_sum(o);
+    XP = XP + XP_o .* Transmission_sum(o);
 end

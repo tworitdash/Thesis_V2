@@ -1,35 +1,22 @@
-clear;
+function [e_ap] = Ga_opt_aper_eff(R, L, F, k, HM, timesk0, focal_length, d)
 
 c0 = 3e8;
 zeta = 120 .* pi;
-F = 5e9;
 lamb = c0./F;
 
-%% Reflector dimensions
-
-focal_length = 1;
-d = linspace(0.3, 2, 10);
-
-%% Feed dimensions
-
-rr = 2e-2;
-rt = 2 .* lamb;
-n = 15;
-R = linspace(rr, rt, n);
+n = length(R);
 
 er = ones(1, n); % Relative Permittivity of each WG section
 mur = ones(1, n); % Relative Permeability of each WG sectio
-
-Length = 6 .* lamb; % length of the conical waveguide
 
 dth = pi/180;
 dph = pi/180;
 
 [th, ph] = meshgrid(eps:dth:pi/2+eps, eps:dph:2*pi+eps);
 
-[Gamma, Dm, ModeNumberAper, Transmission_sum]  = Feed_Gamma_Dm(R, Length, F, 5, er, mur);
+[Gamma, Dm, ModeNumberAper, Transmission_sum]  = Feed_Gamma_Dm_opt(R, L, F, k, er, mur, timesk0, HM);
 
-[Eth, Eph, Eco, Exp, CO, XP] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, th, ph, F, er, mur, R, Transmission_sum, 20);
+[Eth, Eph, Eco, Exp, CO, XP] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, th, ph, F, er, mur, R, Transmission_sum, HM);
 
 
 % [Eth, Eph]  = Feed_FF(rr, rt, n, F, th, ph);
@@ -89,8 +76,9 @@ for i = 1:length(d)
 %     Eth_ = Eth(:, th(1,:)<=theta_);
 %     Eph_ = Eph(:, th(1,:)<=theta_);
     
-    [Eth_, Eph_, Eco_, Exp_, CO_, XP_] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, theta_, phi, F, er, mur, R, Transmission_sum, 20);
-
+    %[Eth_, Eph_, Eco_, Exp_, CO_, XP_] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, theta_, phi, F, er, mur, R, Transmission_sum, 20);
+    [Eth_, Eph_, Eco_, ~, ~, ~] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, theta_, phi, F, er, mur, R, Transmission_sum, 20);
+    
     C = ((4 .* focal_length)./(4 .* focal_length.^2 + rho.^2));
     
     Erho_ = - Eth_ .* C;
@@ -136,12 +124,12 @@ eta_pol(i) = eta_pol_n(i)./eta_pol_d(i);
 
 end
 
-e_ap = eta_s .* eta_pol .* eta_ill;
+e_ap = eta_s .* eta_pol .* e_tp;
 
 figure;
 plot(d, eta_s, 'LineWidth', 2);
 hold on;
-plot(d, eta_ill, 'LineWidth', 2);
+% plot(d, eta_ill, 'LineWidth', 2);
 hold on;
 plot(d, eta_pol, 'LineWidth', 2);
 hold on; 

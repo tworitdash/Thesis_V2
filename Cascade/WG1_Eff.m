@@ -1,51 +1,22 @@
-clear;
+%% One waveguide with reflector efficiency
 
 c0 = 3e8;
-zeta = 120 .* pi;
 F = 5e9;
-lamb = c0./F;
-
-%% Reflector dimensions
+R = 2e-2;
+er = 1;
+mur = 1;
 
 focal_length = 1;
-d = linspace(0.3, 2, 10);
+d = linspace(0.3, 10, 20);
 
-%% Feed dimensions
-
-rr = 2e-2;
-rt = 2 .* lamb;
-n = 15;
-R = linspace(rr, rt, n);
-
-er = ones(1, n); % Relative Permittivity of each WG section
-mur = ones(1, n); % Relative Permeability of each WG sectio
-
-Length = 6 .* lamb; % length of the conical waveguide
+zeta = 120 .* pi;
 
 dth = pi/180;
 dph = pi/180;
 
-[th, ph] = meshgrid(eps:dth:pi/2+eps, eps:dph:2*pi+eps);
+[th, ph] = meshgrid(eps:dth:pi/2+eps, eps:dph:2*pi);
 
-[Gamma, Dm, ModeNumberAper, Transmission_sum]  = Feed_Gamma_Dm(R, Length, F, 5, er, mur);
-
-[Eth, Eph, Eco, Exp, CO, XP] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, th, ph, F, er, mur, R, Transmission_sum, 20);
-
-
-% [Eth, Eph]  = Feed_FF(rr, rt, n, F, th, ph);
-
-E_FF = sqrt(abs(Eth).^2 + abs(Eph).^2);
-
-
-%% 
-figure; 
-plot(th(1, :).*180/pi, db(E_FF(1, :)), 'LineWidth', 2);hold on;
-plot(th(91, :).*180/pi, db(E_FF(91, :)), 'LineWidth', 2); hold on;
-% plot(th(46, :).*180/pi, db(Eco(46, :)), 'LineWidth', 2); hold on;
-plot(th(46, :).*180/pi, db(Exp(46, :)), 'LineWidth', 2); hold on;
-
-grid on;
-ylim([-50 50]);
+[Eth, Eph, Eco, Exp, CO, XP] = FF_apertureFSCir(1, 1, 1, 0, th, ph, F, er(end), mur(end), R(end));
 
 C_spillover = 1/(2 .* zeta);
 
@@ -55,9 +26,6 @@ U_feed = C_spillover .* f_pattern_square;
 
 CO_XP_square = abs(CO).^2 + abs(XP).^2;
 CO_XP_half = abs(CO).^2 + 1./2 .* abs(XP).^2;
-
-
-%% 
 
 for i = 1:length(d)
     
@@ -89,7 +57,7 @@ for i = 1:length(d)
 %     Eth_ = Eth(:, th(1,:)<=theta_);
 %     Eph_ = Eph(:, th(1,:)<=theta_);
     
-    [Eth_, Eph_, Eco_, Exp_, CO_, XP_] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, theta_, phi, F, er, mur, R, Transmission_sum, 20);
+    [Eth_, Eph_, Eco_, Exp_, CO_, XP_] = FF_apertureFSCir(1, 1, 1, 0, theta_, phi, F, er(end), mur(end), R(end));
 
     C = ((4 .* focal_length)./(4 .* focal_length.^2 + rho.^2));
     
@@ -136,16 +104,16 @@ eta_pol(i) = eta_pol_n(i)./eta_pol_d(i);
 
 end
 
-e_ap = eta_s .* eta_pol .* eta_ill;
+e_ap = eta_s .* e_tp;
 
 figure;
 plot(d, eta_s, 'LineWidth', 2);
 hold on;
-plot(d, eta_ill, 'LineWidth', 2);
-hold on;
 plot(d, eta_pol, 'LineWidth', 2);
 hold on; 
 plot(d, e_tp, 'LineWidth', 2);
+hold on;
+% plot(d, eta_ill, 'LineWidth', 2);
 hold on;
 plot(d, e_ap, 'LineWidth', 2);
 

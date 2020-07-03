@@ -30,4 +30,4 @@ fmin.exf = exf;
 fmin.output = out;
 fmin.time_consumed = time_opt;
 
-save('ga_3var_r1rendN_RL.mat', 'fmin');
+save('ga_3var_r1rendN_RL_hpc.mat', 'fmin');

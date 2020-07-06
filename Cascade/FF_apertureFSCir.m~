@@ -25,7 +25,7 @@ Exp = zeros(size(theta));
 CO = zeros(size(theta));
 XP = zeros(size(theta));
 
-for i = o:N
+for i = o:N+o-1
 
 xmn = str(i).xmn;
 m = str(i).m;
@@ -60,8 +60,8 @@ for l = 1:size(Nu, 1)
     end
 end
 
-E_ft_x = (Nup) .* Dm(i) .* pi .* beta_rhop .* sin(2 * Psi) .* I2;
-E_ft_y = (Nup) .* Dm(i) .* pi .* beta_rhop .* (I0 + cos(2 .* Psi) .* I2);
+E_ft_x = (Nup) .* Dm(i - o + 1) .* pi .* beta_rhop .* sin(2 * Psi) .* I2;
+E_ft_y = (Nup) .* Dm(i - o + 1) .* pi .* beta_rhop .* (I0 + cos(2 .* Psi) .* I2);
 
 
 c2 = 1j .* k0 / (4 * pi);
@@ -76,8 +76,8 @@ Eph = Eph + c2 .* cos(theta) .* (E_ft_y .* cos(phi) - E_ft_x .* sin(phi)) .* (1 
 Exp = Exp +  cos(theta) .* cos(phi) .* Eth_o - sin(phi) .* Eph_o;
 Eco = Eco +  cos(theta) .* sin(phi) .* Eth_o + cos(phi) .* Eph_o;
 
-XP = XP + (Nup) .* Dm(i) .* pi .* beta_rhop .* I2 .* cos(theta);
-CO = CO + (Nup) .* Dm(i) .* pi .* beta_rhop .* I0 .* cos(theta);
+XP = XP + (Nup) .* Dm(i - o + 1) .* pi .* beta_rhop .* I2 .* cos(theta);
+CO = CO + (Nup) .* Dm(i - o + 1) .* pi .* beta_rhop .* I0 .* cos(theta);
 
 
 end

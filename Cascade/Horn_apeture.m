@@ -304,12 +304,15 @@ grid on;
 % ylim([-50 30]);
 
 %% Directivity
-
+theta = th;
+dtheta = dth;
 zeta = 120 .* pi;
 
 U = abs(E_FF).^2./(2 .* zeta);
 
-P_rad_i = U(:, 91:end) .* sin(theta(:, 91:end)) .* dtheta .* dphi;
+% P_rad_i = U(:, 91:end) .* sin(theta(:, 91:end)) .* dtheta .* dphi;
+
+P_rad_i = U(:, 1:end) .* sin(theta(:, 1:end)) .* dtheta .* dphi;
 
 P_rad = sum(sum(P_rad_i));
 

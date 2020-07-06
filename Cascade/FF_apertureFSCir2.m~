@@ -1,4 +1,4 @@
-function [Eth, Eph, Eco, Exp, CO, XP] = FF_apertureFSCir(o, N, Dm, Gamma, theta, phi, F, er, mur, R) 
+function [Eth, Eph, Eco, Exp, CO, XP] = FF_apertureFSCir2(N, Dm, Gamma, theta, phi, F, er, mur, R) 
 
 c0 = 3e8;
 v = c0./sqrt(er);
@@ -25,11 +25,11 @@ Exp = zeros(size(theta));
 CO = zeros(size(theta));
 XP = zeros(size(theta));
 
-for i = o:N
+for i = 1:length(N)
 
-xmn = str(i).xmn;
-m = str(i).m;
-mode = str(i).mode;
+xmn = str(N(i)).xmn;
+m = str(N(i)).m;
+mode = str(N(i)).mode;
 
 beta_rhop = xmn./R;
 
@@ -54,8 +54,8 @@ for l = 1:size(Nu, 1)
     
     for k = 1:size(Nu, 2)
 
-        I0(l, k) = Lommel(0, R, beta_rhop, Nu(i, k), m - 1, m - 1);
-        I2(l, k) = Lommel(0, R, beta_rhop, Nu(i, k), m + 1, m + 1);
+        I0(l, k) = Lommel(0, R, beta_rhop, Nu(l, k), m - 1, m - 1);
+        I2(l, k) = Lommel(0, R, beta_rhop, Nu(l, k), m + 1, m + 1);
 
     end
 end

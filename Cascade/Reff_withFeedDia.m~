@@ -1,60 +1,30 @@
-clear;
+%% One waveguide with reflector efficiency
 
 c0 = 3e8;
+
+
+theta_0 = 53 .* pi/180;
+d = 15;
+
+R = linspace(0.1, 10, 100);
+er = 1;
+mur = 1;
+
+focal_length = d/4 * cot(theta_0/2);
+
 zeta = 120 .* pi;
-F = 3e9;
-lamb = c0./F;
-
-%% Reflector dimensions
-
-focal_length = 1;
-d = linspace(0.3, 25, 100);
-
-%% Feed dimensions
-
-str = load('Xmn_azimuthal_inc_TE.mat');
-str = str.xmn_TE;
-
-xmn = str(1).xmn;
-
-rr = (xmn .* c0)./(2 .* pi .* F) + 1e-3;
-
-
-% rr = 2e-2;
-% rt = 2 .* lamb;
-rt = 20e-2;
-n = 15;
-R = linspace(rr, rt, n);
-
-er = ones(1, n); % Relative Permittivity of each WG section
-mur = ones(1, n); % Relative Permeability of each WG sectio
-
-Length = 6 .* lamb; % length of the conical waveguide
 
 dth = pi/180;
 dph = pi/180;
 
-[th, ph] = meshgrid(eps:dth:pi/2+eps, eps:dph:2*pi+eps);
+[th, ph] = meshgrid(eps:dth:pi/2+eps, eps:dph:2*pi);
 
-[Gamma, Dm, ModeNumberAper, Transmission_sum]  = Feed_Gamma_Dm(R, Length, F, 5, er, mur);
+for i = 1:length(R)
+    
+f =  fc(R(i), er, mur);
+F = f(1)+eps;
 
-[Eth, Eph, Eco, Exp, CO, XP] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, th, ph, F, er, mur, R, Transmission_sum, 10);
-
-
-% [Eth, Eph]  = Feed_FF(rr, rt, n, F, th, ph);
-
-E_FF = sqrt(abs(Eth).^2 + abs(Eph).^2);
-
-
-%% 
-figure; 
-plot(th(1, :).*180/pi, db(E_FF(1, :)), 'LineWidth', 2);hold on;
-plot(th(91, :).*180/pi, db(E_FF(91, :)), 'LineWidth', 2); hold on;
-% plot(th(46, :).*180/pi, db(Eco(46, :)), 'LineWidth', 2); hold on;
-plot(th(46, :).*180/pi, db(Exp(46, :)), 'LineWidth', 2); hold on;
-
-grid on;
-ylim([-50 50]);
+[Eth, Eph, Eco, Exp, CO, XP] = FF_apertureFSCir(1, 1, 1, 0, th, ph, F, er, mur, R(i));
 
 C_spillover = 1/(2 .* zeta);
 
@@ -65,22 +35,16 @@ U_feed = C_spillover .* f_pattern_square;
 CO_XP_square = abs(CO).^2 + abs(XP).^2;
 CO_XP_half = abs(CO).^2 + 1./2 .* abs(XP).^2;
 
-
-%% 
-
-for i = 1:length(d)
     
-    drho = d(i)/200; dphi = pi/ 180;
+    drho = d/200; dphi = pi/ 180;
 
-    [rho, phi] = meshgrid(eps:drho:d(i)/2, eps:dphi:2*pi);
+    [rho, phi] = meshgrid(eps:drho:d/2, eps:dphi:2*pi);
     
     theta_ = 2 * atan(rho/(2 * focal_length));
     
-    f_hash = focal_length./d(i);
+    f_hash = focal_length/d;
     
     % Spillover efficiency (eta_s)
-    
-    theta_0(i) = 2 * acot(4 * f_hash);
     
     % numerator
     Int_u_n = U_feed(:,th(1,:)<=theta_0(i)) .* sin(th(:,th(1,:)<=theta_0(i))) .* dth .* dph;
@@ -98,9 +62,8 @@ for i = 1:length(d)
 %     Eth_ = Eth(:, th(1,:)<=theta_);
 %     Eph_ = Eph(:, th(1,:)<=theta_);
     
-    %[Eth_, Eph_, Eco_, Exp_, CO_, XP_] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, theta_, phi, F, er, mur, R, Transmission_sum, 20);
-    [Eth_, Eph_, Eco_, ~, ~, ~] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, theta_, phi, F, er, mur, R, Transmission_sum, 10);
-    
+    [Eth_, Eph_, Eco_, Exp_, CO_, XP_] = FF_apertureFSCir(1, 1, 1, 0, theta_, phi, F, er, mur(end), R(end));
+
     C = ((4 .* focal_length)./(4 .* focal_length.^2 + rho.^2));
     
     Erho_ = - Eth_ .* C;
@@ -146,14 +109,16 @@ eta_pol(i) = eta_pol_n(i)./eta_pol_d(i);
 
 end
 
-e_ap = eta_s .* eta_pol .* e_tp;
+e_ap = eta_s .* e_tp;
 
 figure;
 plot(d, eta_s, 'LineWidth', 2);
 hold on;
+plot(d, eta_pol, 'LineWidth', 2);
+hold on; 
 plot(d, e_tp, 'LineWidth', 2);
 hold on;
-plot(d, eta_pol, 'LineWidth', 2);
+% plot(d, eta_ill, 'LineWidth', 2);
 hold on;
 plot(d, e_ap, 'LineWidth', 2);
 

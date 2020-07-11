@@ -12,20 +12,20 @@ E_phi_0 = A.Phi_0Deg_V_;
 E_phi_90 = A.Phi_90Deg_V_;
 % E_phi_90 = A.Phi_90Deg__;
 
-figure(93);
+figure(71);
 hold on;
-% plot(th, db((abs(E_phi_0)/max(abs(E_phi_0)))), '-.', 'LineWidth', 2);
-plot(th, db((abs(E_phi_0./2.*k0./(4*pi)))), '-.', 'LineWidth', 2);
+plot(th, db((abs(E_phi_0)/max(abs(E_phi_0)))), '-.', 'LineWidth', 2);
+% plot(th, db((abs(E_phi_0./2.*k0./(4*pi)))), '-.', 'LineWidth', 2);
 hold on;
-% plot(th, db((abs(E_phi_90)/max(abs(E_phi_90)))), '-.', 'LineWidth', 2);
-plot(th, db((abs(E_phi_90./2*k0/(4*pi)))), '-.', 'LineWidth', 2);
+plot(th, db((abs(E_phi_90)/max(abs(E_phi_90)))), '-.', 'LineWidth', 2);
+% plot(th, db((abs(E_phi_90./2*k0/(4*pi)))), '-.', 'LineWidth', 2);
 
 
-xlabel('\theta(Deg)', 'FontSize', 12, 'FontWeight', 'bold');
-ylabel('E_{abs} (dB)', 'FontSize', 12, 'FontWeight', 'bold');
-title('Far electric field', 'FontSize', 12, 'FontWeight', 'bold');
-legend({'\phi = 0', '\phi = 90'}, 'FontSize', 12, 'FontWeight', 'bold');
-
-grid on;
-% xlim([90 270]);
-ylim([-50 20]);
+% xlabel('\theta(Deg)', 'FontSize', 12, 'FontWeight', 'bold');
+% ylabel('E_{abs} (dB)', 'FontSize', 12, 'FontWeight', 'bold');
+% title('Far electric field', 'FontSize', 12, 'FontWeight', 'bold');
+% legend({'\phi = 0', '\phi = 90'}, 'FontSize', 12, 'FontWeight', 'bold');
+% 
+% grid on;
+% % xlim([90 270]);
+% ylim([-50 20]);

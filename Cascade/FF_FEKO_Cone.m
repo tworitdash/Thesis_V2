@@ -18,7 +18,7 @@ R = rho_f(end);
 x_f = rho_f .* cos(phi_f);
 y_f = rho_f .* sin(phi_f);
 
-F = 5e9;
+F = 7.5e9;
 
 % f = 20*36000:1:21*36000 - 1;
 
@@ -121,15 +121,15 @@ E_abs = sqrt(abs(Eth).^2 + abs(Eph).^2);
 % 
 % ylim([-50 0]);
 %%
-figure(72);
+figure(71);
 
 hold on;
-% plot(theta(1, :)*(180/pi), db((abs(E_abs(1, :))/max(abs(E_abs(1, :))))), '*', 'LineWidth', 0.5);
-plot(theta(1, :)*(180/pi), db((abs(E_abs(1, :)))), 'o', 'LineWidth', 1);
+plot(theta(1, :)*(180/pi), db((abs(E_abs(1, :))/max(abs(E_abs(1, :))))), '*', 'LineWidth', 0.5);
+% plot(theta(1, :)*(180/pi), db((abs(E_abs(1, :)))), 'o', 'LineWidth', 1);
 % figure(42)
 hold on;
-% plot(theta(90, :)*(180/pi), db((abs(E_abs(90, :))/max(abs(E_abs(90, :))))), '*', 'LineWidth', 0.5);
-plot(theta(90, :)*(180/pi), db((abs(E_abs(90, :)))), 'o', 'LineWidth', 1);
+plot(theta(90, :)*(180/pi), db((abs(E_abs(90, :))/max(abs(E_abs(90, :))))), '*', 'LineWidth', 0.5);
+% plot(theta(90, :)*(180/pi), db((abs(E_abs(90, :)))), 'o', 'LineWidth', 1);
 
 xlabel('\theta(Deg)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('E_{abs} (dB)', 'FontSize', 12, 'FontWeight', 'bold');

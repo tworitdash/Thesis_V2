@@ -16,8 +16,8 @@ problem2.fitnessfcn = @(x) MinXP_Goal_V2L([x(1:N)], x(N+1), F, 0);
 problem2.nvars = N + 1;
 % problem2.x0 = [linspace(R1, Rend, N)];
 
-lb = zeros(2.*N-1, 1);
-ub = zeros(2.*N-1, 1);
+lb = zeros(N+1, 1);
+ub = zeros(N+1, 1);
 
 lb(1) = R1;
 ub(1) = R1 + R1/5;

@@ -1,5 +1,5 @@
 c0 = 3e8;
-N = 120;
+N = 80;
 F = 5e9;
 
 lamb = c0/F;
@@ -26,7 +26,7 @@ for i =  2:N
     lb(i) = ub(i - 1) - R_test(1)/5;
     ub(i) = R_test(i) + R_test(1)/5;
 end
-ub(N + 1) = 10 .* lamb;
+ub(N + 1) = 8 .* lamb;
 lb(N + 1) = 5 .* lamb; 
 
 % for m = N+1:2*N-1

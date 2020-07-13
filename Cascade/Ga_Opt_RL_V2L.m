@@ -29,13 +29,13 @@ for i =  2:N
     ub(i) = R_test(i) + lamb./2;
 end
 
-lb(N + 1) = 10 .* lamb;
-ub(N + 1) = 5  .* lamb;
+lb(N + 1) = 5 .* lamb;
+ub(N + 1) = 10  .* lamb;
 
 problem2.lb = [lb.'];
 problem2.ub = [ub.'];
 
-IP = [R_test l.'];
+IP = [R_test Len];
 
 problem2.solver = 'ga';
 

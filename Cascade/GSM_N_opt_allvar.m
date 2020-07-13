@@ -1,6 +1,7 @@
 function [RLRR_TE11] = GSM_N_opt_allvar(R, Len, F, k)
 
-
+c0 = 3e8;
+lamb = c0./F;
 
 % R1 = R_vec(1);
 % Rend = R_vec(2);
@@ -12,7 +13,7 @@ function [RLRR_TE11] = GSM_N_opt_allvar(R, Len, F, k)
 n = length(R);
 
 l1 = lamb/4;
-L = [l1 ones(n-1, 1) * Len/n];
+L = [l1 ones(1, n - 1) * Len/n];
 
 er = ones(n);
 mur = ones(n);

@@ -1,5 +1,5 @@
 clear L
-out = load('ga_allvar_ms3serv2.mat');
+out = load('ga_allvar_ms3serv2_minxp_V2L.mat');
 
 out = out.fmin2;
 

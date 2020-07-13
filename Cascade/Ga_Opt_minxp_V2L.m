@@ -1,5 +1,5 @@
 c0 = 3e8;
-N = 80;
+N = 40;
 F = 5e9;
 
 lamb = c0/F;
@@ -59,7 +59,7 @@ tic;
 
 problem2.options = optimoptions(@ga, 'PlotFcn', {'gaplotbestf', 'gaplotbestindiv'}, 'Display', 'iter',... 
     'InitialPopulationMatrix', [IP], 'UseParallel',...
-    true, 'Fitnesslimit', -10^(25/20));
+    true, 'MaxTime', 12600);
 
 [r, fval2, exf2, ouput2] = ga(problem2);
 

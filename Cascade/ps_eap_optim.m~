@@ -29,32 +29,30 @@ d = 4 .* focal_length .* tan(theta_0./2); % Reflectoor Diameter
 
 % problem2.fitnessfcn = @(x) MinXP_Goal([x(1:N)], [l1 x(N+1:2*N-1)], F, 0, 10, 6);
 
-problem2.fitnessfcn = @(x) Ga_opt_aper_eff([x(1:N)], [l1 x(N+1:2*N-1)], F, 5, 10, 10, focal_length, d);
+problem2.objective = @(x) Ga_opt_aper_eff([x(1:N)],x(N + 1), F, 5, 10, 10, focal_length, d);
 problem2.nvars = 2*N - 1;
 % problem2.x0 = [linspace(R1, Rend, N)];
 
-lb = zeros(2.*N-1, 1);
-ub = zeros(2.*N-1, 1);
+lb = zeros(N+1, 1);
+ub = zeros(N+1, 1);
 
 lb(1) = R1;
 ub(1) = R1 + R1/5;
 
 for i =  2:N
-    lb(i) = ub(i - 1) - R_test(1)/5;
-    ub(i) = R_test(i) + R_test(1)/5;
+    lb(i) = ub(i - 1) - lamb/2;
+    ub(i) = R_test(i) + lamb/2;
 end
 
-for m = N+1:2*N-1
-    lb(m) = l(m - N) - lamb/5;
-    ub(m) = l(m - N) + lamb/5;
-end
+ub(N + 1) = 10 .* lamb;
+lb(N + 1) = 5 .* lamb; 
 
 problem2.lb = [lb.'];
 problem2.ub = [ub.'];
 
-IP = [R_test l.'];
+IP = [R_test Len];
 
-problem2.solver = 'ga';
+problem2.solver = 'patternsearch';
 
 
 tic;
@@ -72,9 +70,9 @@ tic;
 %     'InitialPopulationMatrix', [IP], 'UseParallel',...
 %     true, 'FitnessLimit',  10^(-45/20));
 
-problem2.options = optimoptions(@ga, 'PlotFcn', {'gaplotbestf', 'gaplotbestindiv'}, 'Display', 'iter',... 
-    'InitialPopulationMatrix', [IP], 'UseParallel',...
-    true, 'Fitnesslimit', -0.65);
+problem2.options = optimoptions(@patternsearch,'PlotFcn', ...
+    {'psplotbestf', 'psplotbestx'},...
+     'UseParallel', true, 'MaxFunEval', Inf, 'MaxIter', Inf);
 
 [r, fval2, exf2, ouput2] = ga(problem2);
 

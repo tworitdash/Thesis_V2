@@ -1,8 +1,11 @@
-function [e_ap] = Ga_opt_aper_eff(R, L, F, k, HM, timesk0, focal_length, d)
-
+function [e_ap] = Ga_opt_aper_eff(R, Len, F, k, focal_length, d)
+c0 = 3e8;
+lamb = c0./F;
+l1 = lamb/4;
 zeta = 120 .* pi;
 
 n = length(R);
+L = [l1 ones(1, n-1).*Len./n];
 
 er = ones(1, n); % Relative Permittivity of each WG section
 mur = ones(1, n); % Relative Permeability of each WG sectio
@@ -12,9 +15,9 @@ dph = pi/180;
 
 [th, ph] = meshgrid(eps:dth:pi/2+eps, eps:dph:2*pi+eps);
 
-[Gamma, Dm, ModeNumberAper, Transmission_sum]  = Feed_Gamma_Dm_opt(R, L, F, k, er, mur, timesk0, HM);
+[ModeNumberAper, Transmission_sum]  = Feed_Gamma_Dm_opt_V2L(R, L, F, k, er, mur);
 
-[Eth, Eph, ~, ~, CO, XP] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, th, ph, F, er, mur, R, Transmission_sum, HM);
+[Eth, Eph, ~, ~, CO, XP] = Feed_FF_Superposition_V2L(ModeNumberAper, th, ph, F, er, mur, R, Transmission_sum);
 
 
 % [Eth, Eph]  = Feed_FF(rr, rt, n, F, th, ph);
@@ -64,7 +67,7 @@ for i = 1:length(d)
 %     Eph_ = Eph(:, th(1,:)<=theta_);
     
     %[Eth_, Eph_, Eco_, Exp_, CO_, XP_] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, theta_, phi, F, er, mur, R, Transmission_sum, 20);
-    [Eth_, Eph_, Eco_, ~, ~, ~] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, theta_, phi, F, er, mur, R, Transmission_sum, HM);
+    [Eth_, Eph_, Eco_, ~, ~, ~] = Feed_FF_Superposition_V2L(ModeNumberAper, theta_, phi, F, er, mur, R, Transmission_sum);
     
     C = ((4 .* focal_length)./(4 .* focal_length.^2 + rho.^2));
     

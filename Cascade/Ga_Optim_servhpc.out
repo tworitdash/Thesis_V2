@@ -1,0 +1,706 @@
+MATLAB is selecting SOFTWARE OPENGL rendering.
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2017 The MathWorks, Inc.
+                   R2017b (9.3.0.713579) 64-bit (glnxa64)
+                             September 14, 2017
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+Frequency Iteration: 
+     1
+
+Starting parallel pool (parpool) using the 'local' profile ...
+connected to 12 workers.
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+[Warning: MATLAB has disabled some advanced graphics rendering features by
+switching to software OpenGL. For more information, click <a
+href="matlab:opengl('problems')">here</a>.] 
+
+                                  Best           Mean      Stall
+Generation      Func-count        f(x)           f(x)    Generations
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** JOB 5413801 ON awi02 CANCELLED AT 2020-07-12T10:39:26 DUE TO TIME LIMIT ***
+slurmstepd: error: *** STEP 5413801.0 ON awi02 CANCELLED AT 2020-07-12T10:39:26 DUE TO TIME LIMIT ***

@@ -55,19 +55,31 @@ D_Ip = 4 .* pi .* U_feedIp ./ P_radIp;
 % P_radUb = sum(sum(P_radUb_i));
 % D_Ub = 4 .* pi .* U_feedUb ./ P_radUb;
 %%
+
+Exp_Ip = 1./sqrt(2) .* (Eth_Ip(46, :) - Eph_Ip(46, :));
+Eco_Ip = 1./sqrt(2) .* (Eth_Ip(46, :) + Eph_Ip(46, :));
+
 figure(5);
 hold on;
-plot(the(1, :)*180/pi, db(abs(Eco_Ip(1, :))./max(abs(Eco_Ip(1, :)))), 'LineWidth', 2);
+plot(the(1, :)*180/pi, db(abs(Eco_Ip)./max(abs(Eco_Ip))), 'LineWidth', 2);
 hold on;
-plot(the(1, :)*180/pi, db(abs(Exp_Ip(46, :))./max(abs(Eco_Ip(1, :)))), 'LineWidth', 2);
+plot(the(1, :)*180/pi, db(abs(Exp_Ip)./max(abs(Eco_Ip))), 'LineWidth', 2);
 grid on;
 ylim([-50 0]);
 
-figure(3);
 hold on;
-plot(the(1, :)*180/pi, db(abs(Eth_Ip(45, :))./max(abs(Eth_Ip(45, :)))), 'LineWidth', 2);
+plot(the(1, :)*180/pi, db(abs(CO(1, :))./max(abs(CO(1, :)))), 'LineWidth', 2);
 hold on;
-plot(the(1, :)*180/pi, db(abs(Eph_Ip(45, :))./max(abs(Eph_Ip(45, :)))), 'LineWidth', 2);
+plot(the(1, :)*180/pi, db(abs(XP(46, :))./max(abs(CO(1, :)))), 'LineWidth', 2);
+grid on;
+ylim([-50 0]);
+
+
+figure(10);
+hold on;
+plot(the(1, :)*180/pi, db(abs(Eth_Ip(46, :))./max(abs(Eth_Ip(46, :)))), 'LineWidth', 2);
+hold on;
+plot(the(1, :)*180/pi, db(abs(Eph_Ip(46, :))./max(abs(Eph_Ip(46, :)))), 'LineWidth', 2);
 grid on;
 ylim([-50 0]);
 
@@ -88,7 +100,7 @@ ylim([-50 0]);
 % hold on;
 % plot(the(1, :)*180/pi, db(abs(Eco_Ub(1, :))./max(abs(Eco_Ub(1, :)))), 'g', 'LineWidth', 2);
 
-figure(2);
+figure;
 hold on;
 plot(the(1, :)*180/pi, db(abs(E_Ip(1, :))./max(abs(E_Ip(1, :)))), 'LineWidth', 2);
 hold on;
@@ -126,4 +138,10 @@ plot([lub_axis], ub(1:N), 'g', 'LineWidth', 2); hold on; plot([lub_axis], -ub(1:
 
 grid on;
 
-
+figure(6);
+hold on;
+plot(the(1, :)*180/pi, db(abs(Eth_Ip(46, :))), 'LineWidth', 2);
+hold on;
+plot(the(1, :)*180/pi, db(abs(Eph_Ip(46, :))), 'LineWidth', 2);
+grid on;
+ylim([-50 0]);

@@ -294,7 +294,7 @@ end
 E_FF = sqrt(abs(Eth).^2 + abs(Eph).^2);
 
 %% plots
-figure(2);
+figure(1);
 hold on;
 plot(theta(1, :).*180/pi, db(abs(E_FF(1, :))./max(abs(E_FF(1, :)))), 'LineWidth', 2);
 hold on;

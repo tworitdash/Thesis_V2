@@ -15,7 +15,7 @@ E_phi_45_th = A.Theta_Phi_45Deg__V_;
 E_phi_45_ph = A.Phi_Phi_45Deg__V_;
 % E_phi_90 = A.Phi_90Deg__;
 
-figure(2);
+figure(1);
 hold on;
 plot(th, db((abs(E_phi_0)/max(abs(E_phi_0)))), '-.', 'LineWidth', 2);
 % plot(th, db((abs(E_phi_0./2.*k0./(4*pi)))), '-.', 'LineWidth', 2);
@@ -35,8 +35,8 @@ plot(th, db((abs(E_phi_90)/max(abs(E_phi_90)))), '-.', 'LineWidth', 2);
 
 %% Co and Cross polar fields
 
-Exp = 1./sqrt(2) .* ( cos(th*pi/180) .* E_phi_45_th - E_phi_45_ph);
-Eco = 1./sqrt(2) .* ( cos(th*pi/180) .* E_phi_45_th + E_phi_45_ph);
+Exp = 1./sqrt(2) .* (E_phi_45_th - E_phi_45_ph);
+Eco = 1./sqrt(2) .* (E_phi_45_th + E_phi_45_ph);
 
 
 figure(5);
@@ -47,10 +47,16 @@ hold on;
 plot(th, db((abs(Exp)/max(abs(Eco)))), '-.', 'LineWidth', 2);
 
 
-figure(3);
+figure(10);
 hold on;
 plot(th, db(abs(E_phi_45_th)./max(abs(E_phi_45_th))));
 hold on;
 plot(th, db(abs(E_phi_45_ph)./max(abs(E_phi_45_ph))));
 hold on;
 
+figure(10);
+hold on;
+plot(th, db(abs(E_phi_45_th)));
+hold on;
+plot(th, db(abs(E_phi_45_ph)));
+hold on;

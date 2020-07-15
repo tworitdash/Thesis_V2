@@ -48,7 +48,8 @@ kz = (-1j)*sqrt(-(k0.^2 - kx.^2 - ky.^2));
 
 Nu = sqrt((kx.^2 + ky.^2));
 
-Psi = acos(kx./Nu);
+% Psi = acos(kx./Nu);
+Psi = phi;
 
 for l = 1:size(Nu, 1)
     

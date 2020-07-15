@@ -294,20 +294,23 @@ end
 E_FF = sqrt(abs(Eth).^2 + abs(Eph).^2);
 
 %% plots
-figure;
-
-plot(theta(1, :).*180/pi, db(E_FF(1, :)), 'LineWidth', 2);
+figure(1);
 hold on;
-plot(theta(91, :).*180/pi, db(E_FF(91, :)), 'LineWidth', 2);
+plot(theta(1, :).*180/pi, db(abs(E_FF(1, :))./max(abs(E_FF(1, :)))), 'LineWidth', 2);
+hold on;
+plot(theta(91, :).*180/pi, db(E_FF(91, :)./max(abs(E_FF(91, :)))), 'LineWidth', 2);
 
 grid on;
 % ylim([-50 30]);
 
 %% Directivity
-
+% theta = th;
+dtheta = pi/180;
 zeta = 120 .* pi;
 
 U = abs(E_FF).^2./(2 .* zeta);
+
+% P_rad_i = U(:, 91:end) .* sin(theta(:, 91:end)) .* dtheta .* dphi;
 
 P_rad_i = U(:, 91:end) .* sin(theta(:, 91:end)) .* dtheta .* dphi;
 
@@ -323,5 +326,13 @@ plot(theta(91, :)*180/pi, db(D(91, :))/2, 'LineWidth', 2);
 
 grid on;
 
+%% 
+Exp = (Eth(46, :) .* cos(theta(1, :)) - Eph(46, :));
+Eco = (Eth(46, :) .* cos(theta(1, :)) + Eph(46, :));
 
+figure(5);
+hold on;
+plot(theta(1, :).*180/pi, db(abs(Eco)./max(abs(Eco))), 'LineWidth', 2);
+hold on;
+plot(theta(91, :).*180/pi, db(abs(Exp)./max(abs(Eco))), 'LineWidth', 2);
 

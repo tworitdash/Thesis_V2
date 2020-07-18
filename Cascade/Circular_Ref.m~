@@ -92,9 +92,9 @@ plot(x, imag(yap), 'Linewidth', 2);
 
 grid on;
 hold on;
-plot(x, real(y11./YTE11), 'Linewidth', 2);
+plot(x, real(y11), 'Linewidth', 2);
 hold on;
-plot(x, imag(y11./YTE11), 'Linewidth', 2);
+plot(x, imag(y11), 'Linewidth', 2);
 
 xlabel('2r/ \lambda', 'FontWeight', 'bold', 'FontSize', 16);
 ylabel('Y_{in}', 'FontWeight', 'bold', 'FontSize', 16);

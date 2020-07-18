@@ -1,7 +1,7 @@
 function [RLRR_TE11] = GSM_N_opt_allvar(R, Len, F, k)
 
 c0 = 3e8;
-lamb = c0./F;
+lamb = c0./5e9;
 
 % R1 = R_vec(1);
 % Rend = R_vec(2);
@@ -20,7 +20,7 @@ mur = ones(n);
 
 for i = 1:n
     f =  fc(R(i), er(i), mur(i));
-    N_i  =  find(f < F);
+    N_i  =  find(f < F(end));
     N_(i) = length(N_i);
 end
 
@@ -45,6 +45,7 @@ for j = 1:J
 end
 
 %% Frequency loop to find the GSM of the entire structure
+RLRR_TE11 = zeros(length(F));
 
 for k = 1:length(F)
     
@@ -88,7 +89,8 @@ STR(k, :, :) = slt * STR_ * slr;
 SRT(k, :, :) = slr * SRT_ * slt; 
 SRR(k, :, :) = slr * SRR_ * slr;
 
-
+RLRR_TE11(k) = db(sum(sum(abs(SRR(k, :, :)).^2)))./2; % Return loss at waveguide R
 end
-RLRR_TE11 = db(sum(sum(abs(SRR(k, :, :)).^2)))./2; % Return loss at waveguide R
+
+
 end

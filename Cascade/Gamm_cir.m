@@ -55,7 +55,7 @@ Gamma_(i) = (1 - yin(i))./(1 + yin(i));
 
 end
 
-figure(1);
+figure(6);
 hold on;
 plot(2*R./lamb, real(yin_), 'Linewidth', 2);
 
@@ -68,8 +68,8 @@ xlabel('2r/ \lambda', 'FontWeight', 'bold', 'FontSize', 16);
 ylabel('Y_{in}', 'FontWeight', 'bold', 'FontSize', 16);
 title('Input Admittance', 'FontWeight', 'bold', 'FontSize', 16);
 
-legend({'g_{in} K space integrals', 'b_{in} K space integrals', 'Mishustin integrals', 'Mishustin integrals'...
-    }, 'location', 'northeast', 'FontWeight', 'bold', 'FontSize', 16);
+legend({'g_{in} K space integrals 29 higher order modes', 'b_{in} K space integrals 29 higher order modes', 'g_{in} Mishustin integrals only with TE11/TE11', 'b_{in} Mishustin integrals only with TE11/TE11'...
+    , 'g_{in} K space integrals only with TE11/TE11', 'b_{in} K space integrals only with TE11/TE11'}, 'location', 'northeast', 'FontWeight', 'bold', 'FontSize', 16);
 
 
 figure(3);

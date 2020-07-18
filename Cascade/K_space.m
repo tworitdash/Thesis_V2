@@ -132,7 +132,7 @@ xlabel('2r/ \lambda', 'FontWeight', 'bold', 'FontSize', 16);
 ylabel('Y_{in}', 'FontWeight', 'bold', 'FontSize', 16);
 title('Input Admittance', 'FontWeight', 'bold', 'FontSize', 16);
 
-legend({'g_{in}', 'b_{in}'}, 'location', 'northeast', 'FontWeight', 'bold', 'FontSize', 16);
+% legend({'g_{in} K Space Integrals', 'b_{in} K space integrals'}, 'location', 'northeast', 'FontWeight', 'bold', 'FontSize', 16);
 
 
 figure(2);

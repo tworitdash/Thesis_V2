@@ -4,10 +4,14 @@ c0 = 3e8;
 F = 5e9;
 lamb = c0./F;
 
-R = [0.02253 0.02253 0.03353 0.03917 0.05562 0.05946 0.05901 0.07181 0.08365 0.1009 0.08275 0.08619 0.1107 0.1097 0.1106 0.1297...
-    0.1182];
-N = length(R) - 1;
-Len = 0.4595;
+N = 16;
+data = load('ga_V2L_ms3serv2_fl.mat');
+r = data.fmin2.r;
+R = [r(1) r(1:N)];
+% R = [0.02253 0.02253 0.03353 0.03917 0.05562 0.05946 0.05901 0.07181 0.08365 0.1009 0.08275 0.08619 0.1107 0.1097 0.1106 0.1297...
+%     0.1182];
+% N = length(R) - 1;
+Len = r(N + 1);
 
 l1 = lamb./4;
 L = [l1 ones(1, N - 1)./N .* Len];
@@ -32,13 +36,13 @@ str = XMN_data.Xmn;
 
 fc_ = fc(R(2), 1, 1);
 
-F = linspace(fc_(1)+fc_(1)./100, fc_(3), 100);
+F = linspace(fc_(1)+fc_(1)./100, fc_(3), 10);
 % F = 5e9;
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
 
-for i = 1:length(F)
- RL(i) = GSM_N_opt_allvar(SP(1:N), SP(N+1), F(i), 0);
-end
+% for i = 1:length(F)
+RL = GSM_N_opt_allvar(SP(1:N), SP(N+1), F, 20);
+% end
 
 figure;
 plot(F*1e-9, RL, 'LineWidth', 2);

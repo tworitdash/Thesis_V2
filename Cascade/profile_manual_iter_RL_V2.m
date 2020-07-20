@@ -38,7 +38,7 @@ str = XMN_data.Xmn;
 
 fc_ = fc(R(2), 1, 1);
 
-F = linspace(fc_(1)+fc_(1)./100, fc_(2), 1000);
+F = linspace(fc_(1)+fc_(1)./100, fc_(3), 3000);
 % F = 5e9;
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
 
@@ -48,6 +48,7 @@ F = linspace(fc_(1)+fc_(1)./100, fc_(2), 1000);
 
 figure;
 plot(F*1e-9, RL(:, 1), 'LineWidth', 2);
+title('Return Loss of "Patternsearch Optimizated antenna at 5 GHz" with respect to a band of frequencies')
 
 RL1 = GSM_N_opt_allvar(SP(1:N), SP(N+1), 5e9, 20);
 % end

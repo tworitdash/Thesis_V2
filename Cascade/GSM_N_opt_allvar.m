@@ -24,7 +24,7 @@ for i = 1:n
     N_(i) = length(N_i);
 end
 
-if (N_(end) < 50)
+if (N_(end) < 100)
     %N = [20 round(20 * (R(end)/R(1))^2)];
     N = N_ + k;
 else

@@ -15,7 +15,7 @@ R_test = linspace(R1, Rend, N);
 % l1 = lamb/4;
 % l = ones(N-1, 1) * Len/N;
 
-problem2.objective = @(x) GSM_N_opt_allvar([x(1:N)], x(N+1), F, 20);
+problem2.objective = @(x) GSM_N_opt_allvar_V2([x(1:N)], x(N+1), F, 20);
 %problem2.nvars = N + 1;
 % problem2.x0 = [linspace(R1, Rend, N)];
 

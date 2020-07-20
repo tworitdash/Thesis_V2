@@ -47,7 +47,7 @@ end
 %% Frequency loop to find the GSM of the entire structure
 RLRR_TE11 = zeros(length(F));
 
-parfor k = 1:length(F)
+for k = 1:length(F)
     
     disp('Frequency Iteration: ');
     disp(k);

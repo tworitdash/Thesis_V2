@@ -1,4 +1,4 @@
-function [RLRR_TE11] = GSM_N_opt_allvar(R, Len, F, k)
+function [RLRR_TE11] = GSM_N_opt_allvar_V2(R_cone, Len, F, k)
 
 c0 = 3e8;
 lamb = c0./5e9;
@@ -9,6 +9,18 @@ lamb = c0./5e9;
 % R = linspace(R1, Rend, round(Len/(lamb/10)));
 
 % R = linspace(R1, Rend, E);
+
+num = round(Len./(lamb./10));
+
+n_R = length(R_cone);
+
+N_axis = round(num./(n_R-1));
+
+for p = 1:n_R-1
+    R_(:, p) = linspace(R_cone(p), R_cone(p+1), N_axis);
+end
+
+R = reshape(R_, 1, size(R_, 1) .* size(R_, 2));
 
 n = length(R);
 

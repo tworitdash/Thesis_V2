@@ -159,7 +159,7 @@ E = sqrt(abs(E_phi).^2 + abs(E_rho).^2);
 figure;
 surface(rho.*cos(phi), rho.*sin(phi), db(abs(E_z)./(max(max(abs(E_z)))))); shading flat;
 % surface(rho.*cos(phi), rho.*sin(phi), db(abs(E_z))); shading flat;
-colormap('jet');
+colormap('jet'); 
 
 figure;
 surface(rho.*cos(phi), rho.*sin(phi), db(abs(E_rho)./(max(max(abs(E_rho)))))); shading flat;

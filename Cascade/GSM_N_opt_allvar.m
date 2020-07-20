@@ -1,3 +1,5 @@
+function [RLRR_TE11] = GSM_N_opt_allvar(R, Len, F, k)
+
 c0 = 3e8;
 lamb = c0./5e9;
 
@@ -22,7 +24,7 @@ for i = 1:n
     N_(i) = length(N_i);
 end
 
-if (N_(end) < 100)
+if (N_(end) < 50)
     %N = [20 round(20 * (R(end)/R(1))^2)];
     N = N_ + k;
 else
@@ -43,7 +45,7 @@ for j = 1:J
 end
 
 %% Frequency loop to find the GSM of the entire structure
-RLRR_TE11 = zeros(length(F));
+RLRR_TE11 = size(zeros(1, length(F)));
 
 for k = 1:length(F)
     

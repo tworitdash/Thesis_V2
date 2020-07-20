@@ -1,4 +1,4 @@
-function [RLRR_TE11] = GSM_N_opt_allvar(R, Len, F, k)
+function [RLRR_TE11] = GSM_N_opt_allvar_V2(R_cone, Len, F, k)
 
 c0 = 3e8;
 lamb = c0./5e9;
@@ -9,6 +9,18 @@ lamb = c0./5e9;
 % R = linspace(R1, Rend, round(Len/(lamb/10)));
 
 % R = linspace(R1, Rend, E);
+
+num = round(Len./(lamb./10));
+
+n_R = length(R_cone);
+
+N_axis = round(num./(n_R-1));
+
+for p = 1:n_R-1
+    R_(:, p) = linspace(R_cone(p), R_cone(p+1), N_axis);
+end
+
+R = reshape(R_, 1, size(R_, 1) .* size(R_, 2));
 
 n = length(R);
 
@@ -24,7 +36,7 @@ for i = 1:n
     N_(i) = length(N_i);
 end
 
-if (N_(end) < 100)
+if (N_(end) < 50)
     %N = [20 round(20 * (R(end)/R(1))^2)];
     N = N_ + k;
 else
@@ -45,13 +57,9 @@ for j = 1:J
 end
 
 %% Frequency loop to find the GSM of the entire structure
-<<<<<<< HEAD
-RLRR_TE11 = zeros(length(F));
-=======
 RLRR_TE11 = size(zeros(1, length(F)));
->>>>>>> 475531290ad8049f8334b6f51d6180fe46e4b334
 
-parfor k = 1:length(F)
+for k = 1:length(F)
     
     disp('Frequency Iteration: ');
     disp(k);

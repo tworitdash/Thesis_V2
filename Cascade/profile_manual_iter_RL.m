@@ -20,7 +20,8 @@ for i = 1:N
     L_axis(i) = sum(L(1:i));
 end
 L_axis = [0 L_axis];
-figure;
+figure(1);
+hold on;
 plot(L_axis, R, 'LineWidth', 2, 'Color', [0.6350, 0.0780, 0.1840] );
 hold on;
 plot(L_axis, -R, 'LineWidth', 2, 'Color', [0.6350, 0.0780, 0.1840] );
@@ -41,10 +42,14 @@ F = linspace(fc_(1)+fc_(1)./100, fc_(2), 1000);
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
 
 % for i = 1:length(F)
-RL = GSM_N_opt_allvar(SP(1:N), SP(N+1), F, 20);
+RL_ga = GSM_N_opt_allvar(SP(1:N), SP(N+1), F, 20);
 % end
 
-figure;
-plot(F*1e-9, RL(:, 1), 'LineWidth', 2);
+figure(2);
+hold on;
+plot(F*1e-9, RL_ga, 'LineWidth', 2); grid on;
+xlabel('Frequency (GHz)', 'FontSize', 16, 'FontWeight', 'bold');
+ylabel('Return loss (dB)', 'FontSize', 16, 'FontWeight', 'bold');
+title('RL of Ga algo', 'FontSize', 16, 'FontWeight', 'bold');
 
 

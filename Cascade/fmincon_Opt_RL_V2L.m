@@ -1,6 +1,6 @@
 clear;
 c0 = 3e8;
-N = 16;
+N = 5;
 F = 5e9;
 
 lamb = c0/F;
@@ -66,7 +66,7 @@ tic;
 %      'UseParallel', true, 'MaxIterations', 2000);
  problem2.options = optimoptions(@patternsearch,'PlotFcn', ...
     {'psplotbestf', 'psplotbestx'},...
-     'UseParallel', true, 'MaxFunEval', Inf, 'MaxIter', Inf);
+     'UseParallel', true, 'MaxFunEval', Inf, 'MaxIter', 100);
 
 [r, fval2, exf2, ouput2] = patternsearch(problem2);
 
@@ -78,4 +78,4 @@ fmin2.exf = exf2;
 fmin2.output = ouput2;
 fmin2.time_consumed = time_opt2;
 
-save('fmincon_V2L_ms3serv2_fl.mat', 'fmin2'); %wo_fl is for without fitness limit
+save('fmincon_V2L_ms3serv2_fl_V2.mat', 'fmin2'); %wo_fl is for without fitness limit

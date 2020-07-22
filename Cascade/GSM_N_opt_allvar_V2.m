@@ -10,7 +10,7 @@ lamb = c0./5e9;
 
 % R = linspace(R1, Rend, E);
 
-num = round(Len./(lamb./10));
+num = round(Len./(lamb./5));
 
 n_R = length(R_cone);
 
@@ -24,8 +24,8 @@ R = reshape(R_, 1, size(R_, 1) .* size(R_, 2));
 
 n = length(R);
 
-l1 = lamb/4;
-L = [l1 ones(1, n - 1) * Len/n];
+% l1 = lamb/4;
+L = [l1 ones(1, n) * Len/n];
 
 er = ones(n);
 mur = ones(n);

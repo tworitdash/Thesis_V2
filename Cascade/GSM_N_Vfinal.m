@@ -1,7 +1,7 @@
-function [RLRR_TE11] = GSM_N_opt_allvar_V2(R_cone, Len, F, k)
+function [STT, STR, SRT, SRR, num] = GSM_N_Vfinal(R_cone, Len, F, k)
 
 c0 = 3e8;
-lamb = c0./5e9;
+lamb = c0./F(end);
 
 % R1 = R_vec(1);
 % Rend = R_vec(2);
@@ -10,17 +10,19 @@ lamb = c0./5e9;
 
 % R = linspace(R1, Rend, E);
 
-n = round(Len./(lamb./10));
+num = round(Len./(lamb./10));
 
 n_R = length(R_cone);
 
-N_axis = round(n./(n_R-1));
+N_axis = round(num./(n_R-1));
 
 for p = 1:n_R-1
-    R_(p, :) = linspace(R_cone(p), R_cone(p+1), N_axis);
+    R_(:, p) = linspace(R_cone(p), R_cone(p+1), N_axis);
 end
 
-R = reshape(R_, size(R_, 1) .* size(R_, 2), 1);
+R = reshape(R_, 1, size(R_, 1) .* size(R_, 2));
+
+n = length(R);
 
 l1 = lamb/4;
 L = [l1 ones(1, n - 1) * Len/n];
@@ -55,7 +57,7 @@ for j = 1:J
 end
 
 %% Frequency loop to find the GSM of the entire structure
-RLRR_TE11 = size(zeros(1, length(F)));
+% RLRR_TE11 = size(zeros(1, length(F)));
 
 for k = 1:length(F)
     
@@ -99,7 +101,7 @@ STR(k, :, :) = slt * STR_ * slr;
 SRT(k, :, :) = slr * SRT_ * slt; 
 SRR(k, :, :) = slr * SRR_ * slr;
 
-RLRR_TE11(k) = db(sum(sum(abs(SRR(k, :, :)).^2)))./2; % Return loss at waveguide R
+% RLRR_TE11 = db(sum(sum(abs(SRR(k, :, :)).^2)))./2; % Return loss at waveguide R
 end
 
 

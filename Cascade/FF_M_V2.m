@@ -1,4 +1,4 @@
-function [Eth, Eph] = FF_M_V2(E_aperture_rho, E_aperture_phi, rho, ph, theta, phi, F, drho, dphi)
+function [Eth, Eph, Eco, Exp] = FF_M_V2(E_aperture_rho, E_aperture_phi, rho, ph, theta, phi, F, drho, dphi)
 
 c0 = 3e8;
 
@@ -38,6 +38,8 @@ c2 = 1j .* k0 .* exp(-1j * k0 * r_obs) / (4 * pi);
 
 Eth = c2 .* (E_ft_x .* cos(phi) + E_ft_y .* sin(phi));
 Eph = c2 .* cos(theta) .* (E_ft_y .* cos(phi) - E_ft_x .* sin(phi));
+Exp = Eth .* cos(phi) - Eph .* sin(phi);
+Eco = Eth .* sin(phi) + Eph .* cos(phi);
 
 % Ex = zeta * Hy;
 % Ey = -zeta * Hx;

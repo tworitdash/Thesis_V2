@@ -1,5 +1,5 @@
 c0 = 3e8;
-N = 100;
+N = 60;
 F = 5e9;
 
 lamb = c0/F;
@@ -12,7 +12,7 @@ Rend = 2 .* lamb;
 R_test = linspace(R1, Rend, N);
 
 
-problem2.objective = @(x) MinXP_Goal_V2L_fields([x(1:N)], x(N+1), F, 0);
+problem2.objective = @(x) MinXP_Goal_V2L_fields([x(1:N)], x(N+1), F, 20);
 
 IP = [R_test Len];
 
@@ -56,34 +56,35 @@ D_Ip = 4 .* pi .* U_feedIp ./ P_radIp;
 % D_Ub = 4 .* pi .* U_feedUb ./ P_radUb;
 %%
 
-Exp_Ip = 1./sqrt(2) .* (Eth_Ip(46, :) - Eph_Ip(46, :));
-Eco_Ip = 1./sqrt(2) .* (Eth_Ip(46, :) + Eph_Ip(46, :));
+% Exp_Ip = 1./sqrt(2) .* (Eth_Ip(46, :) - Eph_Ip(46, :));
+% Eco_Ip = 1./sqrt(2) .* (Eth_Ip(46, :) + Eph_Ip(46, :));
 
-figure(5);
-hold on;
-plot(the(1, :)*180/pi, db(abs(Eco_Ip)./max(abs(Eco_Ip))), 'LineWidth', 2);
-hold on;
-plot(the(1, :)*180/pi, db(abs(Exp_Ip)./max(abs(Eco_Ip))), 'LineWidth', 2);
-grid on;
-ylim([-50 0]);
+% figure(7);
+% hold on;
+% plot(the(1, :)*180/pi, db(abs(Eco_Ip)./max(abs(Eco_Ip))), 'LineWidth', 2);
+% hold on;
+% plot(the(1, :)*180/pi, db(abs(Exp_Ip)./max(abs(Eco_Ip))), 'LineWidth', 2);
+% grid on;
+% ylim([-50 0]);
 
-hold on;
-plot(the(1, :)*180/pi, db(abs(CO(1, :))./max(abs(CO(1, :)))), 'LineWidth', 2);
-hold on;
-plot(the(1, :)*180/pi, db(abs(XP(46, :))./max(abs(CO(1, :)))), 'LineWidth', 2);
-grid on;
-ylim([-50 0]);
+% hold on;
+% plot(the(1, :)*180/pi, db(abs(CO(1, :))./max(abs(CO(1, :)))), 'LineWidth', 2);
+% hold on;
+% plot(the(1, :)*180/pi, db(abs(XP(46, :))./max(abs(CO(1, :)))), 'LineWidth', 2);
+% grid on;
+% ylim([-50 0]);
 
 
-figure(10);
-hold on;
-plot(the(1, :)*180/pi, db(abs(Eth_Ip(46, :))./max(abs(Eth_Ip(46, :)))), 'LineWidth', 2);
-hold on;
-plot(the(1, :)*180/pi, db(abs(Eph_Ip(46, :))./max(abs(Eph_Ip(46, :)))), 'LineWidth', 2);
-grid on;
-ylim([-50 0]);
+% figure(10);
+% hold on;
+% plot(the(1, :)*180/pi, db(abs(Eth_Ip(46, :))./max(abs(Eth_Ip(46, :)))), 'LineWidth', 2);
+% hold on;
+% plot(the(1, :)*180/pi, db(abs(Eph_Ip(46, :))./max(abs(Eph_Ip(46, :)))), 'LineWidth', 2);
+% grid on;
+% ylim([-50 0]);
 
-figure;
+figure(7);
+hold on;
 plot(the(1, :)*180/pi, db(abs(Eco_Ip(1, :))./max(abs(Eco_Ip(1, :)))), 'b', 'LineWidth', 2);
 hold on;
 plot(the(1, :)*180/pi, db(abs(Exp_Ip(46, :))./max(abs(Eco_Ip(1, :)))), 'LineWidth', 2, 'color', [0, 1, 0.2]);
@@ -100,7 +101,7 @@ ylim([-50 0]);
 % hold on;
 % plot(the(1, :)*180/pi, db(abs(Eco_Ub(1, :))./max(abs(Eco_Ub(1, :)))), 'g', 'LineWidth', 2);
 
-figure;
+figure(12);
 hold on;
 plot(the(1, :)*180/pi, db(abs(E_Ip(1, :))./max(abs(E_Ip(1, :)))), 'LineWidth', 2);
 hold on;

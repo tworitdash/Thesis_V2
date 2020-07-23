@@ -9,13 +9,13 @@ A = readtable('result.txt');
 th = A.Theta_deg_;
 phi_ = eps:pi/180:2*pi+pi/180;
 E_phi_0 = A.Total_Phi_0Deg__V_;
-% E_phi_0 = A.Phi_0Deg__;
+% E_phi_0 = A.Phi_0Deg_V_;
 E_phi_90 = A.Total_Phi_90Deg__V_;
 E_phi_45_th = A.Theta_Phi_45Deg__V_;
 E_phi_45_ph = A.Phi_Phi_45Deg__V_;
-% E_phi_90 = A.Phi_90Deg__;
+% E_phi_90 = A.Phi_90Deg_V_;
 
-figure(1);
+figure(12);
 hold on;
 plot(th, db((abs(E_phi_0)/max(abs(E_phi_0)))), '-.', 'LineWidth', 2);
 % plot(th, db((abs(E_phi_0./2.*k0./(4*pi)))), '-.', 'LineWidth', 2);
@@ -39,7 +39,7 @@ Exp = 1./sqrt(2) .* (E_phi_45_th - E_phi_45_ph);
 Eco = 1./sqrt(2) .* (E_phi_45_th + E_phi_45_ph);
 
 
-figure(5);
+figure(7);
 hold on;
 plot(th, db((abs(Eco)/max(abs(Eco)))), '-.', 'LineWidth', 2);
 % plot(th, db((abs(E_phi_0./2.*k0./(4*pi)))), '-.', 'LineWidth', 2);

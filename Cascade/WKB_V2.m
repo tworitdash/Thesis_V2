@@ -8,11 +8,11 @@ mu0 = 1.25663706e-6;  % Free Space Permeability
 
 er = 1; mur = 1; epsilon = er .* er0; mu = mur .* mu0;
 
-str = load('Xmn.mat');
-str = str.Xmn;
+% str = load('Xmn.mat');
+% str = str.Xmn;
 
-% str = load('Xmn_azimuthal_inc_TE.mat');
-% str = str.xmn_TE;
+str = load('Xmn_azimuthal_inc_TE.mat');
+str = str.xmn_TE;
 
 F = 5e9;
 lamb = c0./F;
@@ -30,7 +30,7 @@ d = 6 .* lamb;
 % slope = (r(1) - r(end))./d;
 
 
-fc_ = fc(rt, er, mur);
+fc_ = fc_sameazimuth(rt, er, mur);
 
 fc_end = find(fc_ < F);
 
@@ -126,11 +126,11 @@ end
 Erho = Erho + Erho_i;
 Ephi = Ephi + Ephi_i;
 
-Eth = Eth + h .* Eth_i;
-Eph = Eph + h .* Eph_i;
+Eth = Eth +  Eth_i;
+Eph = Eph +  Eph_i;
 
-Eco = Eco + h .* Eco_i;
-Exp = Exp + h .* Exp_i;
+Eco = Eco +  Eco_i;
+Exp = Exp +  Exp_i;
 
 
 end
@@ -156,15 +156,26 @@ figure;
 
 surface(x, y, db(abs(E_aper)./max(max(abs(E_aper))))); shading flat; colormap('jet');
 
-figure;
+figure(12);
 plot(theta_obs(1, :)*180./pi, db(E_FF(1, :)./max(((abs(E_FF(1, :))))))); hold on;
 
 plot(theta_obs(91, :).*180/pi, db(E_FF(91, :)./max(((abs(E_FF(91, :))))))); hold on; grid on; ylim([-50 0]);
 
-figure;
+figure(7);
 plot(theta_obs(1, :)*180./pi, db(Eco(1, :)./max(((abs(Eco(1, :))))))); hold on;
 
 plot(theta_obs(46, :).*180/pi, db(Exp(46, :)./max(((abs(Eco(1, :))))))); hold on; grid on; ylim([-50 0]);
 
+
+%% Gain
+zeta = 120 .* pi;
+U = abs(E_FF).^2./(2 .* zeta);
+
+P_rad_i = U(:, 91:end) .* sin(theta_obs(:, 91:end)) .* dth .* dph;
+P_rad = sum(sum(P_rad_i));
+
+D = 4 .* pi .* U./P_rad;
+figure;
+plot(theta_obs(1, :).*180/pi, db(D(1, :))./2, 'LineWidth', 2); grid on;
 
 

@@ -1,0 +1,34 @@
+c0 = 3e8;
+
+F = 5e9;
+lamb = c0/F;
+
+rr = 2e-2;
+
+er = 1; mur = 1;
+
+problem.fitnessfcn = @(x)  WKB_Exp(x(1), x(2), rr, F, er, mur);
+problem.solver = 'ga';
+problem.nvars = 2;
+
+lb(1) = rr;
+ub(1) = rr + lamb;
+
+lb(1) = 
+
+problem.options = optimoptions(@ga, 'PlotFcn', {'gaplotbestf', 'gaplotbestindiv'}, 'Display', 'iter',... 
+    'InitialPopulationMatrix', [IP], 'UseParallel',...
+    true, 'FitnessLimit', -25);
+tic;
+
+[r, fval2, exf2, ouput2] = ga(problem);
+
+time_opt2 = toc;
+
+fmin2.r = r;
+fmin2.fval = fval2;
+fmin2.exf = exf2;
+fmin2.output = ouput2;
+fmin2.time_consumed = time_opt2;
+
+save('ga_WKB_minxp.mat', 'fmin2'); 

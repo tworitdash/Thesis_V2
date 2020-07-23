@@ -38,8 +38,9 @@ c2 = 1j .* k0 .* exp(-1j * k0 * r_obs) / (4 * pi);
 
 Eth = c2 .* (E_ft_x .* cos(phi) + E_ft_y .* sin(phi));
 Eph = c2 .* cos(theta) .* (E_ft_y .* cos(phi) - E_ft_x .* sin(phi));
-Exp = Eth .* cos(phi) - Eph .* sin(phi);
-Eco = Eth .* sin(phi) + Eph .* cos(phi);
+
+Exp = Eth .* cos(phi) .* cos(theta) - Eph .* sin(phi);
+Eco = Eth .* sin(phi) .* cos(theta) + Eph .* cos(phi);
 
 % Ex = zeta * Hy;
 % Ey = -zeta * Hx;

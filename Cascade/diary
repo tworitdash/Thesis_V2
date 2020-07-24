@@ -1,0 +1,163 @@
+ls
+2wg_AJ_FEKO_EPhi.eps			f_trial.m			 slurm-5356654.out
+2wg_AJ_FEKO_Erho.eps			ga_3var_r1rendN_RL_ms3serv2.mat  Spec_test.m
+2wg_AJ_FEKO_rhophi.eps			ga_allvar_ms3serv2.mat		 Sper.mat
+2wg_AJ_MM_EPhi.eps			Gamma_Angle_K_Mishustin.eps	 Sper_modes.m
+2wg_AJ_MM_Erho.eps			Gamma_conv_rec.eps		 Spherical_mode_expansion.m
+2wg_AJ_MM_rhophi.eps			Gamma_conv_rec.m		 Spherical_mode.m
+2wg_cst.s38p				Gamma_K_mishustin.eps		 Sq_imag.eps
+2wg_feko.s20p				Gamma_Mag_K_Mishustin.eps	 sq.m
+2wg_gsm.m~				Gamma_mishustin_Kspace.eps	 Sq_real.eps
+3wg_feko_10_modes.s20p			Gamma_phase_conv_rec.eps	 Srr3_ratio_1_modes_20_1mm.mat
+3wg_V1.s39p				Gamm_cir.m			 Srr5_ratio_1_modes_20.mat
+5wg_AJ_FEKO_Ephi.eps			ga_Nvar_Rvec_ms3serv2.mat	 Srr5_ratio_1_modes_variable.mat
+5wg_AJ_FEKO.eps				Ga_opt_aper_eff.m		 Srr_cone_replica_10_conv.mat
+5wg_AJ_FEKO_Erho.eps			Ga_Opt_Exp_WKB.m		 Srr_cone_replica_10.mat
+5wg_AJ_FEKO_rhophi.eps			Ga_Opt_Exp_WKB.m~		 Srr_cone_replica_15_conv.mat
+5wg_AJ_MM_Ephi.eps			Ga_optim_eap.m			 Srr_cone_replica_15.mat
+5wg_AJ_MM.eps				Ga_Optim_serv2_allvar		 Srr_cone_replica_20.mat
+5wg_AJ_MM_Erho.eps			Ga_Optim_serv2_allvar.m		 Srr_cone_replica_25_conv.mat
+5wg_AJ_MM_rhophi.eps			GA_Optim_serv2.m		 Srr_cone_replica_25.mat
+5wg_BJ_FEKO_Ephi.eps			Ga_Optim_servhpc		 Srr_cone_replica_30_conv.mat
+5wg_BJ_FEKO.eps				Ga_Optim_servhpc.m		 Srr_cone_replica_5_conv.mat
+5wg_BJ_FEKO_Erho.eps			Ga_Optim_servhpc.out		 Srr_cone_replica_5.mat
+5wg_BJ_FEKO_rhophi.eps			GA_opt_minxp.m			 SRR_conv_3.mat
+5wg_BJ_MM_EPhi.eps			Ga_Opt_minxp_V2L.m		 SRR_mag.eps
+5wg_BJ_MM.eps				Ga_Opt_minxp_V2L_serv1.m	 SRR_phase.eps
+5wg_BJ_MM_Erho.eps			Ga_Opt_RL_V2L.m			 Srt3_ratio_1_modes_20_1mm.mat
+5wg_BJ_MM_rhophi.eps			Ga_Opt_RL_V2L.out		 Srt5_ratio_1_modes_20.mat
+5wg_BJ_rho_cut.eps			Ga_Opt_V2L.out			 Srt5_ratio_1_modes_variable.mat
+5wg_Srr_mag.eps				GA_returnloss_45db_limit.eps	 Srt_cone_replica_10_conv.mat
+5wg_Srr_phase.eps			Ga_RL_17var_serv2.eps		 Srt_cone_replica_10.mat
+5wg_Srt_mag.eps				ga_V2L_ms3serv2_fl.mat		 Srt_cone_replica_15_conv.mat
+5wg_Srt_Phase.eps			ga_WKB_minxp.mat		 Srt_cone_replica_15.mat
+5wg_Str_mag.eps				GBMA.m				 Srt_cone_replica_20.mat
+5wg_Str_Phase.eps			GSM.m				 Srt_cone_replica_25_conv.mat
+5wg_Stt_mag.eps				GSM_N_Conv.m			 Srt_cone_replica_25.mat
+5wg_Stt_Phase.eps			GSM_N.m				 Srt_cone_replica_30_conv.mat
+5wg_touchstone_5modes_1mm_2cm_1mm.s10p	GSM_N_opt_allvar.m		 Srt_cone_replica_5_conv.mat
+abhi.m					GSM_N_opt_allvar_V2.m		 Srt_cone_replica_5.mat
+A.mat					GSM_N_opt.m			 SRT_conv_3.mat
+Ap_E_field_2cm_5Ghz_Closed_FEKO.eps	GSM_N_opt_radii.m		 SRT_mag.eps
+Ap_E_field_2cm_5Ghz_Closed_MAT.eps	GSM_N_SameAzimuth.m		 SRT_phase.eps
+Ap_E_field_2cm_5Ghz_Open_FEKO.eps	GSM_N_Vfinal.m			 STR_10modes_cone_diff..eps
+Ap_E_field_2cm_5Ghz_Open_Rum.eps	GSM_V2.m			 STR_10modes_cone_diff._phase.eps
+ApGamma_with_hmodes.m			GSM_V2_SameAzimuth.m		 STR_10modes_cone_FEKO.eps
+Ap_H_field_2cm_5Ghz_Closed_FEKO.eps	H_der.m				 STR_10modes_cone_MM.eps
+Ap_H_field_2cm_5Ghz_Closed_MAT.eps	Horn_apeture.m			 Str3_ratio_1_modes_20_1mm.mat
+Ap_H_field_2cm_5Ghz_Open_FEKO.eps	H_TE.m				 Str5_ratio_1_modes_20.mat
+Ap_H_field_2cm_5Ghz_Open_Rum.eps	H_TM.m				 Str5_ratio_1_modes_variable.mat
+besselj_der.m				Inner_p2.m			 Str_cone_replica_10_conv.mat
+cascade_3.m				Inner_p2_SameAzimuth.m		 Str_cone_replica_10.mat
+Cascade_3wg_Conv.m			Inner_p.m			 Str_cone_replica_15_conv.mat
+Cascade.m				Int_2D_rec.m			 Str_cone_replica_15.mat
+cheval.m				Integrand_rho.eps		 Str_cone_replica_20.mat
+Circular_Ref.m				Integrand_rho.fig		 Str_cone_replica_25_conv.mat
+Cir_spec.eps				Int.m				 Str_cone_replica_25.mat
+Cone_AJ_FEKO_Ephi.eps			Intpath_kspace.png		 Str_cone_replica_30_conv.mat
+Cone_AJ_FEKO_Erho.eps			Intpath_mishustin.png		 Str_cone_replica_5_conv.mat
+Cone_AJ_MM_Ephi.eps			intphicos.m			 Str_cone_replica_5.mat
+Cone_AJ_MM_Erho.eps			intphisin.m			 STR_conv_3.mat
+Cone_conv_Phase_TM01_CST.eps		Int_test.m			 STR_mag.eps
+Cone_conv_Srr_TE11.eps			J_Aperture.m			 STR_phase.eps
+Cone_conv_STR_CST.eps			J_cart_analytical.m		 STR_TE01_5wg.eps
+Cone_conv_TE11_mag.eps			J_cart.m			 STR_TE01_Cone.eps
+Cone_conv_TE11_phase.eps		Kspace_FFT_Cir.m		 STR_TE31_5wg.eps
+Cone_conv_TE11_SRR_CST.eps		K_space_integrand.m		 STR_TM11_5wg.eps
+Cone_conv_TM01_mag.eps			K_space.m			 STR_TM11_Cone.eps
+Cone_conv_TM01_phase.eps		legendre_der_.m			 STR_TM21_Cone.eps
+Cone_conv_TM01_SRR_CST.eps		license.txt			 struve
+Cone_conv_TM01_STR_CST.eps		Lommel2_h.m			 Struve01
+Cone_FF_7cm.m				Lommel2.m			 Struve01.zip
+Cone_GSM_vfinal.m			Lommel.m			 StruveH0.m
+Cone_NF_modes.m				matlab.mat			 StruveH0Y0.m
+Cone_NF_rhophi_Feko.eps			MinXP_Goal.m			 StruveH1.m
+Cone_NF_rhophi_MM.eps			MinXP_Goal_V2L_fields.m		 StruveH1Y1.m
+Cone_replica.m				MinXP_Goal_V2L.m		 StruveL0.m
+Cone_replica_V2.m			MM_FF.m				 StruveL1.m
+Cone_V3_NF.m				Multi_5wg.m			 struve.m
+Conical_guide.m				Multi.m				 struve.zip
+diary					Near_field_fun_2.m		 Stt3_ratio_1_modes_20_1mm.mat
+Directivity_calc.m			Near_field_fun.m		 Stt5_ratio_1_modes_20.mat
+Directivity_calc.m~			NF_3wg.m			 Stt5_ratio_1_modes_variable.mat
+Dkx.m					NF_5wg.m			 Stt_cone_replica_10_conv.mat
+D_m_circular.eps			NF_5wg_V2.m			 Stt_cone_replica_10.mat
+D_m_numerical_square.eps		NF_cone_5cm.m			 Stt_cone_replica_15_conv.mat
+D_m_of_modes.eps			NF_test.m			 Stt_cone_replica_15.mat
+Dyad.m					NF_test_P.m			 Stt_cone_replica_20.mat
+E_amp.m					NF_trail_V2.m			 Stt_cone_replica_25_conv.mat
+E_amp_TE.m				Norm.m				 Stt_cone_replica_25.mat
+E_and_H_v2.m				Norm_TE.m			 Stt_cone_replica_30_conv.mat
+E_ap.m					OPT_example.m			 Stt_cone_replica_5_conv.mat
+E_Balanis_Cone.eps			OPT_example_multi.m		 Stt_cone_replica_5.mat
+E_FEKO_rec.m				OPT_example_multi.m~		 STT_conv_3.mat
+EFF_Open_Closed.eps			Opt_example_serv2.m		 STT_mag.eps
+E_n.m					Opt_min_Return_loss_SA.eps	 STT_phase.eps
+E_r1.m					Plot_5wg_different_setmodes.m	 STT_TE01_5wg.eps
+E_r.m					Plot_Cone_GSM_conv.m		 STT_TE01_Cone.eps
+E_TE_FEKOstyle.m			Plot_cone.m			 STT_TE31_5wg.eps
+E_TE.m					Plot_conv_3wg.m			 STT_TM11_5wg.eps
+E_TM_FEKOstyle.m			plot_feko_NF.m			 STT_TM11_Cone.eps
+E_TM.m					Plot_FEKO_rec.m			 STT_TM21_Cone.eps
+Ez_investigation_5wg.m			Plot_from_dat.m			 Sym_test.m
+fc.m					Plot_GSM_3wg.asv		 TE12_Feko.eps
+fc_sameazimuth.m			Plot_GSM_3wg.m			 TE_21_STR_comp.eps
+Feed_FF_Superposition.m			Plot_GSM_5wg.m			 TE31_Feko.eps
+Feed_FF_Superposition_V2L.m		Plot_GSM_Cone.m			 Test_dInt.m
+Feed_Gamma_Dm.m				Plot_NF_cst.m			 Test_Dkx.fig
+Feed_Gamma_Dm_opt.m			Plot_NF_feko_V2.m		 Test_int_n.m
+Feed_Gamma_Dm_opt_V2L.m			Plot_NF_feko_V4.m		 Test_kx.fig
+FEKO_add.m				Plot_Op_var.m			 test.m
+FEKO_E.m				Plot_V2.m			 TM11_Feko.eps
+FF_2wg_comp.eps				P.m				 TM_22_Feko.eps
+FF_2wg_comp.png				Pow.m				 WG1_Eff.m
+FF_apertureFSCir2.m			profile_manual_iter_RL.m	 wg1_NF.m
+FF_apertureFSCir3.m			profile_manual_iter_RL_V2.m	 wg1_plots.m
+FF_apertureFSCir.m			ps_eap_optim.m			 wg2_FF.m
+FF_Cone_Comparison_2modes.eps		Ps_minxp_41var.png		 wg2_gsm.m
+FF_Cone_Comparison_2modes.png		Ps_RL_17var_serv2.eps		 wg5_FF.m
+FF_Cone_Comparison_3mode.eps		QZcalculation_v2.m		 wg5_GSM_Test.m
+FF_Cone_Comparison_3mode.png		QZcalculation_v4.m		 WG_Cir_abs.m
+FF_Cone_Comparison_3modes.eps		QZcalculation_v4_SameAzimuth.m	 wkb
+FF_FEKO_Cone.m				read_line.sh			 WKB_Exp.m
+FF_from_dat.m				Rec_aper.m			 WKB_Exp.m~
+FF.m					Rec_ref2.m			 WKB.m
+FF_M_cart.m				Rec_ref.m			 WKB_V2
+FF_M_cart_numerical.m			Ref_eff.m			 WKB_V2.m
+FF_M.m					Reff_Horn_with_Feed_dia.m	 Xmn_azimuthal_inc_TE.mat
+FF_M_V2.m				Reff_withFeedDia.m		 Xmn_bessel.m
+FF_read_CST.m				result.txt			 Xmn.mat
+FF_WG.m					S11_3wg_conv_MM_real.eps	 Yin_Circular.m
+fmincon_3var_r1rendN_RL.mat		S11_3wg_conv_MM_zoomed_real.eps  Y_in_K_Mihustin.eps
+fmincon_allvar_ms3serv2.mat		S_5wg.m				 Yin_Mishustin_Kspace.eps
+Fmincon_horn_profile_allvar.eps		serv2ga.sh			 Y_in_space_K.eps
+fmincon_Nvar_Rvec.mat			servga.sh			 ymn_k.m
+Fmincon_Opt_Exp_WKB.m			SGF.m				 ymn.m
+Fmincon_Optim_Serv2_allvar		SL.m				 Ymn_numerical.m
+Fmincon_Optim_Serv2_allvar.m		slurm-5356624.out		 Ymode.m
+fmincon_Opt_minxp_V2L_serv2.m		slurm-5356627.out		 Y_mut2.m
+fmincon_Opt_RL_V2L.m			slurm-5356629.out		 Y_mut.m
+fmincon_Opt_V2L_serv2.out		slurm-5356638.out		 Zeta_2.m
+fmincon_V2L_ms3serv2_fl.mat		slurm-5356645.out		 Zeta.m
+fmn.m					slurm-5356648.out		 Zeta_N.m
+fmn_rec.m				slurm-5356652.out
+
+help diary
+ <strong>diary</strong> Save text of MATLAB session.
+    <strong>diary</strong> FILENAME causes a copy of all subsequent command window input
+    and most of the resulting command window output to be appended to the
+    named file.  If no file is specified, the file 'diary' is used.
+ 
+    <strong>diary</strong> OFF suspends it. 
+    <strong>diary</strong> ON turns it back on.
+    <strong>diary</strong>, by itself, toggles the diary state.
+ 
+    Use the functional form of <strong>diary</strong>, such as <strong>diary</strong>('file'),
+    when the file name is stored in a string.
+ 
+    See also <a href="matlab:help save">save</a>.
+
+    <a href="matlab:doc diary">Reference page for diary</a>
+    <a href="matlab:matlab.internal.language.introspective.overloads.displayOverloads('diary')">Other functions named diary</a>
+
+diary log.txt

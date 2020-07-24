@@ -1,0 +1,723 @@
+IP = [0.02283 0.06313 0.07772 0.09971 0.1467 0.3273];
+diary off;
+Frequency Iteration: 
+     1
+
+Starting parallel pool (parpool) using the 'local' profile ...
+connected to 12 workers.
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException
+Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException
+Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException
+Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException
+Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException
+Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException
+Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException
+Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException
+Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException
+Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException
+Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException
+Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException
+
+                                  Best           Mean      Stall
+Generation      Func-count        f(x)           f(x)    Generations
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+Frequency Iteration: 
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+Frequency Iteration: 
+     1
+
+     1
+
+Fre

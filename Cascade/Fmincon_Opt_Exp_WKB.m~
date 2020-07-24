@@ -16,16 +16,15 @@ lb(3) = rr;
 ub(3) = rr + lamb;
 
 lb(2) = 4 .* lamb;
-ub(2) = 12 .* lamb;
+ub(2) = 10 .* lamb;
 
 lb(1) = (lamb - lb(3))./lb(2);
-ub(1) = (12 .* lamb - ub(3))./ub(2);
+ub(1) = (4 .* lamb - ub(3))./ub(2);
 
 problem.lb = lb;
 problem.ub = ub;
 
 problem.x0 = [(2 .* lamb - lb(3))./(6 .* lamb) 6.*lamb rr];
-% problem.x0 = fmin2.r;
 
 
  problem.options = optimoptions(@patternsearch,'PlotFcn', ...

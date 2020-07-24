@@ -1,6 +1,6 @@
 c0 = 3e8;
 
-data = load('ps_WKB_minxp.mat', 'fmin2'); 
+data = load('ga_WKB_minxp.mat', 'fmin2'); 
 
 F = 5e9;
 lamb = c0./F;
@@ -29,16 +29,15 @@ str = XMN_data.Xmn;
 
 fc_ = fc(R_axis(2), 1, 1);
 
-F = linspace(fc_(1)+fc_(1)./100, fc_(3), 1000);
+Freq = linspace(fc_(1)+fc_(1)./100, fc_(3), 1000);
 % F = 5e9;
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
-
-% parfor i = 1:length(F)
-RL = GSM_N_opt_allvar_V2_freq(SP(1:N), SP(N+1), F, 20);
-% end
+for i = 1:length(F)
+ Max_Exp_diff(i) = MinXP_Goal_V2L(SP(1:2), Len, Freq(i), 20, Freq(end));
+end
 
 figure;
-plot(F*1e-9, RL, 'LineWidth', 2);grid on;
+plot(F*1e-9, Max_Exp_diff, 'LineWidth', 2);grid on;
 xlabel('Frequency (GHz)', 'FontSize', 16, 'FontWeight', 'bold');
-ylabel(' (dB)', 'FontSize', 16, 'FontWeight', 'bold');
-title('RL of WKB + Patternsearch algo', 'FontSize', 16, 'FontWeight', 'bold');
+ylabel('RL in (dB)', 'FontSize', 16, 'FontWeight', 'bold');
+title('WKB + Patternsearch algo for MinXP', 'FontSize', 16, 'FontWeight', 'bold');

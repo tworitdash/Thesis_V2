@@ -29,12 +29,11 @@ str = XMN_data.Xmn;
 
 fc_ = fc(R_axis(2), 1, 1);
 
-Freq = linspace(fc_(1)+fc_(1)./100, fc_(3), 1000);
+Freq = linspace(fc_(1)+fc_(1)./100, fc_(3), 10);
 % F = 5e9;
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
-
-parfor i = 1:length(F)
- Max_Exp_diff(i) = MinXP_Goal_V2L(SP(1:2), Len, 5e9, Freq(i), Freq(end));
+for i = 1:length(Freq)
+ Max_Exp_diff(i) = MinXP_Goal_V2L(SP(1:2), Len, Freq(i), 20, Freq(end));
 end
 
 figure;

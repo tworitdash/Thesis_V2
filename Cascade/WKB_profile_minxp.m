@@ -1,6 +1,6 @@
 c0 = 3e8;
 
-data = load('ps_WKB_minxp.mat', 'fmin2'); 
+data = load('ga_WKB_minxp.mat', 'fmin2'); 
 
 F = 5e9;
 lamb = c0./F;

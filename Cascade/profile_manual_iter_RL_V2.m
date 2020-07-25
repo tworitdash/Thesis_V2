@@ -45,7 +45,7 @@ str = XMN_data.Xmn;
 
 fc_ = fc(R(2), 1, 1);
 
-F = linspace(fc_(1)+fc_(1)./100, fc_(3), 1000);
+F = linspace(fc_(1)+fc_(1)./100, fc_(3), 10);
 % F = 5e9;
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
 

@@ -102,7 +102,9 @@ STR(k, :, :) = slt * STR_ * slr;
 SRT(k, :, :) = slr * SRT_ * slt; 
 SRR(k, :, :) = slr * SRR_ * slr;
 
-RLRR_TE11(k) = db(sum(sum(abs(SRR(k, :, :)).^2)))./2; % Return loss at waveguide R
+Num_modes_prop  =  find(f < F(k));
+
+RLRR_TE11(k) = db(sum(sum(abs(SRR(k, 1, 1)).^2)))./2; % Return loss at waveguide R
 end
 
 

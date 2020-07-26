@@ -9,7 +9,7 @@ lamb = c0./5e9;
 % R = linspace(R1, Rend, round(Len/(lamb/10)));
 
 % R = linspace(R1, Rend, E);
-lamb_opt_freq = c0./F_end;
+lamb_opt_freq = c0./F;
 
 num = round(Len./(lamb_opt_freq./10));
 

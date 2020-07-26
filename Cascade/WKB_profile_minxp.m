@@ -21,7 +21,7 @@ xlabel('Horn Length cut', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('Horn Radius cut', 'FontSize', 12, 'FontWeight', 'bold');
 grid on;
 
-%% 
+%% Applying WKB optimized antenna with min xp on MM software
 SP = [R_axis(2:end) Len];
 
 XMN_data = load('Xmn.mat');
@@ -32,12 +32,26 @@ fc_ = fc(R_axis(2), 1, 1);
 Freq = linspace(fc_(1)+fc_(1)./100, fc_(3), 10);
 % F = 5e9;
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
-for i = 1:length(Freq)
- Max_Exp_diff(i) = MinXP_Goal_V2L(SP(1:2), Len, Freq(i), 20, Freq(end));
+% parfor i = 1:length(Freq)
+%  Max_Exp_diff(i) = MinXP_Goal_V2L(SP(1:2), Len, Freq(i), 20, Freq(end));
+% end
+% 
+% figure;
+% plot(Freq*1e-9, Max_Exp_diff, 'LineWidth', 2);grid on;
+% xlabel('Frequency (GHz)', 'FontSize', 16, 'FontWeight', 'bold');
+% ylabel('RL in (dB)', 'FontSize', 16, 'FontWeight', 'bold');
+% title('WKB + Patternsearch algo for MinXP', 'FontSize', 16, 'FontWeight', 'bold');
+
+%% Applying WKB optimized antenna on WKB algo
+
+parfor i = 1:length(Freq)
+   Exp_level_diff_wkb(i) = WKB_Exp(Slope, Len, Rbase, Freq(i), er, mur);
 end
 
-figure;
-plot(F*1e-9, Max_Exp_diff, 'LineWidth', 2);grid on;
-xlabel('Frequency (GHz)', 'FontSize', 16, 'FontWeight', 'bold');
-ylabel('RL in (dB)', 'FontSize', 16, 'FontWeight', 'bold');
-title('WKB + Patternsearch algo for MinXP', 'FontSize', 16, 'FontWeight', 'bold');
+figure(3);hold on;
+plot(Freq*1e-9, Max_Exp_diff_wkb, 'LineWidth', 2);grid on;
+% xlabel('Frequency (GHz)', 'FontSize', 16, 'FontWeight', 'bold');
+% ylabel('RL in (dB)', 'FontSize', 16, 'FontWeight', 'bold');
+% title('WKB + Patternsearch algo for MinXP', 'FontSize', 16, 'FontWeight', 'bold');
+
+

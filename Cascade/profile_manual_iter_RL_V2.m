@@ -9,7 +9,7 @@ N = 5;
 % 
 % R = [fmin.r(1) fmin.r(1:N).'];
 
-R = [0.02283 0.02283 0.06313 0.07772 0.09971 0.1467];
+R = [0.02283 0.02283 0.06313 0.07772 0.09971 0.1467]; % From GA algo
 
 
 % R = [0.02 0.02 0.02667 0.03333 0.04 0.04667 0.05333 0.06 0.06667 0.07333 0.09562 0.08667 0.09333 0.1009 0.1067 0.1156...
@@ -54,7 +54,7 @@ F = linspace(fc_(1)+fc_(1)./100, fc_(5), 20);
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
 
 % parfor i = 1:length(F)
-RL = GSM_N_opt_allvar_V2_freq(SP(1:N), SP(N+1), F, 20);
+RL = GSM_N_opt_allvar_V2_freq(SP(1:N), SP(N+1), F, 100);
 % end
 
 figure;

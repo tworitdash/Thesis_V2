@@ -1,4 +1,4 @@
-function [Max_Exp_diff] = MinXP_Goal_V2L(R_cone, Len, F, k, F_end)
+function [Max_Exp_diff] = MinXP_Goal_V2L(R_cone, Len, F, k)
 
 c0 = 3e8;
 lamb = c0./5e9;

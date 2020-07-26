@@ -1,5 +1,5 @@
 c0 = 3e8;
-N = 40;
+N = 5;
 F = 5e9;
 
 lamb = c0/F;
@@ -12,7 +12,7 @@ Rend = 2 .* lamb;
 R_test = linspace(R1, Rend, N);
 
 
-problem2.fitnessfcn = @(x) MinXP_Goal_V2L([x(1:N)], x(N+1), F, 0);
+problem2.fitnessfcn = @(x) MinXP_Goal_V2L([x(1:N)], x(N+1), F, 20);
 problem2.nvars = N + 1;
 % problem2.x0 = [linspace(R1, Rend, N)];
 
@@ -20,11 +20,11 @@ lb = zeros(N+1, 1);
 ub = zeros(N+1, 1);
 
 lb(1) = R1;
-ub(1) = R1 + R1/5;
+ub(1) = R1 + lamb./2;
 
 for i =  2:N
-    lb(i) = ub(i - 1) - R_test(1)/5;
-    ub(i) = R_test(i) + R_test(1)/5;
+    lb(i) = ub(i - 1) - lamb/2;
+    ub(i) = R_test(i) + lamb/5;
 end
 ub(N + 1) = 8 .* lamb;
 lb(N + 1) = 5 .* lamb; 
@@ -59,7 +59,7 @@ tic;
 
 problem2.options = optimoptions(@ga, 'PlotFcn', {'gaplotbestf', 'gaplotbestindiv'}, 'Display', 'iter',... 
     'InitialPopulationMatrix', [IP], 'UseParallel',...
-    true, 'MaxTime', 12600);
+    true, 'MaxTime', 12600, 'FitnessLimit', -25);
 
 [r, fval2, exf2, ouput2] = ga(problem2);
 
@@ -73,4 +73,4 @@ fmin2.time_consumed = time_opt2;
 
 % save('ga_allvar_ms3serv2_wo_fl.mat', 'fmin2'); %wo_fl is for without fitness limit
 
-save('ga_allvar_ms3serv2_minxp_V2L.mat', 'fmin2'); %minxp is for minimum cross polarization
+save('ga_allvar_minxp_V2L.mat', 'fmin2'); %minxp is for minimum cross polarization

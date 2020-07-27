@@ -54,7 +54,7 @@ F = linspace(fc_(1)+fc_(1)./100, fc_(5), 20);
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
 
 % parfor i = 1:length(F)
-RL = GSM_N_opt_allvar_V2_freq(SP(1:N), SP(N+1), F, 100);
+RL = GSM_N_opt_allvar_V2_freq(SP(1:N), SP(N+1), F, 20);
 % end
 
 figure;

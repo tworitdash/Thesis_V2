@@ -19,7 +19,7 @@ rt = 4e-2; % Top redius
 
 n = 150; % number of transitions
 
-Length = 7e-2;
+Length = 5e-2;
 % Length = 6 .* lamb;
 
 R = linspace(rr, rt, n); % radius vector
@@ -116,7 +116,7 @@ E_abs = sqrt(abs(Eth).^2 + abs(Eph).^2);
 %FF Plots
 
 
-figure(71);
+figure(37);
 
 hold on;  
 plot(theta(1, :)*(180/pi), db(abs(E_abs(1, :))/max(abs(E_abs(1, :)))), 'LineWidth', 2);

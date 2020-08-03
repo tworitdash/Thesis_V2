@@ -4,8 +4,8 @@ c0 = 3e8;
 F = 5e9;
 lamb = c0./F;
 
-N = 16;
-data = load('ga_V2L_ms3serv2_fl.mat');
+N = 5;
+data = load('ga_allvar_minxp_V2L.mat');
 r = data.fmin2.r;
 R = [r(1) r(1:N)];
 % R = [0.02253 0.02253 0.03353 0.03917 0.05562 0.05946 0.05901 0.07181 0.08365 0.1009 0.08275 0.08619 0.1107 0.1097 0.1106 0.1297...
@@ -20,7 +20,7 @@ for i = 1:N
     L_axis(i) = sum(L(1:i));
 end
 L_axis = [0 L_axis];
-figure(1);
+figure;
 hold on;
 plot(L_axis, R, 'LineWidth', 2, 'Color', [0.6350, 0.0780, 0.1840] );
 hold on;

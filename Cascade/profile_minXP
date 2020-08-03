@@ -4,12 +4,12 @@ c0 = 3e8;
 F = 5e9;
 lamb = c0./F;
 N = 5;
-data = load('fmincon_V2L_ms3serv2_fl_V2.mat');
-fmin = data.fmin2;
+% data = load('fmincon_V2L_ms3serv2_fl.mat');
+% fmin = data.fmin2;
+% 
+% R = [fmin.r(1) fmin.r(1:N).'];
 
-R = [fmin.r(1) fmin.r(1:N).'];
-
-% R = [0.02283 0.02283 0.06313 0.07772 0.09971 0.1467]; % From GA algo
+R = [0.02283 0.02283 0.06313 0.07772 0.09971 0.1467]; % From GA algo
 
 
 % R = [0.02 0.02 0.02667 0.03333 0.04 0.04667 0.05333 0.06 0.06667 0.07333 0.09562 0.08667 0.09333 0.1009 0.1067 0.1156...
@@ -18,7 +18,7 @@ R = [fmin.r(1) fmin.r(1:N).'];
 % Len = 0.3912;
 % Len = fmin.r(N + 1);
 
-Len = fmin.r(N+1);
+Len = 0.3273;
 
 l1 = lamb./4;
 L = [l1 ones(1, N - 1)./N .* Len];

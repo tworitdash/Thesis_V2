@@ -4,10 +4,10 @@ c0 = 3e8;
 F = 5e9;
 lamb = c0./F;
 N = 5;
-data = load('fmincon_V2L_ms3serv2_fl_V2.mat');
+data = load('ga_V2L_ms3serv2_fl_V2.mat');
 fmin = data.fmin2;
 
-R = [fmin.r(1) fmin.r(1:N).'];
+R = [fmin.r(1) fmin.r(1:N)];
 
 % R = [0.02283 0.02283 0.06313 0.07772 0.09971 0.1467]; % From GA algo
 

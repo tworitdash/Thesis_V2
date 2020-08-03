@@ -4,10 +4,10 @@ c0 = 3e8;
 F = 5e9;
 lamb = c0./F;
 N = 5;
-data = load('fmincon_V2L_ms3serv2_fl_V2.mat');
+data = load('ga_allvar_minxp_V2L.mat');
 fmin = data.fmin2;
 
-R = [fmin.r(1) fmin.r(1:N).'];
+R = [fmin.r(1) fmin.r(1:N)];
 
 % R = [0.02283 0.02283 0.06313 0.07772 0.09971 0.1467]; % From GA algo
 
@@ -16,9 +16,9 @@ R = [fmin.r(1) fmin.r(1:N).'];
 %     0.1491];
 % N = length(R) - 1;
 % Len = 0.3912;
-% Len = fmin.r(N + 1);
+Len = fmin.r(N + 1);
 
-Len = fmin.r(N+1);
+% Len = 0.3273;
 
 l1 = lamb./4;
 L = [l1 ones(1, N - 1)./N .* Len];
@@ -48,21 +48,21 @@ fc_ = fc(R(2), 1, 1);
 % <<<<<<< Updated upstream
 % F = linspace(fc_(1)+fc_(1)./100, fc_(3), 20);
 % =======
-F = linspace(fc_(1)+fc_(1)./100, fc_(11), 20);
+F = linspace(fc_(1)+fc_(1)./100, fc_(20), 20);
 % >>>>>>> Stashed changes
 % F = 5e9;
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
 tic;
 % parfor i = 1:length(F)
-RL = GSM_N_opt_allvar_V2_freq(SP(1:N), SP(N+1), F, 20);
+XP_level = MinXP_Goal_V2L_freq(SP(1:N), SP(N+1), F, 100);
 
 time_used = toc;
 % end
 
 figure;
-plot(F*1e-9, RL, 'LineWidth', 2);grid on;
+plot(F*1e-9, XP_level, 'LineWidth', 2);grid on;
 xlabel('Frequency (GHz)', 'FontSize', 16, 'FontWeight', 'bold');
 ylabel('Return loss (dB)', 'FontSize', 16, 'FontWeight', 'bold');
-title('RL of patternsearch algo', 'FontSize', 16, 'FontWeight', 'bold');
+title('Cross polar level ga algo', 'FontSize', 16, 'FontWeight', 'bold');
 % RL1 = GSM_N_opt_allvar(SP(1:N), SP(N+1), 5e9, 20);
 % end

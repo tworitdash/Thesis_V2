@@ -1,4 +1,4 @@
-function [RLRR_TE11] = GSM_N_opt_allvar_V2_freq(R_cone, Len, F, k)
+function [RLRR_TE11, SRR] = GSM_N_opt_allvar_V2_freq(R_cone, Len, F, k)
 
 c0 = 3e8;
 lamb = c0./5e9;
@@ -106,8 +106,10 @@ f_base =  fc(R(1), er(1), mur(1));
 Num_modes_prop  =  find(f_base < F(k));
 
 % RLRR_TE11(k) = db(sum(sum(abs(SRR(k, 1:Num_modes_prop(end), 1:Num_modes_prop(end))).^2)))./2; % Return loss at waveguide R
-RLRR_TE11(k) = db(abs(sum(SRR(k, 1, 1:Num_modes_prop(end)))).^2)./2; % Return loss at waveguide R
+RLRR_TE11(k) = db(abs(sum(SRR(k, 1, 1:Num_modes_prop(end))))).^2./2; % Return loss at waveguide R
+% RLRR_TE11(k) = db(abs(sum(SRR(k, 1, 1:Num_modes_prop(end))))).^2./2; % Return loss at waveguide R
 end
+
 
 
 end

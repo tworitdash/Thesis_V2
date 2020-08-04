@@ -106,8 +106,11 @@ f_base =  fc(R(1), er(1), mur(1));
 Num_modes_prop  =  find(f_base < F(k));
 
 % RLRR_TE11(k) = db(sum(sum(abs(SRR(k, 1:Num_modes_prop(end), 1:Num_modes_prop(end))).^2)))./2; % Return loss at waveguide R
-RLRR_TE11(k) = db(sum(abs(sum(SRR(k, 1, 1:Num_modes_prop(end)))).^2))./2; % Return loss at waveguide R
+RLRR_TE11(k) = db(abs(sum(SRR(k, 1, 1:Num_modes_prop(end))))).^2./2; % Return loss at waveguide R
+% RLRR_TE11(k) = db(abs(sum(SRR(k, 1, 1:Num_modes_prop(end))))).^2./2; % Return loss at waveguide R
 end
+
+save('Ga_SRR', 'SRR');
 
 
 end

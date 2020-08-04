@@ -45,7 +45,8 @@ ModeNumberAper = N;
 for i = 1:length(F)
     
     ap = zeros(N(i, end), 1);
-    ar = ones(N(i, 1), 1);
+    ar = zeros(N(i, 1), 1);
+    ar(1) = 1;
 
 
 

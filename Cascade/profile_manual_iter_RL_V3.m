@@ -48,13 +48,16 @@ fc_ = fc(R(2), 1, 1);
 % <<<<<<< Updated upstream
 % F = linspace(fc_(1)+fc_(1)./100, fc_(3), 20);
 % =======
-F = linspace(fc_(1)+fc_(1)./100, fc_(11), 20);
+F = linspace(fc_(1)+fc_(1)./100, fc_(11), 50);
 % >>>>>>> Stashed changes
 % F = 5e9;
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
 tic;
 % parfor i = 1:length(F)
-RL = GSM_N_opt_allvar_V2_freq(SP(1:N), SP(N+1), F, 20);
+[RL, SRR] = GSM_N_opt_allvar_V2_freq(SP(1:N), SP(N+1), F, 20);
+
+
+save('Ga_SRR', 'SRR');
 
 time_used = toc;
 % end

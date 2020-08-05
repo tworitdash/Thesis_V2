@@ -1,0 +1,22 @@
+MM = load('fmincon_SRR.mat');
+SRR = MM.SRR;
+
+% F_feko = linspace(4e9, 8e9, 36);
+F_feko = F;
+
+data = read(rfdata.data,'../../Thesis/3wg/gsm/RL_fmincon.s2p');
+s_params = extract(data,'S_PARAMETERS');
+
+RL_feko = db(abs(squeeze(s_params(1, 1, :)) + squeeze(s_params(1, 1, :))).^2)./2;
+
+% figure;
+% hold on;
+% 
+% plot(F_feko * 1e-9, RL_feko, 'LineWidth', 2); grid on;
+
+figure;
+
+plot(F * 1e-9, db(abs(squeeze(SRR(:, 1, 1)))), 'LineWidth', 2); grid on;
+hold on;
+plot(F_feko * 1e-9, db(abs(squeeze(s_params(2, 2, :)))), 'LineWidth', 2); grid on;
+

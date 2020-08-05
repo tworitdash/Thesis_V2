@@ -1,10 +1,10 @@
 %% Optimum design for -45dB return loss from pattern search optimization 
-clear;
+% clear;
 c0 = 3e8;
 F = 5e9;
 lamb = c0./F;
 N = 5;
-data = load('ga_allvar_minxp_V2L.mat');
+data = load('ps_allvar_ms3serv2_minxp_V2L_serv2.mat');
 fmin = data.fmin2;
 
 R = [fmin.r(1) fmin.r(1:N)];
@@ -63,6 +63,6 @@ figure;
 plot(F*1e-9, XP_level, 'LineWidth', 2);grid on;
 xlabel('Frequency (GHz)', 'FontSize', 16, 'FontWeight', 'bold');
 ylabel('Return loss (dB)', 'FontSize', 16, 'FontWeight', 'bold');
-title('Cross polar level ga algo', 'FontSize', 16, 'FontWeight', 'bold');
+title('Cross polar level fmincon algo', 'FontSize', 16, 'FontWeight', 'bold');
 % RL1 = GSM_N_opt_allvar(SP(1:N), SP(N+1), 5e9, 20);
 % end

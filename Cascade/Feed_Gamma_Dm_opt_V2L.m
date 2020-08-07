@@ -44,7 +44,8 @@ ModeNumberAper = N(end);
 
 
 ap = zeros(N(end), 1);
-ar = ones(N(1), 1);
+ar = zeros(N(1), 1);
+ar(1) = 1;
 
 if N(1) == 1
     STR_req = STR(1, 1:N(end));

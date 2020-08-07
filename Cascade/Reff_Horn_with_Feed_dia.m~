@@ -28,7 +28,7 @@ rr = (xmn .* c0)./(2 .* pi .* F) + 1e-3;
 % rt = 2 .* lamb;
 % rt = 20e-2;
 
-rt = linspace(3e-2, 2 .* lamb, 20);
+rt = linspace(0.5.*lamb, 3 .* lamb, 20);
 
 for i = 1:length(rt)
 
@@ -50,13 +50,13 @@ dph = pi/180;
 
 [th, ph] = meshgrid(eps:dth:pi/2+eps, eps:dph:2*pi+eps);
 
-[Gamma, Dm, ModeNumberAper, Transmission_sum]  = Feed_Gamma_Dm(R, Length, F, 5, er, mur);
-
-[Eth, Eph, Eco, Exp, CO, XP] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, th, ph, F, er, mur, R, Transmission_sum, 10);
-
-% [ModeNumberAper, Transmission_sum]  = Feed_Gamma_Dm_opt_V2L(R, L, F, 5, er, mur);
+% [Gamma, Dm, ModeNumberAper, Transmission_sum]  = Feed_Gamma_Dm(R, Length, F, 5, er, mur);
 % 
-% [Eth, Eph, Eco, Exp, CO, XP] = Feed_FF_Superposition_V2L(ModeNumberAper, th, ph, F, er, mur, R, Transmission_sum);
+% [Eth, Eph, Eco, Exp, CO, XP] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, th, ph, F, er, mur, R, Transmission_sum, 10);
+
+[ModeNumberAper, Transmission_sum]  = Feed_Gamma_Dm_opt_V2L(R, L, F, 5, er, mur);
+
+[Eth, Eph, Eco, Exp, CO, XP] = Feed_FF_Superposition_V2L(ModeNumberAper, th, ph, F, er, mur, R, Transmission_sum);
 
 
 % [Eth, Eph]  = Feed_FF(rr, rt, n, F, th, ph);
@@ -118,8 +118,7 @@ CO_XP_half = abs(CO).^2 + 1./2 .* abs(XP).^2;
     
     %[Eth_, Eph_, Eco_, Exp_, CO_, XP_] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, theta_, phi, F, er, mur, R, Transmission_sum, 20);
     [Eth_, Eph_, Eco_, ~, ~, ~] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, theta_, phi, F, er, mur, R, Transmission_sum, 10);
-%     [Eth_, Eph_, Eco_, ~, ~, ~] = Feed_FF_Superposition_V2L(ModeNumberAper, theta_, phi, F, er, mur, R, Transmission_sum);
-
+    
     C = ((4 .* focal_length)./(4 .* focal_length.^2 + rho.^2));
     
     Erho_ = - Eth_ .* C;

@@ -31,7 +31,7 @@ figure;
 plot(L_axis, R, 'LineWidth', 2, 'Color', [0.6350, 0.0780, 0.1840] );
 hold on;
 plot(L_axis, -R, 'LineWidth', 2, 'Color', [0.6350, 0.0780, 0.1840] );
-title(['Optimum Horn, Aprture Radius = ', num2str(R(end)./lamb), ' \lambda ', 'Horn Lengt = ', num2str(Len./lamb), ' \lambda'], 'FontSize', 12, 'FontWeight', 'bold');
+title(['Optimum Horn, Aprture Radius = ', num2str(R(end)./lamb), ' \lambda ', 'Horn Length = ', num2str(Len./lamb), ' \lambda'], 'FontSize', 12, 'FontWeight', 'bold');
 xlabel('Horn Length cut [m]', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('Horn Radius cut [m]', 'FontSize', 12, 'FontWeight', 'bold');
 grid on;

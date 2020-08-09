@@ -1,4 +1,4 @@
-function [X_til] = Inner_p3(Nr, Np, rp, rr, erp, murp, err, murr) 
+function [X_tilf] = Inner_p3(Nr, Np, rp, rr, erp, murp, err, murr) 
 
 %% Inner Product Calculation
 
@@ -21,10 +21,11 @@ dphi = pi/180;
 
 [rhor_, phir_] = meshgrid(eps:drho:rr, eps:dphi:2*pi-eps);  % domain for the fields on one cross-section of the waveguide
 
-X_til = zeros(length(Nr), length(Np));
 
+ X_tilf = zeros(length(Nr), length(Np));
 
-for p = 1:length(Np)
+parfor p = 1:length(Np)
+    X_til = zeros(1, length(Nr));
       for r = 1:length(Nr)
 %                 disp('Iteration:')
 % %                 
@@ -96,13 +97,13 @@ for p = 1:length(Np)
                             X_til_pr =  sqrt(Nup) .* sqrt(Nur) ...
                             .* K .* (A + D) .* (Icos + Isin);
 
-                            X_til(r, p) = X_til_pr; 
+                            X_til(r) = X_til_pr; 
                       
                     else 
                         
                             X_til_pr = (grad_Phi_rhop .* grad_Phi_rhor +  grad_Phi_phip .* grad_Phi_phir)...
                         .* rhor_ .* drho .* dphi;
-                            X_til(r, p) = sum(sum(X_til_pr));
+                            X_til(r) = sum(sum(X_til_pr));
 %                              X_til_pr = (grad_Phi_rhop .* grad_Phi_phir - grad_Phi_rhor .* grad_Phi_phip)...
 %                        .* rhor_ .* drho .* dphi;
 %                              X_til(r, p) = sum(sum(X_til_pr));
@@ -112,14 +113,14 @@ for p = 1:length(Np)
      elseif (modep == "TE" && moder == "TM")
                     X_til_pr = (grad_Phi_rhop .* grad_Phi_phir - grad_Phi_rhor .* grad_Phi_phip)...
                        .* rhor_ .* drho .* dphi;
-                   X_til(r, p) = sum(sum(X_til_pr));
+                   X_til(r) = sum(sum(X_til_pr));
 %                     X_til(r, p) = 0;
                     
      elseif (modep == "TM" && moder == "TE")
          
                    X_til_pr = (grad_Phi_rhop .* grad_Phi_phir - grad_Phi_rhor .* grad_Phi_phip)...
                        .* rhor_ .* drho .* dphi;
-                   X_til(r, p) = sum(sum(X_til_pr));
+                   X_til(r) = sum(sum(X_til_pr));
                         
      end             
                     
@@ -128,6 +129,7 @@ for p = 1:length(Np)
         
       end
       
+      X_tilf(:, p) = X_til;
 end
     
 

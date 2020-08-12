@@ -58,6 +58,7 @@ tic;
 
 
 save('Ga_SRR', 'SRR');
+save('Ga_RL', 'RL');
 
 time_used = toc;
 % end

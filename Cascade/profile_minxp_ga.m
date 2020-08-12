@@ -55,12 +55,12 @@ F = linspace(fc_(1)+fc_(1)./100, fc_(10), 20);
 tic;
 % parfor i = 1:length(F)
 % XP_level = MinXP_Goal_V2L_freq(SP(1:N), SP(N+1), F, 20);
-F_ = [F(1) F(10) F(20)];
+F_ = [F(1) F(4) F(10) F(20)];
 [Eth_, Eph_, Eco_, Exp_, CO_, XP_, E_, th, ph, Max_Exp_diff] = MinXP_Goal_V2L_freq_fields(SP(1:N), SP(N + 1), F_, 20);
 
 %% Plots
 
-i = 3;
+i = 2;
 
 Eco = squeeze(Eco_(i, :, :));
 Exp = squeeze(Exp_(i, :, :));
@@ -81,7 +81,7 @@ time_used = toc;
 % % RL1 = GSM_N_opt_allvar(SP(1:N), SP(N+1), 5e9, 20);
 % end
 
-figure(75);
+figure(80);
 
 hold on;
 plot(th(1, :)*(180/pi), db((abs(E(1, :))/max(abs(E(1, :))))), '-.', 'LineWidth', 2);
@@ -97,7 +97,7 @@ title('Far electric field', 'FontSize', 12, 'FontWeight', 'bold');
 grid on;
 ylim([-40 5]);
 
-figure(76);
+figure(81);
 hold on;
 plot(th(1, :)*(180/pi), db((abs(Eco(1, :))./max(max(abs(Eco))))), '-.', 'LineWidth', 2);
 hold on;

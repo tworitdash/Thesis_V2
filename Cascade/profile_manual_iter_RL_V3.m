@@ -54,7 +54,7 @@ F = linspace(fc_(1)+fc_(1)./100, fc_(11), 50);
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
 tic;
 % parfor i = 1:length(F)
-[RL, SRR] = GSM_N_opt_allvar_V2_freq(SP(1:N), SP(N+1), F, 20);
+[RL, SRR] = GSM_N_opt_allvar_V2_freq_new(SP(1:N), SP(N+1), F, 20);
 
 
 save('Ga_SRR', 'SRR');

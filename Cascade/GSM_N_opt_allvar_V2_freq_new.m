@@ -1,4 +1,4 @@
-function [SRR] = GSM_N_opt_allvar_V2_freq_new(R_cone, Len, F, k)
+function [RLRR_TE11, SRR] = GSM_N_opt_allvar_V2_freq_new(R_cone, Len, F, k)
 
 c0 = 3e8;
 lamb = c0./5e9;
@@ -52,6 +52,11 @@ J = length(R) - 1; % Number of Junctions
 %% Frequency independent inner cross product 
 
 parfor j = 1:J
+    disp('Junction');
+    disp(j);
+    disp('of')
+    disp(J);
+   
     x_til = zeros(N(j), N(j + 1));
     x_til(:, :) = Inner_p2(1:1:N(j), 1:1:N(j + 1), R(j + 1), R(j), er(j + 1), mur(j + 1), er(j), mur(j));
     X_til(j).x_til = x_til;
@@ -101,12 +106,13 @@ STT(k, :, :) = slt * STT_ * slt';
 STR(k, :, :) = slt * STR_ * slr; 
 SRT(k, :, :) = slr * SRT_ * slt; 
 SRR(k, :, :) = slr * SRR_ * slr;
+SRR_ = squeeze(SRR(k, :, :));
 
 f_base =  fc(R(1), er(1), mur(1));
 Num_modes_prop  =  find(f_base < F(k));
 
 % RLRR_TE11(k) = db(sum(sum(abs(SRR(k, 1:Num_modes_prop(end), 1:Num_modes_prop(end))).^2)))./2; % Return loss at waveguide R
-% RLRR_TE11(k) = db(abs(sum(SRR(k, 1, 1:Num_modes_prop(end)))).^2)./2; % Return loss at waveguide R
+RLRR_TE11(k) = db(abs(sum(SRR_(1, 1:Num_modes_prop(end)))).^2)./2; % Return loss at waveguide R
 % RLRR_TE11(k) = db(abs(sum(SRR(k, 1, 1:Num_modes_prop(end))))).^2./2; % Return loss at waveguide R
 end
 

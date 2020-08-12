@@ -18,7 +18,7 @@ R = rho_f(end);
 x_f = rho_f .* cos(phi_f);
 y_f = rho_f .* sin(phi_f);
 
-F = 4.8986e9;
+F = 7.5e9;
 
 % f = 20*36000:1:21*36000 - 1;
 
@@ -102,8 +102,7 @@ dphi = pi/180;
 [Eth, Eph] = FF_M_V2(E_rho_reshape_.', E_phi_reshape_.', rho, ph, theta, phi, F, drho, dphi);
 E_abs = sqrt(abs(Eth).^2 + abs(Eph).^2);
 
-Exp = cos(phi) .* Eth - sin(phi) .* Eph;
-Eco = sin(phi) .* Eth + cos(phi) .* Eph;
+Eco = cos(theta) .* cos(phi)
 
 % patternCustom(E_abs,theta,phi);
 
@@ -124,7 +123,7 @@ Eco = sin(phi) .* Eth + cos(phi) .* Eph;
 % 
 % ylim([-50 0]);
 %%
-figure(75);
+figure(71);
 
 hold on;
 plot(theta(1, :)*(180/pi), db((abs(E_abs(1, :))/max(abs(E_abs(1, :))))), '*', 'LineWidth', 0.5);
@@ -135,7 +134,7 @@ plot(theta(90, :)*(180/pi), db((abs(E_abs(90, :))/max(abs(E_abs(90, :))))), '*',
 % plot(theta(90, :)*(180/pi), db((abs(E_abs(90, :)))), 'o', 'LineWidth', 1);
 
 xlabel('\theta(Deg)', 'FontSize', 12, 'FontWeight', 'bold');
-ylabel('E_{abs} (dB) normalized ', 'FontSize', 12, 'FontWeight', 'bold');
+ylabel('E_{abs} (dB)', 'FontSize', 12, 'FontWeight', 'bold');
 title('Far electric field', 'FontSize', 12, 'FontWeight', 'bold');
 % legend({'\phi = 0', '\phi = 90'}, 'FontSize', 12, 'FontWeight', 'bold');
 
@@ -143,20 +142,4 @@ grid on;
 
 ylim([-40 5]);
 
-figure(76);
-
-hold on;
-plot(theta(1, :)*(180/pi), db((abs(Eco(1, :))./max(max(abs(Eco))))), '*', 'LineWidth', 0.5);
-% plot(theta(1, :)*(180/pi), db((abs(E_abs(1, :)))), 'o', 'LineWidth', 1);
-% figure(42)
-hold on;
-plot(theta(90, :)*(180/pi), db((abs(Exp(45, :))./max(max(abs(Eco))))), '*', 'LineWidth', 0.5);
-% plot(theta(90, :)*(180/pi), db((abs(E_abs(90, :)))), 'o', 'LineWidth', 1);
-
-xlabel('\theta(Deg)', 'FontSize', 12, 'FontWeight', 'bold');
-ylabel('E_{co}, E_{xp} in (dB) normalized', 'FontSize', 12, 'FontWeight', 'bold');
-title('Far electric field', 'FontSize', 12, 'FontWeight', 'bold');
-% legend({'\phi = 0', '\phi = 90'}, 'FontSize', 12, 'FontWeight', 'bold');
-ylim([-40 5]);
-grid on;
 system('rm result.txt');

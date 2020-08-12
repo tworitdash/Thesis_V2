@@ -40,7 +40,7 @@ R = linspace(rr, rt(i), n);
 er = ones(1, n); % Relative Permittivity of each WG section
 mur = ones(1, n); % Relative Permeability of each WG sectio
 
-Length = 6 .* lamb; % length of the conical waveguide
+Length = 1 .* lamb; % length of the conical waveguide
 
 l1 = lamb/4;
 L = [l1 ones(1, n - 1) * Length/n];
@@ -65,16 +65,16 @@ E_FF = sqrt(abs(Eth).^2 + abs(Eph).^2);
 
 
 %% 
-figure(5);hold on;
-plot(th(1, :).*180/pi, db(E_FF(1, :)), 'LineWidth', 2);hold on;grid on;
-ylim([-50 50]);
-figure(6); hold on;
-plot(th(91, :).*180/pi, db(E_FF(91, :)), 'LineWidth', 2); hold on;grid on;
-ylim([-50 50]);
-% plot(th(46, :).*180/pi, db(Eco(46, :)), 'LineWidth', 2); hold on;
-figure(7); hold on;
-plot(th(46, :).*180/pi, db(Exp(46, :)), 'LineWidth', 2); hold on;grid on;
-ylim([-50 50]);
+% figure(5);hold on;
+% plot(th(1, :).*180/pi, db(E_FF(1, :)), 'LineWidth', 2);hold on;grid on;
+% ylim([-50 50]);
+% figure(6); hold on;
+% plot(th(91, :).*180/pi, db(E_FF(91, :)), 'LineWidth', 2); hold on;grid on;
+% ylim([-50 50]);
+% % plot(th(46, :).*180/pi, db(Eco(46, :)), 'LineWidth', 2); hold on;
+% figure(7); hold on;
+% plot(th(46, :).*180/pi, db(Exp(46, :)), 'LineWidth', 2); hold on;grid on;
+% ylim([-50 50]);
 
 
 

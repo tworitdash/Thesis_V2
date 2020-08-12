@@ -1,7 +1,12 @@
-function [STT, STR, SRT, SRR, N_] = GSM_N(R, L, er, mur, F, k)
+function [STT, STR, SRT, SRR, N_o] = GSM_N_freq(R, L, er, mur, F, k)
 
-
+c0 = 3e8;
 n = length(R);
+
+Str = load('Xmn.mat');
+str = Str.Xmn;
+
+XMN = horzcat(str.xmn);
 
 for i = 1:n
     f =  fc(R(i), er(i), mur(i));
@@ -16,6 +21,15 @@ else
     N = N_;
 end
 
+
+for o = 1:length(F)
+    for p = 1:n
+    
+        xmn_o = 2.*pi.*R(p)./c0 .* F(o);
+        idx_o = find(XMN < xmn_o);
+        N_o(o, p) = length(idx_o);
+    end
+end
 % N = round(linspace(5, 25, n));
 
 % N = [20 20 20] ; % Number of modes

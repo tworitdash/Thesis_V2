@@ -48,7 +48,8 @@ fc_ = fc(R(2), 1, 1);
 % <<<<<<< Updated upstream
 % F = linspace(fc_(1)+fc_(1)./100, fc_(3), 20);
 % =======
-F = linspace(fc_(1)+fc_(1)./100, 20e9, 50);
+% F = linspace(fc_(1)+fc_(1)./100, 20e9, 50);
+F = [4e9 6e9 8e9];
 % >>>>>>> Stashed changes
 % F = 5e9;
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
@@ -80,3 +81,17 @@ xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('Cross polar level (dB)', 'FontSize', 12, 'FontWeight', 'bold');
 title('Cross polar level from RL optimized antenna using GA', 'FontSize', 12, 'FontWeight', 'bold');
 grid on;
+
+%% Directivity
+zeta = 120*pi;
+figure;
+for i = 1:length(F)
+    E_Ip = sqrt(abs(squeeze(Eth_(i, :, :))).^2 + abs(squeeze(Eph_(i, :, :))).^2);
+    U_feedIp = abs(E_Ip).^2./(2 .* zeta);
+    P_radIp_i = U_feedIp .* sin(th(1, :)) .*pi./180 .* pi./180;
+    P_radIp = sum(sum(P_radIp_i));
+    D_Ip(i, :, :) = 4 .* pi .* U_feedIp ./ P_radIp;
+    hold on;
+    plot(th(1, :)*180/pi, db(squeeze(D_Ip(i, 1, :)))./2, 'LineWidth', 2);
+end
+

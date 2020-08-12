@@ -67,15 +67,18 @@ E_ft_y = (Nup) .* Dm(i) .* pi .* beta_rhop .* (I0 + cos(2 .* Psi) .* I2);
 
 c2 = 1j .* k0 / (4 * pi);
 
-% Eth_o = c2 .* (E_ft_x .* cos(phi) + E_ft_y .* sin(phi)) .* (1 + Gamma);
-% Eph_o = c2 .* cos(theta) .* (E_ft_y .* cos(phi) - E_ft_x .* sin(phi)) .* (1 + Gamma);
+Eth_o = c2 .* (1 + cos(theta)) .* (E_ft_x .* cos(phi) + E_ft_y .* sin(phi)) .* (1 + Gamma);
+Eph_o = c2 .* (1 + cos(theta)) .* (E_ft_y .* cos(phi) - E_ft_x .* sin(phi)) .* (1 + Gamma);
 
 
 Eth = Eth + c2 .* (1 + cos(theta)) .* (E_ft_x .* cos(phi) + E_ft_y .* sin(phi)) .* (1 + Gamma);
 Eph = Eph + c2 .* (1 + cos(theta)) .* (E_ft_y .* cos(phi) - E_ft_x .* sin(phi)) .* (1 + Gamma);
 
-Exp = Exp +  (1 + cos(theta)) .* E_ft_x;
-Eco = Eco +  (1 + cos(theta)) .* E_ft_y;
+% Exp = Exp +  (1 + cos(theta)) .* E_ft_x;
+% Eco = Eco +  (1 + cos(theta)) .* E_ft_y;
+
+Exp = Exp + cos(phi) .* Eth_o - sin(phi) .* Eph_o;
+Eco = Eco + sin(phi) .* Eth_o + cos(phi) .* Eph_o;
 
 XP = XP + (Nup) .* Dm(i) .* pi .* beta_rhop .* I2 .* cos(theta);
 CO = CO + (Nup) .* Dm(i) .* pi .* beta_rhop .* I0 .* cos(theta);

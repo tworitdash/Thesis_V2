@@ -35,7 +35,7 @@ L = [l1 ones(1, n - 1) * Len/n];
 % L = [l1 ones(1, n-1) * Len/n];
 
 er = ones(1, n); % Relative Permittivity of each WG section
-mur = ones(1, n); % Relative Permeability of each WG sectio
+mur = ones(1, n); % Relative Permeability of each WG section
 
 dth = pi/180;
 dph = pi/180;

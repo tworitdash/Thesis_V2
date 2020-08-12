@@ -34,11 +34,13 @@ mu = mur .* mu0;
 % [E_aperture_rho, E_aperture_phi] = Near_field_fun_2(er, mur, R, F, L, rho, ph, 20, drho, dphi);
 
 
-[STT, STR, SRT, SRR, N] = GSM_N_SameAzimuth_freq(R, L, er, mur, F, k);
+% [STT, STR, SRT, SRR, N] = GSM_N_SameAzimuth_freq(R, L, er, mur, F, k);
+[STT, STR, SRT, SRR, N] = GSM_N_freq(R, L, er, mur, F, k);
 
-Str = load('Xmn_azimuthal_inc_TE.mat');
-
-str = Str.xmn_TE;
+% Str = load('Xmn_azimuthal_inc_TE.mat');
+Str = load('Xmn.mat');
+% str = Str.xmn_TE;
+str = Str.Xmn;
 %% 
 ModeNumberAper = N;
 

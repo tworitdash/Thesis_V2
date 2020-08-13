@@ -5,7 +5,7 @@ F = 3e9;
 
 lamb = c0/F;
 
-Len = 6 .* lamb;
+Len = lamb;
 
 str = load('Xmn_azimuthal_inc_TE.mat');
 str = str.xmn_TE;
@@ -15,7 +15,7 @@ xmn = str(1).xmn;
 R1 = (xmn .* c0)./(2 .* pi .* F) + 1e-3;
 
 % R1 = 2e-2;
-Rend = 1.2632 .* lamb/2;
+Rend = 0.6579 .* lamb;
 % Rend = 20e-2;
 
 R_test = linspace(R1, Rend, N);
@@ -35,15 +35,15 @@ lb = zeros(N+1, 1);
 ub = zeros(N+1, 1);
 
 lb(1) = R1;
-ub(1) = R1 + lamb/2;
+ub(1) = R1 + lamb/4;
 
 for i =  2:N
     lb(i) = ub(i - 1) - lamb/2;
     ub(i) = R_test(i) + lamb/2;
 end
 
-lb(N + 1) = 6*lamb;
-ub(N + 1) = 8*lamb;
+lb(N + 1) = 0.5*lamb;
+ub(N + 1) = 2*lamb;
 
 problem2.lb = [lb.'];
 problem2.ub = [ub.'];
@@ -70,7 +70,7 @@ tic;
 
 problem2.options = optimoptions(@ga, 'PlotFcn', {'gaplotbestf', 'gaplotbestindiv'}, 'Display', 'iter',... 
     'InitialPopulationMatrix', [IP], 'UseParallel',...
-    true, 'Fitnesslimit', -0.64);
+    true, 'Fitnesslimit', -0.75);
 
 [r, fval2, exf2, ouput2] = ga(problem2);
 

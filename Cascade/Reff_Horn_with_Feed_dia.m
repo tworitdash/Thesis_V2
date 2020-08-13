@@ -174,7 +174,8 @@ plot(rt, e_tp, 'LineWidth', 2);
 hold on;
 plot(rt, eta_pol, 'LineWidth', 2);
 hold on;
-plot(rt, e_ap, 'LineWidth', 2);
+figure;
+plot(rt./lamb, e_ap, 'LineWidth', 2);
 
 grid on;
 

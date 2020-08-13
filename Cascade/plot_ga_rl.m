@@ -26,10 +26,10 @@ legend({'MM', 'FEKO'}, 'FontSize', 12, 'FontWeight', 'bold');
 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(SRR(:, 1, 1)))), 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(SRR(:, 9, 1)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F_feko * 1e-9, db(abs(squeeze(s_params(1, 1, :)))), 'LineWidth', 2); grid on;
+plot(F_feko * 1e-9, db(abs(squeeze(s_params(2, 1, :)))), 'LineWidth', 2); grid on;
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
-ylabel('S11 of TE_{11} (dB)', 'FontSize', 12, 'FontWeight', 'bold');
+ylabel('S11 of TE_{11} with TE_{12} (dB)', 'FontSize', 12, 'FontWeight', 'bold');
 title('S11 in dB', 'FontSize', 12, 'FontWeight', 'bold');
 legend({'MM', 'FEKO'}, 'FontSize', 12, 'FontWeight', 'bold');

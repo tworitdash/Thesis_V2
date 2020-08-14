@@ -21,7 +21,7 @@ plot(F_feko * 1e-9, RL_feko, 'LineWidth', 2); hold on;
 grid on;
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('Return loss (dB)', 'FontSize', 12, 'FontWeight', 'bold');
-title('RL of fmincon algo', 'FontSize', 12, 'FontWeight', 'bold');
+title('RL of ga algo', 'FontSize', 12, 'FontWeight', 'bold');
 legend({'MM', 'FEKO'}, 'FontSize', 12, 'FontWeight', 'bold');
 
 figure;

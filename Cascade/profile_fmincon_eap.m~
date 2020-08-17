@@ -53,9 +53,10 @@ F = linspace(fc_(1)+fc_(1)./100, fc_(11), 50);
 % F = 5e9;
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
 tic;
-% parfor i = 1:length(F)
-[Aper_n] = Ga_opt_aper_eff(SP(1:N), SP(N+1), F, 5);
+parfor i = 1:length(F)
 
+[Aper_n(i)] = Ga_opt_aper_eff(SP(1:N), SP(N+1), F, 5);
+end
 
 % save('Ga_SRR', 'SRR');
 % save('Ga_RL', 'RL');
@@ -64,7 +65,7 @@ time_used = toc;
 % end
 
 figure;
-plot(F*1e-9, -Aper_n.*, 'LineWidth', 2);grid on;
+plot(F*1e-9, -Aper_n*100, 'LineWidth', 2);grid on;
 xlabel('Frequency (GHz)', 'FontSize', 16, 'FontWeight', 'bold');
-ylabel('Return loss (dB)', 'FontSize', 16, 'FontWeight', 'bold');
-title('RL of patternsearch algo', 'FontSize', 16, 'FontWeight', 'bold');
+ylabel('Aperture efficiency (dB)', 'FontSize', 16, 'FontWeight', 'bold');
+title('Aperture efficiency of ga algo', 'FontSize', 16, 'FontWeight', 'bold');

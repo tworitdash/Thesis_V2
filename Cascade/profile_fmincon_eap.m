@@ -23,6 +23,12 @@ Len = fmin.r(N+1);
 l1 = lamb./4;
 L = [l1 ones(1, N - 1)./N .* Len];
 
+
+focal_length = 1; % Focal length of the reflector
+theta_0 = 50 .* pi./180; % Subtended angle given from SKA
+d = 4 .* focal_length .* tan(theta_0./2); % Reflectoor Diameter
+
+
 for i = 1:N
     L_axis(i) = sum(L(1:i));
 end
@@ -53,9 +59,9 @@ F = linspace(fc_(1)+fc_(1)./100, fc_(11), 50);
 % F = 5e9;
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
 tic;
-% parfor i = 1:length(F)
-[Aper_n] = Ga_opt_aper_eff(SP(1:N), SP(N+1), F, 5);
-
+parfor i = 1:length(F)
+  [Aper_n(i)] = Ga_opt_aper_eff(SP(1:N), SP(N+1), F(i), 5, focal_length, d);
+end
 
 % save('Ga_SRR', 'SRR');
 % save('Ga_RL', 'RL');

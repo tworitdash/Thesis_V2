@@ -1,10 +1,10 @@
 %% Optimum design for -45dB return loss from pattern search optimization 
 clear;
 c0 = 3e8;
-F = 5e9;
+F = 3e9;
 lamb = c0./F;
 N = 5;
-data = load('ga_allvar_minxp_V2L.mat');
+data = load('fmincon_allvar_ms3serv2_maxeap.mat');
 fmin = data.fmin2;
 
 R = [fmin.r(1) fmin.r(1:N)];
@@ -43,75 +43,79 @@ SP = [R(2:end) Len];
 XMN_data = load('Xmn.mat');
 str = XMN_data.Xmn;
 
-fc_ = fc(R(2), 1, 1);
-
-% <<<<<<< Updated upstream
-% F = linspace(fc_(1)+fc_(1)./100, fc_(3), 20);
-% =======
-F = linspace(fc_(1)+fc_(1)./100, 20e9, 20);
+% fc_ = fc(R(2), 1, 1);
+% 
+% % <<<<<<< Updated upstream
+% % F = linspace(fc_(1)+fc_(1)./100, fc_(3), 20);
+% % =======
+% F = linspace(fc_(1)+fc_(1)./100, 20e9, 20);
 % >>>>>>> Stashed changes
 % F = 5e9;
 % objective = @(x) GSM_N_opt_allvar(SP(1:N), SP(N+1), x(1:length(F)), 0);
 tic;
 % parfor i = 1:length(F)
 % XP_level = MinXP_Goal_V2L_freq(SP(1:N), SP(N+1), F, 20);
+F = 2.998e9;
 % F_ = [F(1) F(4) F(10) F(20)];
-[Eth_, Eph_, Eco_, Exp_, CO_, XP_, E_, th, ph, Max_Exp_diff] = MinXP_Goal_V2L_freq_fields(SP(1:N), SP(N + 1), F, 10);
+[Eth_, Eph_, Eco_, Exp_, CO_, XP_, E_, th, ph, Max_Exp_diff] = MinXP_Goal_V2L_freq_fields(SP(1:N), SP(N + 1), F, 20);
 
 plot(F*1e-9, Max_Exp_diff, 'LineWidth', 2);grid on;
 xlabel('Frequency (GHz)', 'FontSize', 16, 'FontWeight', 'bold');
 ylabel('Cross Polar level (dB)', 'FontSize', 16, 'FontWeight', 'bold');
 title('Cross polar level ga algo', 'FontSize', 16, 'FontWeight', 'bold');
 
-save('Max_XP', 'Max_Exp_diff');
 
-% %% Plots
-% 
-% i = 2;
-% 
-% Eco = squeeze(Eco_(i, :, :));
-% Exp = squeeze(Exp_(i, :, :));
-% E = squeeze(E_(i, :, :));
-% 
-% CO = squeeze(CO_(i, :, :));
-% 
-% XP = squeeze(XP_(i, :, :));
-% 
-% time_used = toc;
-% % end
-% 
-% % % RL1 = GSM_N_opt_allvar(SP(1:N), SP(N+1), 5e9, 20);
-% % end
-% 
-% 
-% figure(80);
-% 
-% hold on;
-% plot(th(1, :)*(180/pi), db((abs(E(1, :))/max(abs(E(1, :))))), '-.', 'LineWidth', 2);
-% 
-% hold on;
-% plot(th(90, :)*(180/pi), db((abs(E(90, :))/max(abs(E(90, :))))), '-.', 'LineWidth', 2);
-% 
-% 
-% xlabel('\theta(Deg)', 'FontSize', 12, 'FontWeight', 'bold');
-% ylabel('E_{abs} (dB) normalized ', 'FontSize', 12, 'FontWeight', 'bold');
-% title('Far electric field', 'FontSize', 12, 'FontWeight', 'bold');
-% % legend({'\phi = 0', '\p
-% grid on;
-% ylim([-40 5]);
-% 
-% figure(81);
-% hold on;
-% plot(th(1, :)*(180/pi), db((abs(Eco(1, :))./max(max(abs(Eco))))), '-.', 'LineWidth', 2);
-% hold on;
-% plot(th(90, :)*(180/pi), db((abs(Exp(45, :))./max(max(abs(Eco))))), '-.', 'LineWidth', 2);
-% 
-% xlabel('\theta(Deg)', 'FontSize', 12, 'FontWeight', 'bold');
-% ylabel('Far fields E_{co} and E_{xp} (dB)', 'FontSize', 12, 'FontWeight', 'bold');
-% title('Co and Cross polar fields', 'FontSize', 12, 'FontWeight', 'bold');
-% grid on;
-% ylim([-40 5]);
-% 
+
+
+%% Plots
+
+i = 1;
+
+Eco = squeeze(Eco_(i, :, :));
+Exp = squeeze(Exp_(i, :, :));
+E = squeeze(E_(i, :, :));
+
+
+
+CO = squeeze(CO_(i, :, :));
+
+XP = squeeze(XP_(i, :, :));
+
+time_used = toc;
+% end
+
+% % RL1 = GSM_N_opt_allvar(SP(1:N), SP(N+1), 5e9, 20);
+% end
+
+
+figure(80);
+
+hold on;
+plot(th(1, :)*(180/pi), db((abs(E(1, :))/max(abs(E(1, :))))), '-.', 'LineWidth', 2);
+
+hold on;
+plot(th(90, :)*(180/pi), db((abs(E(90, :))/max(abs(E(90, :))))), '-.', 'LineWidth', 2);
+
+
+xlabel('\theta(Deg)', 'FontSize', 12, 'FontWeight', 'bold');
+ylabel('E_{abs} (dB) normalized ', 'FontSize', 12, 'FontWeight', 'bold');
+title('Far electric field', 'FontSize', 12, 'FontWeight', 'bold');
+% legend({'\phi = 0', '\p
+grid on;
+ylim([-40 5]);
+
+figure(81);
+hold on;
+plot(th(1, :)*(180/pi), db((abs(Eco(1, :))./max(max(abs(Eco))))), '-.', 'LineWidth', 2);
+hold on;
+plot(th(90, :)*(180/pi), db((abs(Exp(45, :))./max(max(abs(Eco))))), '-.', 'LineWidth', 2);
+
+xlabel('\theta(Deg)', 'FontSize', 12, 'FontWeight', 'bold');
+ylabel('Far fields E_{co} and E_{xp} (dB)', 'FontSize', 12, 'FontWeight', 'bold');
+title('Co and Cross polar fields', 'FontSize', 12, 'FontWeight', 'bold');
+grid on;
+ylim([-40 5]);
+
 % % 
 % % figure(72);
 % % hold on;
@@ -124,3 +128,21 @@ save('Max_XP', 'Max_Exp_diff');
 % % title('Co and Cross polar fields', 'FontSize', 12, 'FontWeight', 'bold');
 % % grid on;
 % % ylim([-40 5]);
+
+
+%% Directivity 
+zeta = 120 .* pi;
+U = abs(E).^2 ./ (2 * zeta);
+P_rad_i = U(:, 91:end) .* sin(th(:, 91:end)) .* pi/180 .* pi/180;
+P_rad = sum(sum(P_rad_i));
+
+D = 4 .* pi .* U ./ P_rad;
+
+figure(1);
+
+hold on;
+plot(th(1, :).*180/pi, db(abs(D(1, :)))./2, '-.', 'Linewidth', 2);
+
+
+% 
+% patternCustom(db(D)/2, th(1, :).*180, ph(:, 1).*180);

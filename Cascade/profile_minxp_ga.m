@@ -57,7 +57,7 @@ tic;
 % XP_level = MinXP_Goal_V2L_freq(SP(1:N), SP(N+1), F, 20);
 % F_ = [F(1) F(4) F(10) F(20)];
 [Eth_, Eph_, Eco_, Exp_, CO_, XP_, E_, th, ph, Max_Exp_diff] = MinXP_Goal_V2L_freq_fields(SP(1:N), SP(N + 1), F, 10);
-
+figure;
 plot(F*1e-9, Max_Exp_diff, 'LineWidth', 2);grid on;
 xlabel('Frequency (GHz)', 'FontSize', 16, 'FontWeight', 'bold');
 ylabel('Cross Polar level (dB)', 'FontSize', 16, 'FontWeight', 'bold');

@@ -18,7 +18,7 @@ R = rho_f(end);
 x_f = rho_f .* cos(phi_f);
 y_f = rho_f .* sin(phi_f);
 
-F = 2.998e9;
+F = 6e9;
 
 % f = 20*36000:1:21*36000 - 1;
 
@@ -124,7 +124,7 @@ Eco = sin(phi) .* Eth + cos(phi) .* Eph;
 % 
 % ylim([-50 0]);
 %%
-figure(80);
+figure(37);
 
 hold on;
 plot(theta(1, :)*(180/pi), db((abs(E_abs(1, :))/max(abs(E_abs(1, :))))), '*', 'LineWidth', 0.5);

@@ -3,7 +3,7 @@ er0 = 8.85418782e-12; % Free space permittivity
 mu0 = 1.25663706e-6;  % Free Space Permeability
 
 %F = 21e9; % Frequency at which far field is requested
-F = 7.5e9;
+F = 6e9;
 % fcutt = 20e9-1e-11;
 % 
 Str = load('Xmn.mat');

@@ -1,0 +1,67 @@
+function [Dm_, yap, Gamma, y11, Gamma_11] = Tworit_Integrals_K_Space(r, N, k0, L, er, mur)
+
+c0 = 3e8;
+
+er0 = 8.85418782e-12; % Free space permittivity
+mu0 = 1.25663706e-6;  % Free Space Permeability
+
+epsilon = er * er0;
+mu = mur .* mu0;
+
+omega = c0.*k0;
+
+Str = load('Xmn_azimuthal_inc_TE.mat');
+
+str = Str.xmn_TE;
+
+for k = 1:length(r)
+    
+    R = r(k);
+
+for i = 1:length(N)
+    
+    xmn(i) = str(N(i)).xmn;
+    beta_rho(i) = xmn(i)./R;
+    M(i) = str(N(i)).m;
+    beta_z(i) = -1j .* sqrt(-(k0.^2 - (beta_rho(i)).^2));
+    YTE(i) = beta_z(i)./(omega .* mu);
+    ZTE(i) = 1./YTE(i);
+    
+end
+
+for l = 1:length(N)
+    for p = 1:length(N)
+        if l == p
+            Ymut(l, p) = exp(-1j .* beta_z(l) .* len) .* (Yin_Circular(N(l), N(p), k0, R, er, mur, L) + YTE(p)) .* exp(-1j .* beta_z(p) .* len);
+        else
+            Ymut(l, p) = exp(-1j .* beta_z(l) .* len) .* Yin_Circular(N(l), N(p), k0, R, er, mur, L) .* exp(-1j .* beta_z(p) .* len);
+        end
+    end
+end
+
+for l = 1:length(N)
+    Y_rhs(l) = Yin_Circular(1, N(l), k0, R, er, mur, L) .* exp(-1j .* beta_z(l) .* len) ;
+end
+
+Dm_(k, :) = Ymut\(-Y_rhs.');
+
+% Dm(k, :) = Ymut\(-Y_rhs.');
+
+Y11 = Yin_Circular(1, 1, k0, R, er, mur, L);
+% 
+xmn11 = str(1).xmn;
+beta_rho11 = xmn11./R;
+
+beta_z11 = -1j .* sqrt(-(k0.^2 - beta_rho11.^2));
+YTE11(k) = beta_z11./(omega .* mu);
+ZTE11 = 1./YTE11(k);
+
+yap(k) = (Y11 + Dm_(k, :) * Y_rhs.')./YTE11(k);
+y11(k) = Y11./YTE11(k);
+
+Gamma_11(k) = (1 - y11(k))./(1 + y11(k));
+
+Gamma(k) = (1 - yap(k))./(1 + yap(k));
+
+end
+end

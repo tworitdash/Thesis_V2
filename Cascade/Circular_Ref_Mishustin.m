@@ -289,5 +289,3 @@ legend({'\phi = 0 Finite length waveguide K space Rumsey', ...
 grid on;
 
 ylim([-50 10]);
-
-

@@ -18,6 +18,7 @@ f = linspace(14.1569e9, 16.6551e9, 41);
 % f = linspace(14.1569e9, 70.6551e9, 41);
 % f = linspace(23e9, 30e9, 20);
 % f = linspace(4.99654e9, 8.32757e9, 41);
+% f = linspace(4.99654e9, 20e9, 41);
 n_orig = 2;
 % F = 5e9;
 % lamb = c0/F;
@@ -63,15 +64,19 @@ time = toc;
 % data5_feko = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_1_1_8_GP.s1p');
 % s_params_5_feko = extract(data5_feko,'S_PARAMETERS');
 
+% data5_feko_GP10r = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_1_1_8_5GHz_10rGP.s3p');
 data5_feko_GP10r = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_1_1_8_GP_TE12_Big_Big_GP.s1p');
 s_params_5_feko = extract(data5_feko_GP10r,'S_PARAMETERS');
 
 
+
+
 m_feko = 1;
-n_feko = 1;
+n_feko = 2;
 
 Str = load('Xmn_azimuthal_inc_TE.mat');
 f_ = f;
+% f_ = linspace(4.99654e9, 8.32757e9, 41);
 % r_feko = 1.8e-2;
 % f_ = linspace(14.1569e9, 16.6551e9, 41);
 % f_ = linspace(23e9, 30e9, 20);
@@ -81,7 +86,7 @@ k0_ = (2 * pi * f_)/c0;
 str = Str.xmn_TE;
 
 % xmn11 = str(n_feko).xmn;
-xmn11 = str(2).xmn;
+xmn11 = str(n_feko).xmn;
 beta_rho11 = xmn11./r;
 
 beta_z11 = -1j .* sqrt(-(k0_.^2 - beta_rho11.^2));
@@ -98,6 +103,8 @@ Y_FEKO = (1 - Gamma_FEKO)./(1 + Gamma_FEKO);
 % data5_feko = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_1_1_8_GP.s1p');
 % s_params_5_feko = extract(data5_feko,'S_PARAMETERS');
 
+% data5_cst_GP10r = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_ref_FS_TE11.s1p');
+
 data5_cst_GP10r = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_ref_FS_TE12.s20p');
 s_params_5_cst = extract(data5_cst_GP10r,'S_PARAMETERS');
 
@@ -106,7 +113,7 @@ m_cst = 16;
 n_cst = 16;
 
 Str = load('Xmn_azimuthal_inc_TE.mat');
-%f_cst = linspace(5e9, 20e9, 1001);
+% f_cst = linspace(5e9, 20e9, 1001);
 f_cst = linspace(14.1569e9, 16.6551e9, 1001);
 % r_feko = 1.8e-2;
 % f_ = linspace(14.1569e9, 16.6551e9, 41);
@@ -122,7 +129,7 @@ beta_rho11 = xmn11./r;
 
 beta_z11_cst = -1j .* sqrt(-(k0_cst.^2 - beta_rho11.^2));
 
-Gamma_CST = squeeze(s_params_5_cst(m_cst, n_cst, :)).' .* exp(+2j .* beta_z11_cst .* len);
+Gamma_CST = squeeze(s_params_5_cst(m_cst, n_cst, :)).' .* exp(2j .* beta_z11_cst .* len);
 Y_CST = (1 - Gamma_CST)./(1 + Gamma_CST);
 %%
 
@@ -130,13 +137,13 @@ figure;
 hold on;
 plot(f*1e-9, real(yap), 'o', 'Linewidth', 1);
 hold on;
-plot(f*1e-9, -imag(yap), 'o', 'Linewidth', 1);
+plot(f*1e-9, imag(yap), 'o', 'Linewidth', 1);
 
 grid on;
 hold on;
 plot(f*1e-9, real(y11), '-.', 'Linewidth', 1);
 hold on;
-plot(f*1e-9, -imag(y11), '-.', 'Linewidth', 1);
+plot(f*1e-9, imag(y11), '-.', 'Linewidth', 1);
 
 % hold on;
 % plot(x, real(Yin), '*', 'Linewidth', 1);
@@ -172,29 +179,27 @@ legend({'Real Y_{ap} This technique with 4 higher order modes', ...
 %%
 figure;
 hold on;
-plot(f, db(abs(Gamma)), 'o', 'Linewidth', 1);
+plot(f*1e-9, db(abs(Gamma)), 'o', 'Linewidth', 1);
 hold on;
-plot(f, db(abs(Gamma_11)), '-.', 'Linewidth', 1);
+plot(f*1e-9, db(abs(Gamma_11)), '-.', 'Linewidth', 1);
 % hold on;
 % plot(f, db(abs(Gamma_K)), '*', 'Linewidth', 1);
 grid on;
 hold on;
-plot(f_, db(abs(Gamma_FEKO)), 'r', 'LineWidth', 2); grid on;
+plot(f_*1e-9, db(abs(Gamma_FEKO)), 'r', 'LineWidth', 2); grid on;
 hold on;
-plot(f_cst, db(abs(Gamma_CST)), 'k', 'LineWidth', 2); grid on;
+plot(f_cst*1e-9, db(abs(Gamma_CST)), 'k', 'LineWidth', 2); grid on;
 % hold on;
 % plot(x, db(abs(Gamma_FEKO_Gp10r)), '+', 'LineWidth', 2); grid on;
 
-xlabel('2r/ \lambda', 'FontWeight', 'bold', 'FontSize', 16);
+xlabel('Frequency (GHz)', 'FontWeight', 'bold', 'FontSize', 16);
 ylabel('\Gamma in dB', 'FontWeight', 'bold', 'FontSize', 16);
 title('Reflection Coefficient', 'FontWeight', 'bold', 'FontSize', 16);
 
-legend({'Real Y_{ap} This technique with 4 higher order modes', ...
-    'Imag Y_{ap} This technique with 4 higher order modes', ...
-    
-    ,'\Gamma This technique with no higher order modes', ...
+legend({'\Gamma This technique with 4 higher order modes', ...
+    '\Gamma This technique with no higher order modes', ...
     '\Gamma FEKO',...
-    '\Gamma CST'})
+    '\Gamma CST'});
 %%
 figure;
 hold on;

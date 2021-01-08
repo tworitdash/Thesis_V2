@@ -18,6 +18,7 @@ f = linspace(14.1569e9, 16.6551e9, 41);
 % f = linspace(14.1569e9, 70.6551e9, 41);
 % f = linspace(23e9, 30e9, 20);
 % f = linspace(4.99654e9, 8.32757e9, 41);
+% f = linspace(4.99654e9, 20e9, 41);
 n_orig = 2;
 % F = 5e9;
 % lamb = c0/F;
@@ -63,8 +64,11 @@ time = toc;
 % data5_feko = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_1_1_8_GP.s1p');
 % s_params_5_feko = extract(data5_feko,'S_PARAMETERS');
 
+% data5_feko_GP10r = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_1_1_8_5GHz_10rGP.s3p');
 data5_feko_GP10r = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_1_1_8_GP_TE12_Big_Big_GP.s1p');
 s_params_5_feko = extract(data5_feko_GP10r,'S_PARAMETERS');
+
+
 
 
 m_feko = 1;
@@ -72,6 +76,7 @@ n_feko = 1;
 
 Str = load('Xmn_azimuthal_inc_TE.mat');
 f_ = f;
+% f_ = linspace(4.99654e9, 8.32757e9, 41);
 % r_feko = 1.8e-2;
 % f_ = linspace(14.1569e9, 16.6551e9, 41);
 % f_ = linspace(23e9, 30e9, 20);
@@ -98,6 +103,8 @@ Y_FEKO = (1 - Gamma_FEKO)./(1 + Gamma_FEKO);
 % data5_feko = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_1_1_8_GP.s1p');
 % s_params_5_feko = extract(data5_feko,'S_PARAMETERS');
 
+% data5_cst_GP10r = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_ref_FS_TE11.s1p');
+
 data5_cst_GP10r = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_ref_FS_TE12.s20p');
 s_params_5_cst = extract(data5_cst_GP10r,'S_PARAMETERS');
 
@@ -106,7 +113,7 @@ m_cst = 16;
 n_cst = 16;
 
 Str = load('Xmn_azimuthal_inc_TE.mat');
-%f_cst = linspace(5e9, 20e9, 1001);
+% f_cst = linspace(5e9, 20e9, 1001);
 f_cst = linspace(14.1569e9, 16.6551e9, 1001);
 % r_feko = 1.8e-2;
 % f_ = linspace(14.1569e9, 16.6551e9, 41);
@@ -122,7 +129,7 @@ beta_rho11 = xmn11./r;
 
 beta_z11_cst = -1j .* sqrt(-(k0_cst.^2 - beta_rho11.^2));
 
-Gamma_CST = squeeze(s_params_5_cst(m_cst, n_cst, :)).' .* exp(+2j .* beta_z11_cst .* len);
+Gamma_CST = squeeze(s_params_5_cst(m_cst, n_cst, :)).' .* exp(2j .* beta_z11_cst .* len);
 Y_CST = (1 - Gamma_CST)./(1 + Gamma_CST);
 %%
 

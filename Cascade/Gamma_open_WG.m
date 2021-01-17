@@ -13,9 +13,9 @@ mu0 = 1.25663706e-6;  % Free Space Permeability
 epsilon = er .* er0;
 mu = mur .* mu0;
 
-f = linspace(14.1569e9, 16.6551e9, 41);
+% f = linspace(14.1569e9, 16.6551e9, 41);
 
-% f = linspace(14.1569e9, 70.6551e9, 41);
+f = linspace(14.1569e9, 70.6551e9, 200);
 % f = linspace(23e9, 30e9, 20);
 % f = linspace(4.99654e9, 8.32757e9, 41);
 % f = linspace(4.99654e9, 20e9, 41);
@@ -75,10 +75,10 @@ m_feko = 1;
 n_feko = 1;
 
 Str = load('Xmn_azimuthal_inc_TE.mat');
-f_ = f;
+% f_ = f;
 % f_ = linspace(4.99654e9, 8.32757e9, 41);
 % r_feko = 1.8e-2;
-% f_ = linspace(14.1569e9, 16.6551e9, 41);
+f_ = linspace(14.1569e9, 16.6551e9, 41);
 % f_ = linspace(23e9, 30e9, 20);
 
 k0_ = (2 * pi * f_)/c0;
@@ -166,7 +166,7 @@ hold on;
 plot(f_cst*1e-9, imag(Y_CST), 'Linewidth', 1);
 
 % xlim([4.99654 8.32757]);
-xlim([14.1569 16.6551])
+% xlim([14.1569 16.6551])
 
 xlabel('Frequency (GHz)', 'FontWeight', 'bold', 'FontSize', 16);
 ylabel('y_{ap}', 'FontWeight', 'bold', 'FontSize', 16);

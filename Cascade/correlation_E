@@ -1,0 +1,21 @@
+c0 = 3e8;
+
+
+er = 1;
+mur = 1;
+R = 1.8e-2;
+F = 16.43e9;
+lamb = c0/F; 
+
+drho = R/100;
+dphi = 180/pi;
+
+L = lamb/4;
+[rho, phi] = meshgrid(linspace(eps:R/100:R, eps:180/pi:2*pi+eps);
+
+
+
+[E_rho, E_phi] = Near_field_fun_2(er, mur, R, F, L, rho, phi, k, drho, dphi);
+
+figure; surface(rho(1, :), phi(:, 1)*180/pi, db(abs(E_rho))); shading flat; colorbar('jet');
+figure; surface(rho(1, :), phi(:, 1)*180/pi, db(abs(E_phi))); shading flat; colorbar('jet');

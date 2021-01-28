@@ -1,4 +1,4 @@
-function [yin, Gamma_K] = Mishustin_K_Space(R, k0, L, er, mur, len)
+function [yin, Gamma_K] = Mishustin_K_Freq(R, k0, L, er, mur, len)
 
 er0 = 8.85418782e-12; % Free space permittivity
 mu0 = 1.25663706e-6;  % Free Space Permeability

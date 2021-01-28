@@ -1,0 +1,14 @@
+c0 = 3e8;
+
+
+er = 1;
+mur = 1;
+R = 1.8e-2;
+F = 16.43e9;
+lamb = c0/F; 
+
+L = lamb/4;
+[rho, phi] = meshgrid(linspace(eps. R, 100), linspace(eps, 2*pi+eps, 3))
+
+
+[E_rho, E_phi] = Near_field_fun_2(er, mur, R, F, L, rho, phi, k, drho, dphi)

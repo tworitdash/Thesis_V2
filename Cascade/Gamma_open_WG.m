@@ -13,9 +13,9 @@ mu0 = 1.25663706e-6;  % Free Space Permeability
 epsilon = er .* er0;
 mu = mur .* mu0;
 
-% f = linspace(14.1569e9, 16.6551e9, 41);
+f = linspace(14.1569e9, 16.6551e9, 41);
 
-f = linspace(14.1569e9, 70.6551e9, 200);
+% f = linspace(14.1569e9, 70.6551e9, 200);
 % f = linspace(23e9, 30e9, 20);
 % f = linspace(4.99654e9, 8.32757e9, 41);
 % f = linspace(4.99654e9, 20e9, 41);
@@ -182,16 +182,16 @@ legend({'Real y_{ap} This technique with 4 higher order modes', ...
 %%
 figure;
 hold on;
-plot(f*1e-9, db(abs(Gamma)), 'o', 'Linewidth', 1);
+plot(f*1e-9, (abs(Gamma)), 'o', 'Linewidth', 1);
 hold on;
-plot(f*1e-9, db(abs(Gamma_11)), '-.', 'Linewidth', 1);
+plot(f*1e-9, (abs(Gamma_11)), '-.', 'Linewidth', 1);
 % hold on;
 % plot(f*1e-9, db(abs(Gamma_K)), '*', 'Linewidth', 1);
 grid on;
 hold on;
-plot(f_*1e-9, db(abs(Gamma_FEKO)), 'r', 'LineWidth', 2); grid on;
+plot(f_*1e-9, (abs(Gamma_FEKO)), 'r', 'LineWidth', 2); grid on;
 hold on;
-plot(f_cst*1e-9, db(abs(Gamma_CST)), 'k', 'LineWidth', 2); grid on;
+plot(f_cst*1e-9, (abs(Gamma_CST)), 'k', 'LineWidth', 2); grid on;
 % hold on;
 % plot(x, db(abs(Gamma_FEKO_Gp10r)), '+', 'LineWidth', 2); grid on;
 
@@ -217,7 +217,7 @@ grid on;
 hold on;
 plot(f_, unwrap(angle((Gamma_FEKO))) .* 180/pi, 'r', 'LineWidth', 2); grid on;
 
-hold on;
+hold on;    
 plot(f_cst, unwrap(angle((Gamma_CST))) .* 180/pi, 'k', 'LineWidth', 2); grid on;
 % hold on;
 % plot(x, db(abs(Gamma_FEKO_Gp10r)), '+', 'LineWidth', 2); grid on;

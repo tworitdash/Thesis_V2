@@ -1,0 +1,31 @@
+YTE11 = \[Beta]_z/(\[Omega] * \[Mu])
+
+BesselJ_der[m_, Z_] = (BesselJ[m - 1, Z] - BesselJ[m + 1, Z])/2
+
+C1 = (2*X^2 * (X/(k_0 R))^2)/((X^2 - 1)*Sqrt(1 - (X/(k_0*R))^2))
+C2 = 2/((X^2 - 1)*Sqrt(1 - (X/(k_0*R))^2))
+
+\[Eta] = K_s / k_0
+
+I1 = (\[Eta] * Sqrt(1 - \[Eta]^2) * (BesselJ_der[1, k_0 * R * \[Eta]])^2)/((X/(k_0 * R)^2 - \[Eta]^2))^2
+
+I2 = (BesselJ[1, k_0 * R * \[Eta]])^2/(eta * Sqrt(1 - \[Eta]^2)))
+
+Mis = C1 * I1 + C2 * I2
+
+NTE = (2/ \[Pi])/((BesselJ[1, X])^2 * (X^2 - 1))
+
+Z_11 = (NTE * (X/R)^2 * \[Pi])/(4 * \[Omega] * \[Mu])
+
+I00 = R^2 * ((X/R) * BesselJ[1, X] * BesselJ[0, \[Eta] * R * k_0] - \[Eta] * k_0 * BesselJ[2, X] * BesselJ[1, \[Eta] * R * k_0]) / ((X/R)^2 - \[Eta]^2 k_0^2)
+
+I22 = R^2 * (-(X/R) * BesselJ[1, X] * BesselJ[2, \[Eta] * R * k_0] + \[Eta] * k_0 * BesselJ[0, X] * BesselJ[1, \[Eta] * R * k_0]) / ((X/R)^2 - \[Eta]^2 k_0^2)
+
+K_z[x_] = Sqrt(k_0^2 - x^2)
+
+\[Tau] = Z11 * (1/K_z[\[eta] * k_0]) * (((2 * (k_0)^2 - (\[Eta]*k_0)^2)) * (I00^2 + I22^2) - (\[Eta] * k_0)^2 * I00 * I22) 
+
+\[tau] = \[Tau]/YTE11
+
+ 
+ 

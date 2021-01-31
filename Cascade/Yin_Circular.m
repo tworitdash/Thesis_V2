@@ -62,7 +62,8 @@ kz = @(Nu) -1j .* sqrt(-(k0.^2 - Nu.^2));
 
 % for i = 1:length(Nu)
 
-ep = 1e-7;
+% ep = 1e-7;
+ep = eps;
 
 if m == n
     
@@ -81,8 +82,16 @@ besselj(1, Nu .* R) .*  besselj(3, Nu .* R));
 I =  @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* pi ./ (4 .* omega .* mu .* kz(Nu)) .* ((2 .* k0.^2 - Nu.^2).*...
 (I0(Nu) .* I0_2(Nu) + I2(Nu) .* I2_2(Nu)) - Nu.^2 .* 1./2 .* (I0(Nu) .* I2_2(Nu) + I0_2(Nu) .* I2(Nu))) .* Nu ;
     
+   
+% I =  @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* pi ./ (4 .* omega .* mu .* kz(Nu)) .* ((k0.^2 - Nu.^2).*...
+% (I0(Nu) .* I0_2(Nu) + I2(Nu) .* I2_2(Nu)) - Nu.^2 .* 1./2 .* (I0(Nu) .* I2_2(Nu) + I0_2(Nu) .* I2(Nu))) .* Nu ;
+
+
 I_near_betarho = @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* pi ./ (4 .* omega .* mu .* kz(Nu)) .* ((2 .* k0.^2 - Nu.^2).*...
 (I0_(Nu) .* I0_(Nu) + I2_(Nu) .* I2_(Nu)) - Nu.^2 .* 1./2 .* (I0_(Nu) .* I2_(Nu) + I0_(Nu) .* I2_(Nu))) .* Nu ;
+
+% I_near_betarho = @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* pi ./ (4 .* omega .* mu .* kz(Nu)) .* ((k0.^2 - Nu.^2).*...
+% (I0_(Nu) .* I0_(Nu) + I2_(Nu) .* I2_(Nu)) - Nu.^2 .* 1./2 .* (I0_(Nu) .* I2_(Nu) + I0_(Nu) .* I2_(Nu))) .* Nu ;
 
     Y1 = integral(I, eps, beta_rhop-ep+1j.*ep, 'Waypoints', [ep+1j.*ep]);
     Y2 = integral(I_near_betarho, beta_rhop-ep+1j.*ep, beta_rhop+ep+1j.*ep);

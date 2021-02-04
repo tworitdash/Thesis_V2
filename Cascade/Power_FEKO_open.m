@@ -50,4 +50,10 @@ figure; plot(9:100, db(abs(Power(9, 9:100)))/2); hold on; plot(9:100, db(abs(Pow
 
 figure; plot(9:100, db(abs(Power_F./max(Power_F))));
 
+
+grid on;
+xlabel('Mode Number', 'FontWeight', 'bold', 'FontSize', 16);
+ylabel('Cross Eergy in dB', 'FontWeight', 'bold', 'FontSize', 16);
+title('Cross Energy. Integral of conjugate of Poynting vector', 'FontWeight', 'bold', 'FontSize', 16);
+
 % Power_F = Pow_2modes(E_rho_reshape_.', E_phi_reshape_.', H_rho_reshape_.', H_phi_reshape_.', rho_f, drho, dphi);

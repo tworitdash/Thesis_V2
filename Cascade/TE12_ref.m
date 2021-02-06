@@ -172,26 +172,28 @@ xlabel('Frequency (GHz)', 'FontWeight', 'bold', 'FontSize', 16);
 ylabel('y_{ap}', 'FontWeight', 'bold', 'FontSize', 16);
 title('Aperture Admittance over Free space admittance', 'FontWeight', 'bold', 'FontSize', 16);
 
-legend({'Real y_{ap} This technique with 4 higher order modes', ...
-    'Imag y_{ap} This technique with 4 higher order modes', ...
+legend({'Real y_{ap} This technique with 3 higher order modes', ...
+    'Imag y_{ap} This technique with 3 higher order modes', ...
     'Real y_{ap} This technique with no higher order modes'...
     ,'Imag y_{ap} This technique with no higher order modes', ...
+    'Real y_{ap} Mishustin'...
+    ,'Imag y_{ap} Mishustin', ...
     'Real y_{ap} FEKO', 'Imag y_{ap} FEKO',...
     'Real y_{ap} CST', 'Imag y_{ap} CST'})
 
 %%
 figure;
 hold on;
-plot(f*1e-9, (abs(Gamma)), 'o', 'Linewidth', 1);
+plot(f*1e-9, db(abs(Gamma)), 'o', 'Linewidth', 1);
 hold on;
-plot(f*1e-9, (abs(Gamma_11)), '-.', 'Linewidth', 1);
+plot(f*1e-9, db(abs(Gamma_11)), '-.', 'Linewidth', 1);
 hold on;
-plot(f*1e-9, (abs(Gamma_K)), '*', 'Linewidth', 1);
+plot(f*1e-9, db(abs(Gamma_K)), '*', 'Linewidth', 1);
 grid on;
 hold on;
-plot(f_*1e-9, (abs(Gamma_FEKO)), 'r', 'LineWidth', 2); grid on;
+plot(f_*1e-9, db(abs(Gamma_FEKO)), 'r', 'LineWidth', 2); grid on;
 hold on;
-plot(f_cst*1e-9, (abs(Gamma_CST)), 'k', 'LineWidth', 2); grid on;
+plot(f_cst*1e-9, db(abs(Gamma_CST)), 'k', 'LineWidth', 2); grid on;
 % hold on;
 % plot(x, db(abs(Gamma_FEKO_Gp10r)), '+', 'LineWidth', 2); grid on;
 
@@ -201,8 +203,9 @@ title('Reflection Coefficient', 'FontWeight', 'bold', 'FontSize', 16);
 % xlim([4.99654 8.32757]);
 xlim([14.1569 16.6551])
 
-legend({'\Gamma This technique with 4 higher order modes', ...
+legend({'\Gamma This technique with 3 higher order modes', ...
     '\Gamma This technique with no higher order modes', ...
+    '\Gamma Mishustin',...
     '\Gamma FEKO',...
     '\Gamma CST'});
 %%
@@ -212,13 +215,13 @@ plot(f, unwrap(angle((Gamma))) .* 180/pi, 'o', 'Linewidth', 1);
 hold on;
 plot(f, angle((Gamma_11)) .* 180/pi, '-.', 'Linewidth', 1);
 hold on;
-plot(x, angle((Gamma_K)) .* 180/pi, '*', 'Linewidth', 1);
+plot(f, angle((Gamma_K)) .* 180/pi, '*', 'Linewidth', 1);
 grid on;
 hold on;
 plot(f_, unwrap(angle((Gamma_FEKO))) .* 180/pi, 'r', 'LineWidth', 2); grid on;
 
 hold on;    
-plot(f_cst, unwrap(angle((Gamma_CST))) .* 180/pi, 'k', 'LineWidth', 2); grid on;
+plot(f_cst, -unwrap(angle((Gamma_CST))) .* 180/pi, 'k', 'LineWidth', 2); grid on;
 % hold on;
 % plot(x, db(abs(Gamma_FEKO_Gp10r)), '+', 'LineWidth', 2); grid on;
 

@@ -13,13 +13,15 @@ mu0 = 1.25663706e-6;  % Free Space Permeability
 epsilon = er .* er0;
 mu = mur .* mu0;
 
-f = linspace(14.1569e9, 16.6551e9, 41);
+%f = linspace(14.1569e9, 16.6551e9, 41);
+
+f = linspace(22.7e9, 25e9, 20);
 
 % f = linspace(14.1569e9, 70.6551e9, 200);
 % f = linspace(23e9, 30e9, 20);
 % f = linspace(4.99654e9, 8.32757e9, 41);
 % f = linspace(4.99654e9, 20e9, 41);
-n_orig = 2;
+n_orig = 3;
 % F = 5e9;
 % lamb = c0/F;
 
@@ -40,7 +42,7 @@ k0 = omega./c0;
 
 L = 100;
 
-N = 3:1:5;
+N = 4:1:6;
 % N = [3 4 5];
 
 [Dm_, yap, Gamma, y11, Gamma_11, YTE11, y_for_debug] = Tworit_Integrals_K_Space_freq(r, N, k0, L, er, mur, n_orig);
@@ -65,7 +67,8 @@ time = toc;
 % s_params_5_feko = extract(data5_feko,'S_PARAMETERS');
 
 % data5_feko_GP10r = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_1_1_8_5GHz_10rGP.s3p');
-data5_feko_GP10r = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_1_1_8_GP_TE12_Big_Big_GP.s1p');
+% data5_feko_GP10r = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_1_1_8_GP_TE12_Big_Big_GP.s1p');
+data5_feko_GP10r = read(rfdata.data,'/home/nfs/tworitdash/tdash/Thesis/Paper_Thesis/WG_1_1_8_GP_TE13.s1p');
 s_params_5_feko = extract(data5_feko_GP10r,'S_PARAMETERS');
 
 
@@ -78,7 +81,8 @@ Str = load('Xmn_azimuthal_inc_TE.mat');
 % f_ = f;
 % f_ = linspace(4.99654e9, 8.32757e9, 41);
 % r_feko = 1.8e-2;
-f_ = linspace(14.1569e9, 16.6551e9, 41);
+% f_ = linspace(14.1569e9, 16.6551e9, 41);
+f_ = f;
 % f_ = linspace(23e9, 30e9, 20);
 
 k0_ = (2 * pi * f_)/c0;
@@ -86,7 +90,7 @@ k0_ = (2 * pi * f_)/c0;
 str = Str.xmn_TE;
 
 % xmn11 = str(n_feko).xmn;
-xmn11 = str(2).xmn;
+xmn11 = str(3).xmn;
 beta_rho11 = xmn11./r;
 
 beta_z11 = -1j .* sqrt(-(k0_.^2 - beta_rho11.^2));
@@ -160,17 +164,26 @@ hold on;
 plot(f_*1e-9, real(Y_FEKO), 'Linewidth', 1);
 hold on;
 plot(f_*1e-9, imag(Y_FEKO), 'Linewidth', 1);
-hold on;
-plot(f_cst*1e-9, real(Y_CST), 'Linewidth', 1);
-hold on;
-plot(f_cst*1e-9, imag(Y_CST), 'Linewidth', 1);
+% hold on;
+% plot(f_cst*1e-9, real(Y_CST), 'Linewidth', 1);
+% hold on;
+% plot(f_cst*1e-9, imag(Y_CST), 'Linewidth', 1);
 
 % xlim([4.99654 8.32757]);
-xlim([14.1569 16.6551])
-
+% xlim([14.1569 16.6551])
+xlim([22.7, 23.426])
 xlabel('Frequency (GHz)', 'FontWeight', 'bold', 'FontSize', 16);
 ylabel('y_{ap}', 'FontWeight', 'bold', 'FontSize', 16);
 title('Aperture Admittance over Free space admittance', 'FontWeight', 'bold', 'FontSize', 16);
+
+% legend({'Real y_{ap} This technique with 3 higher order modes', ...
+%     'Imag y_{ap} This technique with 3 higher order modes', ...
+%     'Real y_{ap} This technique with no higher order modes'...
+%     ,'Imag y_{ap} This technique with no higher order modes', ...
+%     'Real y_{ap} Mishustin'...
+%     ,'Imag y_{ap} Mishustin', ...
+%     'Real y_{ap} FEKO', 'Imag y_{ap} FEKO',...
+%     'Real y_{ap} CST', 'Imag y_{ap} CST'})
 
 legend({'Real y_{ap} This technique with 3 higher order modes', ...
     'Imag y_{ap} This technique with 3 higher order modes', ...
@@ -178,8 +191,7 @@ legend({'Real y_{ap} This technique with 3 higher order modes', ...
     ,'Imag y_{ap} This technique with no higher order modes', ...
     'Real y_{ap} Mishustin'...
     ,'Imag y_{ap} Mishustin', ...
-    'Real y_{ap} FEKO', 'Imag y_{ap} FEKO',...
-    'Real y_{ap} CST', 'Imag y_{ap} CST'})
+    'Real y_{ap} FEKO', 'Imag y_{ap} FEKO'})
 
 %%
 figure;
@@ -193,7 +205,7 @@ grid on;
 hold on;
 plot(f_*1e-9, db(abs(Gamma_FEKO)), 'r', 'LineWidth', 2); grid on;
 hold on;
-plot(f_cst*1e-9, db(abs(Gamma_CST)), 'k', 'LineWidth', 2); grid on;
+% plot(f_cst*1e-9, db(abs(Gamma_CST)), 'k', 'LineWidth', 2); grid on;
 % hold on;
 % plot(x, db(abs(Gamma_FEKO_Gp10r)), '+', 'LineWidth', 2); grid on;
 
@@ -201,13 +213,19 @@ xlabel('Frequency (GHz)', 'FontWeight', 'bold', 'FontSize', 16);
 ylabel('\Gamma in dB', 'FontWeight', 'bold', 'FontSize', 16);
 title('Reflection Coefficient', 'FontWeight', 'bold', 'FontSize', 16);
 % xlim([4.99654 8.32757]);
-xlim([14.1569 16.6551])
+% xlim([14.1569 16.6551])
+xlim([22.7, 23.426])
+% 
+% legend({'\Gamma This technique with 3 higher order modes', ...
+%     '\Gamma This technique with no higher order modes', ...
+%     '\Gamma Mishustin',...
+%     '\Gamma FEKO',...
+%     '\Gamma CST'});
 
 legend({'\Gamma This technique with 3 higher order modes', ...
     '\Gamma This technique with no higher order modes', ...
     '\Gamma Mishustin',...
-    '\Gamma FEKO',...
-    '\Gamma CST'});
+    '\Gamma FEKO'});
 %%
 figure;
 hold on;
@@ -221,7 +239,7 @@ hold on;
 plot(f_, unwrap(angle((Gamma_FEKO))) .* 180/pi, 'r', 'LineWidth', 2); grid on;
 
 hold on;    
-plot(f_cst, -unwrap(angle((Gamma_CST))) .* 180/pi, 'k', 'LineWidth', 2); grid on;
+% plot(f_cst, -unwrap(angle((Gamma_CST))) .* 180/pi, 'k', 'LineWidth', 2); grid on;
 % hold on;
 % plot(x, db(abs(Gamma_FEKO_Gp10r)), '+', 'LineWidth', 2); grid on;
 

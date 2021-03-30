@@ -10,7 +10,7 @@ lamb = c0./F(end);
 
 % R = linspace(R1, Rend, E);
 
-num = round(Len./(lamb./10));
+num = round(Len./(lamb./12));
 
 n_R = length(R_cone);
 
@@ -24,9 +24,10 @@ R = reshape(R_, 1, size(R_, 1) .* size(R_, 2));
 
 n = length(R);
 
-l1 = lamb/4;
-L = [l1 ones(1, n - 1) * Len/n];
-
+% l1 = lamb/4;
+l1 = c0/5e9/4;
+% L = [l1 ones(1, n - 1) * Len/n];
+L = [l1 ones(1, n - 1) * Len/(n - 1) l1];
 er = ones(n);
 mur = ones(n);
 
@@ -59,7 +60,7 @@ end
 %% Frequency loop to find the GSM of the entire structure
 % RLRR_TE11 = size(zeros(1, length(F)));
 
-for k = 1:length(F)
+parfor k = 1:length(F)
     
     disp('Frequency Iteration: ');
     disp(k);

@@ -52,11 +52,11 @@ E_z_reshape = reshape(E_z, 100, 360);
 % % % 
 % colormap('jet');
 
-% % 
-% figure;
-% surface(x_f, y_f, db(abs(E_tot_reshape).')); shading flat; colorbar;
-% xlabel('x[m]');
-% ylabel('y[m]');
+% 
+figure;
+surface(x_f, y_f, (abs(E_tot_reshape).')); shading flat; colorbar;
+xlabel('x[m]');
+ylabel('y[m]');
 % 
 % colormap('jet');
 % 
@@ -72,16 +72,16 @@ E_z_reshape = reshape(E_z, 100, 360);
 % colormap('jet');
 % % 
 % 
-% figure;
-% 
-% surface(x_f, y_f, angle((E_rho_reshape_).')); shading flat;
-% 
-% colormap('jet');
-% 
-% figure;
-% 
-% surface(x_f, y_f, angle((E_phi_reshape_).')); shading flat;
-% colormap('jet');
+figure;
+
+surface(x_f, y_f, abs((E_rho_reshape_).')); shading flat;
+
+colormap('jet');
+
+figure;
+
+surface(x_f, y_f, abs((E_phi_reshape_).')); shading flat;
+colormap('jet');
 %%
 
 drho = R/100;

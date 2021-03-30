@@ -12,11 +12,11 @@ mu = mur .* mu0;
 
 
 N_modes = 1:100;
-R = 1.8e-2;
+R = 3.*1.8e-2;
 F = 17e9;
 
 lamb = c0/F;
-L = lamb/5;
+L =c0/5e9/4;
 
 [rho, phi] = meshgrid(linspace(eps, R, 100), linspace(eps, 2 * pi, 360));
 

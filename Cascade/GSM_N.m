@@ -9,7 +9,7 @@ for i = 1:n
     N_(i) = length(N_i);
 end
 
-if (N_(end) < 50)
+if (N_(end) < 200)
     %N = [20 round(20 * (R(end)/R(1))^2)];
     N = N_ + k;
 else
@@ -31,7 +31,7 @@ end
 
 %% Frequency loop to find the GSM of the entire structure
 
-for k = 1:length(F)
+parfor k = 1:length(F)
     
     disp('Frequency Iteration: ');
     disp(k);

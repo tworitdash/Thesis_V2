@@ -12,12 +12,13 @@ mu = mur .* mu0;
 
 
 
-N_modes = 9:100;
-R = 1.8e-2;
-F = 17e9;
+N_modes = 1:100;
+R = 3.*1.8e-2;
+F = 16e9;
 
 lamb = c0/F;
-L = lamb/5;
+% L = lamb/5;
+L = c0/5e9/4;
 
 [rho, phi] = meshgrid(linspace(eps, R, 100), linspace(eps, 2 * pi, 360));
 
@@ -41,14 +42,14 @@ for j = 1:length(N_modes)
    Power_F_rev(j) = Pow_2modes(E_rho_j, E_phi_j, H_rho_reshape_.', H_phi_reshape_.', rho_f, drho, dphi);
 end
 
-diff = (Power_F - Power(9, 9:end));
+% diff = (Power_F - Power(1, :));
 
-figure; plot(9:100, db(abs(diff))/2);
+% figure; plot(:100, db(abs(diff))/2);
 
-figure; plot(9:100, db(abs(Power(9, 9:100)))/2); hold on; plot(9:100, db(abs(Power_F)));
+figure; plot(1:100, db(abs(Power(1, 1:100)))); hold on; plot(1:100, db(abs(Power_F)));
 
 
-figure; plot(9:100, db(abs(Power_F./max(Power_F))));
+figure; plot(1:100, db(abs(Power_F./max(Power))));
 
 
 grid on;

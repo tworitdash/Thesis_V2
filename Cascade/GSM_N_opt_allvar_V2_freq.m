@@ -1,7 +1,8 @@
-function [RLRR_TE11, SRR] = GSM_N_opt_allvar_V2_freq(R_cone, Len, F, k)
+function [RLRR_TE11, SRR, SRT, STR, STT] = GSM_N_opt_allvar_V2_freq(R_cone, Len, F, k)
 
 c0 = 3e8;
 lamb = c0./5e9;
+% lamb = c0./F(end);
 
 % R1 = R_vec(1);
 % Rend = R_vec(2);
@@ -11,7 +12,7 @@ lamb = c0./5e9;
 % R = linspace(R1, Rend, E);
 lamb_opt_freq = c0./F(end);
 
-num = round(Len./(lamb_opt_freq./10));
+num = round(Len/(lamb_opt_freq/10));
 
 n_R = length(R_cone);
 
@@ -27,7 +28,8 @@ n = length(R);
 
 l1 = lamb/4;
 L = [l1 ones(1, n - 1) * Len/n];
-
+% L = [l1 ones(1, n - 1) * Len/(n - 1) l1]; % A change of last element of this vector has been made on 26/02/2021
+profile;
 er = ones(n);
 mur = ones(n);
 
@@ -60,7 +62,7 @@ end
 %% Frequency loop to find the GSM of the entire structure
 RLRR_TE11 = zeros(1, length(F));
 
-for k = 1:length(F)
+parfor k = 1:length(F)
     
     disp('Frequency Iteration: ');
     disp(k);
@@ -102,12 +104,13 @@ STR(k, :, :) = slt * STR_ * slr;
 SRT(k, :, :) = slr * SRT_ * slt; 
 SRR(k, :, :) = slr * SRR_ * slr;
 
-f_base =  fc(R(1), er(1), mur(1));
-Num_modes_prop  =  find(f_base < F(k));
 
-% RLRR_TE11(k) = db(sum(sum(abs(SRR(k, 1:Num_modes_prop(end), 1:Num_modes_prop(end))).^2)))./2; % Return loss at waveguide R
-RLRR_TE11(k) = db(abs(sum(SRR(k, 1, 1:Num_modes_prop(end)))).^2)./2; % Return loss at waveguide R
-% RLRR_TE11(k) = db(abs(sum(SRR(k, 1, 1:Num_modes_prop(end))))).^2./2; % Return loss at waveguide R
+%% Return loss
+
+% f_base =  fc(R(1), er(1), mur(1));
+% Num_modes_prop  =  find(f_base < F(k));
+% RLRR_TE11(k) = db(abs(sum(SRR(k, 1, 1:Num_modes_prop(end)))).^2)./2; % Return loss at waveguide R
+
 end
 
 

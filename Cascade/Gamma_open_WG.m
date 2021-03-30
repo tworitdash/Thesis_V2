@@ -17,7 +17,8 @@ mu = mur .* mu0;
 
 % f = linspace(14.1569e9, 70.6551e9, 200);
 % f = linspace(23e9, 30e9, 20);
-f = linspace(4.99654e9, 8.32757e9, 41);
+% f = linspace(4.99654e9, 8.32757e9, 41);
+f = 15e9;
 % f = linspace(4.99654e9, 20e9, 41);
 n_orig = 1;
 % F = 5e9;

@@ -55,15 +55,24 @@ F = linspace(fc_(1)+fc_(1)./100, fc_(11), 20);
 tic;
 % parfor i = 1:length(F)
 [RL, SRR] = GSM_N_opt_allvar_V2_freq(SP(1:N), SP(N+1), F, 50);
-save('fmincon_SRR', 'SRR');
-
-time_used = toc;
-% end
 
 figure;
 plot(F*1e-9, RL, 'LineWidth', 2);grid on;
 xlabel('Frequency (GHz)', 'FontSize', 16, 'FontWeight', 'bold');
 ylabel('Return loss (dB)', 'FontSize', 16, 'FontWeight', 'bold');
 title('RL of fmincon algo', 'FontSize', 16, 'FontWeight', 'bold');
+
+save('fmincon_SRR', 'SRR');
+
+%%
+l = load('fmincon_SRR');
+time_used = toc;
+% end
+
 % RL1 = GSM_N_opt_allvar(SP(1:N), SP(N+1), 5e9, 20);
 % end
+figure;
+plot(F*1e-9, db(squeeze(l.SRR(:, 1, 1))), 'LineWidth', 2);grid on;
+xlabel('Frequency (GHz)', 'FontSize', 16, 'FontWeight', 'bold');
+ylabel('Return loss (dB)', 'FontSize', 16, 'FontWeight', 'bold');
+title('RL of fmincon algo', 'FontSize', 16, 'FontWeight', 'bold');

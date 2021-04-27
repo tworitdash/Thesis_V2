@@ -1,0 +1,29 @@
+
+c0 = 3e
+Nr = 1:1:50;
+Np = 1:1:50;
+
+N = [Nr(end) Np(end)];
+
+rp = 2e-2;
+rr = 1.9e-2;
+
+R = [rr rp];
+
+err = 1; murr = 1; erp = 1; murp = 1;
+
+F = linspace(5e9, 21e9, 35);
+
+[X_til] = Inner_p(Nr, Np, rp, rr, erp, murp, err, murr);
+
+for f = 1:length(F)
+    [STT_, STR_, SRT_, SRR_] = GSM_V2(Nr, Np, F(f), rp, rr, erp, murp, err, murr, X_til);
+
+    slr = SL(R(1), F(f), 1:1:N(1), L(1));
+    slt = SL(R(end), F(f), 1:1:N(end), L(end));
+
+    STT = slt * STT_ * slt'; 
+    STR = slt * STR_ * slr; 
+    SRT = slr * SRT_ * slt; 
+    SRR = slr * SRR_ * slr;
+end

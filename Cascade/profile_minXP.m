@@ -38,6 +38,8 @@ grid on;
 
 %% Iteration over the frequencies 
 
+R(end) = 3 * R(1);
+
 SP = [R(2:end) Len];
 
 XMN_data = load('Xmn.mat');
@@ -56,7 +58,7 @@ tic;
 % parfor i = 1:length(F)
 % XP_level = MinXP_Goal_V2L_freq(SP(1:N), SP(N+1), F, 20);
 F_ = [F(1) F(10) F(20)];
-[Eth_, Eph_, Eco_, Exp_, CO_, XP_, E_, th, ph, Max_Exp_diff] = MinXP_Goal_V2L_freq_fields(SP(1:N), SP(N + 1), F_, 20);
+[Eth_, Eph_, Eco_, Exp_, CO_, XP_, E_, th, ph, Max_Exp_diff] = MinXP_Goal_V2L_freq_fields(SP(1:N), SP(N + 1), F_(1), 20);
 
 %% Plots
 

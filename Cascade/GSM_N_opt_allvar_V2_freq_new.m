@@ -1,4 +1,4 @@
-function [RLRR_TE11, SRR] = GSM_N_opt_allvar_V2_freq_new(R_cone, Len, F, k)
+function [RLRR_TE11, SRR, STT, STR, SRT] = GSM_N_opt_allvar_V2_freq_new(R_cone, Len, F, k)
 
 c0 = 3e8;
 lamb = c0./5e9;
@@ -37,7 +37,7 @@ for i = 1:n
     N_(i) = length(N_i);
 end
 
-if (N_(end) < 50)
+if (N_(end) < 100)
     %N = [20 round(20 * (R(end)/R(1))^2)];
     N = N_ + k;
 else

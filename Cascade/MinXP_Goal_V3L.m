@@ -40,11 +40,16 @@ mur = ones(1, n); % Relative Permeability of each WG section
 dth = pi/180;
 dph = pi/180;
 
-[th, ph] = meshgrid(eps:dth:pi/2+eps, eps:dph:2*pi+eps);
+[th, ph] = meshgrid(-pi/2:dth:pi/2+eps, eps:dph:2*pi+eps);
+% [rho, phi] = meshgrid(eps:R(end)/100:R(end), eps:dph:2*pi+eps);
+% [Gamma, Dm, ModeNumberAper, Transmission_sum]  = Feed_Gamma_Dm_opt(R, L, F, k, er, mur, timesk0, HM);
+[ModeNumberAper, Transmission_sum]  = Feed_Gamma_Dm_opt_V2L(R, L, F, k, er, mur);
 
-[Gamma, Dm, ModeNumberAper, Transmission_sum]  = Feed_Gamma_Dm_opt(R, L, F, k, er, mur, timesk0, HM);
 
-[Eth, Eph, Eco, Exp, ~, ~] = Feed_FF_Superposition(ModeNumberAper, Gamma, Dm, th, ph, F, er, mur, R, Transmission_sum, HM);
+% [Eth, Eph, Eco, Exp, ~, ~] = Feed_FF_Superposition_V3paper(ModeNumberAper, Gamma, Dm, th, ph, F, er, mur, R, Transmission_sum, HM);
+[Eth, Eph, Eco, Exp, ~, ~] = Feed_FF_Superposition_V2L_paper(ModeNumberAper, th, ph, F, er, mur, R, Transmission_sum);
+
+
 
 % Max_Exp_diff = -abs(max(max(abs(Eco)))./max(abs(Exp(46, :))));
 Max_Exp_diff = db(max(abs(Exp(46, :)))./abs(max(max(abs(Eco)))));

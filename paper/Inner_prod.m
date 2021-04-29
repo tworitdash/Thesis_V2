@@ -1,4 +1,4 @@
-function [X_til] = Inner_p2(Nr, Np, rp, rr, erp, murp, err, murr) 
+function [X_til] = Inner_prod(Nr, Np, rp, rr, erp, murp, err, murr) 
 
 %% Inner Product Calculation
 
@@ -43,6 +43,8 @@ for p = 1:length(Np)
                 modep = Xmn(p).mode;
                 moder = Xmn(r).mode;
                 
+                polp = Xmn(p).pol;
+                polr = Xmn(r).pol;
                 
                 if pm == 0
                     deltapm = 1;
@@ -70,19 +72,27 @@ for p = 1:length(Np)
 %                 Nup = 1;
 %                 Nur = 1;
 %                 
-%                
+%              
+                if polp == 0
                     grad_Phi_rhop = sqrt(Nup) .* cos(pm .* phir_) .* besselj_der(pm, beta_rhop .* rhor_) .* beta_rhop;
                     grad_Phi_phip = (-1./rhor_) .* sqrt(Nup) .* pm .* sin(pm .* phir_) .* besselj(pm,  beta_rhop .* rhor_);
-                
+                else
+                    grad_Phi_rhop = sqrt(Nup) .* sin(pm .* phir_) .* besselj_der(pm, beta_rhop .* rhor_) .* beta_rhop;
+                    grad_Phi_phip = (1./rhor_) .* sqrt(Nup) .* pm .* cos(pm .* phir_) .* besselj(pm,  beta_rhop .* rhor_);
+                end
 %                
                 
 %                
-                    
+              if polr == 0  
                     grad_Phi_rhor = sqrt(Nur) .* cos(rm .* phir_) .* besselj_der(rm, beta_rhor.* rhor_) .* beta_rhor;
                     grad_Phi_phir = (-1./rhor_) .* sqrt(Nur) .* rm .* sin(rm .* phir_) .* besselj(rm,  beta_rhor .* rhor_);
-%                
+              else
+                    grad_Phi_rhor = sqrt(Nur) .* sin(rm .* phir_) .* besselj_der(rm, beta_rhor.* rhor_) .* beta_rhor;
+                    grad_Phi_phir = (1./rhor_) .* sqrt(Nur) .* rm .* cos(rm .* phir_) .* besselj(rm,  beta_rhor .* rhor_);
+              end
                 
     if (modep  == "TE" && moder  == "TE") || (modep  == "TM" && moder  == "TM")
+            if polp == polr
                     
                     if (pm == rm) && (pm ~= 0) && (rm ~= 0)
                             A = Lommel(0, rr, beta_rhop, beta_rhor, pm - 1, rm - 1);
@@ -97,31 +107,41 @@ for p = 1:length(Np)
                             X_til_pr =  sqrt(Nup) .* sqrt(Nur) ...
                             .* K .* (A + D) .* (Icos + Isin);
 
-                            X_til(r, p) = X_til_pr; 
-                      
+                            X_til(r, p) = X_til_pr;                        
                     else 
                         
-                            X_til_pr = (grad_Phi_rhop .* grad_Phi_rhor +  grad_Phi_phip .* grad_Phi_phir)...
-                        .* rhor_ .* drho .* dphi;
-                            X_til(r, p) = sum(sum(X_til_pr));
+ %                           X_til_pr = (grad_Phi_rhop .* grad_Phi_rhor +  grad_Phi_phip .* grad_Phi_phir)...
+  %                      .* rhor_ .* drho .* dphi;
+ %                           X_til(r, p) = sum(sum(X_til_pr));
+
+                            X_til(r, p) = 0;
 %                              X_til_pr = (grad_Phi_rhop .* grad_Phi_phir - grad_Phi_rhor .* grad_Phi_phip)...
 %                        .* rhor_ .* drho .* dphi;
 %                              X_til(r, p) = sum(sum(X_til_pr));
-%                         
+%                   
                     end
+            else
+
+%                            X_til_pr = (grad_Phi_rhop .* grad_Phi_rhor +  grad_Phi_phip .* grad_Phi_phir)...
+%                        .* rhor_ .* drho .* dphi;
+ %                           X_til(r, p) = sum(sum(X_til_pr)); 
+                            X_til(r, p) = 0;
+            end
                     
      elseif (modep == "TE" && moder == "TM")
-                    X_til_pr = (grad_Phi_rhop .* grad_Phi_phir - grad_Phi_rhor .* grad_Phi_phip)...
-                       .* rhor_ .* drho .* dphi;
-                   X_til(r, p) = sum(sum(X_til_pr));
-%                     X_til(r, p) = 0;
+%                    X_til_pr = (grad_Phi_rhop .* grad_Phi_phir - grad_Phi_rhor .* grad_Phi_phip)...
+%                      .* rhor_ .* drho .* dphi;
+%                   X_til(r, p) = sum(sum(X_til_pr));
+                     X_til(r, p) = 0;
                     
      elseif (modep == "TM" && moder == "TE")
-         
+                if moder == modep
+                    X_til(r, p) = 0;
+                else
                    X_til_pr = (grad_Phi_rhop .* grad_Phi_phir - grad_Phi_rhor .* grad_Phi_phip)...
                        .* rhor_ .* drho .* dphi;
                    X_til(r, p) = sum(sum(X_til_pr));
-                        
+                end    
      end             
                     
                     

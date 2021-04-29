@@ -14,7 +14,7 @@ R(end) = 3*R(1);
 % R = [0.02283 0.02283 0.06313 0.07772 0.09971 0.1467]; % From GA algo
 
 
-% R = [0.02 0.02 0.02667 0.03333 0.04 0.04667 0.05333 0.06 0.06667 0.07333 0.09562 0.08667 0.09333 0.1009 0.1067 0.1156...
+% R = [0.02 0.02 0.02667 0.0 3333 0.04 0.04667 0.05333 0.06 0.06667 0.07333 0.09562 0.08667 0.09333 0.1009 0.1067 0.1156...
 %     0.1491];
 % N = length(R) - 1;
 % Len = 0.3912;
@@ -33,7 +33,7 @@ figure;
 plot(L_axis, R, 'LineWidth', 2, 'Color', [0.6350, 0.0780, 0.1840] );
 hold on;
 plot(L_axis, -R, 'LineWidth', 2, 'Color', [0.6350, 0.0780, 0.1840] );
-title(['Optimum Horn, Aprture Radius = ', num2str(R(end)./lamb), ' \lambda ', 'Horn Lengt = ', num2str(Len./lamb), ' \lambda'], 'FontSize', 12, 'FontWeight', 'bold');
+title(['Optimum Horn, Aprture Radius = ', num2str(R(end)./lamb), ' \lambda ', 'Horn Length = ', num2str(Len./lamb), ' \lambda'], 'FontSize', 12, 'FontWeight', 'bold');
 xlabel('Horn Length cut', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('Horn Radius cut', 'FontSize', 12, 'FontWeight', 'bold');
 grid on;
@@ -67,7 +67,7 @@ b.STT = STT;
 b.STR = STR;
 b.SRT = SRT;
 
-save('Paper_minxp_GSM', 'b');
+save('Paper_minxp_GSM_prev', 'b');
 
 
 % [Max_Exp_diff, Eth, Eph, th, ph, Gamma, Dm]...

@@ -31,10 +31,15 @@ for f = 1:length(F)
     slr = SL(R(1), F(f), 1:1:N(1), L(1));
     slt = SL(R(end), F(f), 1:1:N(end), L(end));
 
-    STT(f, :, :) = slt * STT_ * slt; 
-    STR(f, :, :) = slt * STR_ * slr; 
-    SRT(f, :, :) = slr * SRT_ * slt; 
-    SRR(f, :, :) = slr * SRR_ * slr;
+    Spp(f, :, :) = slt * STT_ * slt; 
+    Spr(f, :, :) = slt * STR_ * slr; 
+    Srp(f, :, :) = slr * SRT_ * slt; 
+    Srr(f, :, :) = slr * SRR_ * slr;
 end
+
+save('Spp2_ratio_1_modes_20_new', 'Spp');
+save('Spr2_ratio_1_modes_20_new', 'Spr');
+save('Srp2_ratio_1_modes_20_new', 'Srp');
+save('Srr2_ratio_1_modes_20_new', 'Srr');
 
 figure; plot(F.*1e-9, db(abs(squeeze(STT(:, 1, 1)))), 'LineWidth', 2); grid on;

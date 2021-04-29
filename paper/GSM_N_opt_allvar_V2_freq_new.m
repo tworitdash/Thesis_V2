@@ -102,7 +102,7 @@ end
 slr = SL(R(1), F(k), 1:1:N(1), L(1));
 slt = SL(R(end), F(k), 1:1:N(end), L(end));
 
-STT(k, :, :) = slt * STT_ * slt'; 
+STT(k, :, :) = slt * STT_ * slt; 
 STR(k, :, :) = slt * STR_ * slr; 
 SRT(k, :, :) = slr * SRT_ * slt; 
 SRR(k, :, :) = slr * SRR_ * slr;

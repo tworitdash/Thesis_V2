@@ -90,6 +90,20 @@ Xmn = Xmn(idx);
 % 
 % [x_TE, idx_TE] = sort([xmn_TE.m]);
 % xmn_TE = xmn_TE(idx_TE);
+% 
+% 
+% [x,idx]=sort([Xmn.n]);
+% Xmn = Xmn(idx);
+% 
+% [x,idx]=sort([Xmn.m]);
+% Xmn = Xmn(idx);
+
+
+% [x_TM, idx_TM] = sort([xmn_TM.n]);
+% xmn_TM = xmn_TM(idx_TM);
+% 
+% [x_TM, idx_TM] = sort([xmn_TM.m]);
+% xmn_TM = xmn_TM(idx_TM);
 
 
 % [x,idx]=sort([Xmn.n]);
@@ -99,8 +113,6 @@ Xmn = Xmn(idx);
 % Xmn = Xmn(idx);
 
 
-
-
 save('Xmn', 'Xmn');
 % save('Xmn_azimuthal_inc_TE', 'xmn_TE');
-
+% save('Xmn_azimuthal_inc_TM', 'xmn_TM');

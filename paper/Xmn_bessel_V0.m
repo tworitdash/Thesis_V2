@@ -1,8 +1,8 @@
 %% Zeros of Bessel's function (For TM) and zeros of the derivative of the Bessel's function (For TE) Calculation
 clear;
 
-m = 0:1:100;
-% m = 1:1:100;
+% m = 0:1:100;
+m = 1:1:100;
 % m = 1;
 
 for j = 1:length(m)
@@ -68,10 +68,14 @@ Xmn = Xmn(idx);
 % 
 % [x,idx]=sort([Xmn.m]);
 % Xmn = Xmn(idx);
+[x_TM, idx_TM] = sort([xmn_TM.n]);
+xmn_TM = xmn_TM(idx_TM);
+
+[x_TM, idx_TM] = sort([xmn_TM.m]);
+xmn_TM = xmn_TM(idx_TM)
 
 
 
-
-save('Xmn', 'Xmn');
-% save('Xmn_azimuthal_inc_TE', 'xmn_TE');
+% save('Xmn', 'Xmn');
+save('Xmn_azimuthal_inc_TM', 'xmn_TM');
 

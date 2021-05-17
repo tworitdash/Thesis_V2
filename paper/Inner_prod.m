@@ -135,7 +135,7 @@ for p = 1:length(Np)
                      X_til(r, p) = 0;
                     
      elseif (modep == "TM" && moder == "TE")
-                if moder == modep
+                if polr == polp
                     X_til(r, p) = 0;
                 else
                    X_til_pr = (grad_Phi_rhop .* grad_Phi_phir - grad_Phi_rhor .* grad_Phi_phip)...

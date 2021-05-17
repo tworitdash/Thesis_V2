@@ -21,12 +21,37 @@ for p = 1:n_R-1
     R_(:, p) = linspace(R_cone(p), R_cone(p+1), N_axis);
 end
 
-R = reshape(R_, 1, size(R_, 1) .* size(R_, 2));
+r_len = length(R_(1:end-1, 1));
+
+for q = 1:n_R-1
+    for r = 1:r_len
+       R((q - 1) .* r_len + r) = R_(r, q);
+    end
+end
+
+R = [R  R_(end, end)];
+
+% R = reshape(R_, 1, size(R_, 1) .* size(R_, 2));
 
 n = length(R);
 
 l1 = lamb/4;
-L = [l1 ones(1, n - 1) * Len/n];
+L = [l1 ones(1, n - 1) * Len/(n - 1)];
+
+for i = 1:n
+    L_axis(i) = sum(L(1:i));
+end
+L_axis = [0 L_axis];
+figure(1); hold on;
+plot(L_axis, [R(1) R], 'o', 'LineWidth', 2, 'Color', [0, 0.0780, 0.1840]);
+hold on;
+plot(L_axis, [-R(1) -R], 'o', 'LineWidth', 2, 'Color', [0, 0.0780, 0.1840] );
+title(['Optimum Horn, Aprture Radius = ', num2str(R(end)./lamb), ' \lambda ', 'Horn Length = ', num2str(sum(L)./lamb), ' \lambda'], 'FontSize', 12, 'FontWeight', 'bold');
+xlabel('Horn Length cut', 'FontSize', 12, 'FontWeight', 'bold');
+ylabel('Horn Radius cut', 'FontSize', 12, 'FontWeight', 'bold');
+grid on;
+
+
 
 er = ones(n);
 mur = ones(n);
@@ -58,7 +83,7 @@ parfor j = 1:J
     disp(J);
    
     x_til = zeros(N(j), N(j + 1));
-    x_til(:, :) = Inner_p2(1:1:N(j), 1:1:N(j + 1), R(j + 1), R(j), er(j + 1), mur(j + 1), er(j), mur(j));
+    x_til(:, :) = Inner_prod(1:1:N(j), 1:1:N(j + 1), R(j + 1), R(j), er(j + 1), mur(j + 1), er(j), mur(j));
     X_til(j).x_til = x_til;
 end
 
@@ -106,13 +131,13 @@ STT(k, :, :) = slt * STT_ * slt;
 STR(k, :, :) = slt * STR_ * slr; 
 SRT(k, :, :) = slr * SRT_ * slt; 
 SRR(k, :, :) = slr * SRR_ * slr;
-SRR_ = squeeze(SRR(k, :, :));
+SRR_1 = squeeze(SRR(k, :, :));
 
 f_base =  fc(R(1), er(1), mur(1));
 Num_modes_prop  =  find(f_base < F(k));
 
 % RLRR_TE11(k) = db(sum(sum(abs(SRR(k, 1:Num_modes_prop(end), 1:Num_modes_prop(end))).^2)))./2; % Return loss at waveguide R
-RLRR_TE11(k) = db(abs(sum(SRR_(1, 1:Num_modes_prop(end)))).^2)./2; % Return loss at waveguide R
+RLRR_TE11(k) = db(abs(sum(SRR_1(1, 1:Num_modes_prop(end)))).^2)./2; % Return loss at waveguide R
 % RLRR_TE11(k) = db(abs(sum(SRR(k, 1, 1:Num_modes_prop(end))))).^2./2; % Return loss at waveguide R
 end
 

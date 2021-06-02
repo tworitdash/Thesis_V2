@@ -45,11 +45,11 @@ SRR = c_rr.Srr;
 %% SPP 
 figure;
 
-plot(F * 1e-9, db(abs(squeeze(SPP(:, 15, 15)))), 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(SPP(:, 1, 1)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(15,15, :)))), 'LineWidth', 2); grid on;
+plot(F_cst * 1e-9, db(abs(squeeze(s_params_5_cst(1,1, :)))), 'LineWidth', 2); grid on;
 hold on;
-plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(19, 19, :)))), 'LineWidth', 2); grid on;
+plot(F * 1e-9, db(abs(squeeze(s_params_5_feko(11, 11, :)))), 'LineWidth', 2); grid on;
 
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S in  dB', 'FontSize', 12, 'FontWeight', 'bold');

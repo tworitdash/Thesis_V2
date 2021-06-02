@@ -23,7 +23,7 @@ F_ = F_feko;
 
 % data = read(rfdata.data,'../../Thesis/3wg/gsm/RL_fmincon.s2p');
 % s_params = extract(data,'S_PARAMETERS');
-data = read(rfdata.data,'../../Thesis/3wg/gsm/Paper_Thesis_Closed_minxp_Sparam_correct_dim.s6p');
+data = read(rfdata.data,'../../Thesis/3wg/gsm/Paper_Thesis_Closed_minxp_Sparam_correct_dim_lam80.s6p');
 s_params = extract(data,'S_PARAMETERS');
 
 
@@ -38,18 +38,17 @@ s_params = extract(data,'S_PARAMETERS');
 % xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 % ylabel('Return loss (dB)', 'FontSize', 12, 'FontWeight', 'bold');
 % title('RL of ga algo', 'FontSize', 12, 'FontWeight', 'bold');
-% legend({'MM', 'FEKO'}, 'FontSize', 12, 'FontWeight', 'bold');
-
+% legend({'MM', 'FEKO'}, 'FontSize', 12, 'FontWeight', 'bold')
 figure;
 
-plot(F_ * 1e-9, db(abs(squeeze(SRR_(:, 1, 1)))), 'LineWidth', 2); grid on;
+plot(F_ * 1e-9, (abs(squeeze(STT_(:, 15, 15)))), 'LineWidth', 2); grid on;
 
 hold on;
 
-plot(F_ * 1e-9, db(abs(squeeze(SRR1(:, 1, 1)))), 'LineWidth', 2); grid on;
-% hold on;
+plot(F_ * 1e-9, (abs(squeeze(STT1(:, 9, 9)))), 'LineWidth', 2); grid on;
+hold on;
 
-plot(F_feko * 1e-9, db(abs(squeeze(s_params(4, 4, :)))), 'LineWidth', 2); grid on;
+plot(F_feko * 1e-9, (abs(squeeze(s_params(3, 3, :)))), 'LineWidth', 2); grid on;
 xlabel('Frequency (GHz)', 'FontSize', 12, 'FontWeight', 'bold');
 ylabel('S11 of TE_{11} with TE_{12} (dB)', 'FontSize', 12, 'FontWeight', 'bold');
 title('S11 in dB', 'FontSize', 12, 'FontWeight', 'bold');

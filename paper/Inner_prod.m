@@ -137,10 +137,14 @@ for p = 1:length(Np)
      elseif (modep == "TM" && moder == "TE")
                 if polr == polp
                     X_til(r, p) = 0;
+                end
+                if (pm == rm) && (polr ~= polp)
+                    X_til(r, p) = - pm .* pi .* sqrt(Nup) .* sqrt(Nur) .* (besselj(pm, beta_rhop .* rr) .* besselj(rm, beta_rhor .* rr) - besselj(pm, 0) .* besselj(rm, 0));
                 else
-                   X_til_pr = (grad_Phi_rhop .* grad_Phi_phir - grad_Phi_rhor .* grad_Phi_phip)...
-                       .* rhor_ .* drho .* dphi;
-                   X_til(r, p) = sum(sum(X_til_pr));
+                    X_til(r, p) = 0;
+%                    X_til_pr = (grad_Phi_rhop .* grad_Phi_phir - grad_Phi_rhor .* grad_Phi_phip)...
+%                        .* rhor_ .* drho .* dphi;
+%                    X_til(r, p) = sum(sum(X_til_pr));
                 end    
      end             
                     

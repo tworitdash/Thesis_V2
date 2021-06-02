@@ -1,0 +1,63 @@
+clear;
+tic;
+
+c0 = 3e8; % speed of light
+
+
+er = 1;
+mur = 1;
+
+er0 = 8.85418782e-12; % Free space permittivity
+mu0 = 1.25663706e-6;  % Free Space Permeability
+
+epsilon = er .* er0;
+mu = mur .* mu0;
+
+
+F = linspace(2.6129e9, 7.7561e9, 100);
+f = F;
+n_orig = 1;
+
+data = load('ga_allvar_minxp_V2L.mat');
+fmin = data.fmin2;
+
+R = [fmin.r(1) fmin.r(1:5)];
+
+R(end) = 3*R(1);
+
+r = R(end);
+
+omega = 2 * pi * f;
+
+
+len = 0.036/4;
+
+k0 = omega./c0;
+
+L = 100;
+
+N = n_orig+1:1:n_orig+5;
+% N = [3 4 5];
+
+[Dm_, yap, Gamma, y11, Gamma_11, YTE11, y_for_debug] = Tworit_Integrals_K_Space_freq(r, N, k0, L, er, mur, n_orig);
+% Gamma = Gamma'
+
+% figure(4);
+% hold on;
+% plot(f, real(YTE11));
+% hold on;
+% plot(f, real(y_for_debug));
+% hold on;
+% plot(f, ones(length(YTE11)) .* 1./(c0 .* mu), 'g');
+
+time = toc;
+
+Gamma_data.f = f;
+Gamma_data.Dm_ = Dm_;
+Gamma_data.yap = yap;
+Gamma_data.Gamma = Gamma;
+Gamma_data.y11 = y11;
+Gamma_data.Gamma_11 = Gamma_11;
+Gamma_data.YTE11 = YTE11;
+
+save(['Gamma_OpenWG_TE1',num2str(n_orig), '_freq'], 'Gamma_data');

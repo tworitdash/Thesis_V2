@@ -64,7 +64,7 @@ for l = 1:size(Nu, 1)
 end
 
 E_ft_x = (Nup) .* Dm(i) .* pi .* beta_rhop .* sin(2 * Psi) .* I2;
-E_ft_y = (Nup) .* Dm(i) .* pi .* beta_rhop .* (I0 + cos(2 .* Psi) .* I2);
+E_ft_y = -(Nup) .* Dm(i) .* pi .* beta_rhop .* (I0 + cos(2 .* Psi) .* I2);
 
 
 c2 = 1j .* k0 / (4 * pi);

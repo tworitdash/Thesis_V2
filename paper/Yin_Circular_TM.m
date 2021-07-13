@@ -13,7 +13,7 @@ omega = c0 .* k0;
 F = omega./(2 * pi);
 
 
-% beta = 2 * pi * F ./ c0;
+beta = 2 * pi * F ./ c0;
 
 omega = 2 * pi * F;
 
@@ -30,10 +30,12 @@ xmn1 = str(n).xmn;
 mode1 = str(n).mode;
 
 beta_rhop = xmn./R;
-% beta_z = -1j .* sqrt(-(beta.^2 - beta_rhop.^2));
+beta_z = -1j .* sqrt(-(beta.^2 - beta_rhop.^2));
+ztm = beta_z./(omega .* epsilon);
 
 beta_rhop1 = xmn1./R;
-% beta_z1 = -1j .* sqrt(-(beta.^2 - beta_rhop1.^2));
+beta_z1 = -1j .* sqrt(-(beta.^2 - beta_rhop1.^2));
+ztm1 = beta_z1./(omega .* epsilon);
 
 % ZTE = 2 * pi * F * mu ./ beta_z;
 % YTE = 1./ZTE;
@@ -81,7 +83,7 @@ besselj(-1, Nu .* R) .*  besselj(1, Nu .* R));
      I2_ = @(Nu) 1./2 .* R^2 .* (besselj(2, Nu .* R).^2 - ...
 besselj(1, Nu .* R) .*  besselj(3, Nu .* R)); 
    
-I =  @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* pi ./ (4 .* omega .* mu .* kz(Nu)) .* ((2 .* k0.^2 - Nu.^2).*...
+I =  @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* ztm .* ztm1 .* pi ./ (4 .* omega .* mu .* kz(Nu)) .* ((2 .* k0.^2 - Nu.^2).*...
 (I0(Nu) .* I0_2(Nu) + I2(Nu) .* I2_2(Nu)) - Nu.^2 .* (I0(Nu) .* I2_2(Nu) + I0_2(Nu) .* I2(Nu))) .* Nu ;
     
    
@@ -89,7 +91,7 @@ I =  @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* pi ./ (4 .* ome
 % (I0(Nu) .* I0_2(Nu) + I2(Nu) .* I2_2(Nu)) - Nu.^2 .* 1./2 .* (I0(Nu) .* I2_2(Nu) + I0_2(Nu) .* I2(Nu))) .* Nu ;
 
 
-I_near_betarho = @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* pi ./ (4 .* omega .* mu .* kz(Nu)) .* ((2 .* k0.^2 - Nu.^2).*...
+I_near_betarho = @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* ztm .* ztm1 .* pi ./ (4 .* omega .* mu .* kz(Nu)) .* ((2 .* k0.^2 - Nu.^2).*...
 (I0_(Nu) .* I0_(Nu) + I2_(Nu) .* I2_(Nu)) - Nu.^2 .* (I0_(Nu) .* I2_(Nu) + I0_(Nu) .* I2_(Nu))) .* Nu ;
 
 % I_near_betarho = @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* pi ./ (4 .* omega .* mu .* kz(Nu)) .* ((k0.^2 - Nu.^2).*...
@@ -117,13 +119,13 @@ besselj(-1, Nu .* R) .*  besselj(1, Nu .* R));
 I2_ = @(Nu) 1./2 .* R^2 .* (besselj(2, Nu .* R).^2 - ...
 besselj(1, Nu .* R) .*  besselj(3, Nu .* R)); 
 
-I =  @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* pi ./ (4 .* omega .* mu .* kz(Nu)) .* ((2 .* k0.^2 - Nu.^2).*...
+I =  @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* ztm .* ztm1 .* pi ./ (4 .* omega .* mu .* kz(Nu)) .* ((2 .* k0.^2 - Nu.^2).*...
 (I0(Nu) .* I0_2(Nu) + I2(Nu) .* I2_2(Nu)) - Nu.^2 .* (I0(Nu) .* I2_2(Nu) + I0_2(Nu) .* I2(Nu))) .* Nu ;
     
-I_near_betarhomin = @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* pi ./ (4 .* omega .* mu .* kz(Nu)) .* ((2 .* k0.^2 - Nu.^2).*...
+I_near_betarhomin = @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* ztm .* ztm1  .* pi ./ (4 .* omega .* mu .* kz(Nu)) .* ((2 .* k0.^2 - Nu.^2).*...
 (I0_(Nu) .* I0_2(Nu) + I2_(Nu) .* I2_2(Nu)) - Nu.^2 .* (I0_(Nu) .* I2_2(Nu) + I0_2(Nu) .* I2_(Nu))) .* Nu ;
 
-I_near_betarhomax =  @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* pi ./ (4 .* omega .* mu .* kz(Nu)) .* ((2 .* k0.^2 - Nu.^2).*...
+I_near_betarhomax =  @(Nu) sqrt(Nup) .* sqrt(Nup1) .* beta_rhop .* beta_rhop1 .* ztm .* ztm1  .* pi ./ (4 .* omega .* mu .* kz(Nu)) .* ((2 .* k0.^2 - Nu.^2).*...
 (I0(Nu) .* I0_(Nu) + I2(Nu) .* I2_(Nu)) - Nu.^2 .* (I0(Nu) .* I2_(Nu) + I0_(Nu) .* I2(Nu))) .* Nu ;
 
     Y1 = integral(I, eps, beta_rhopmin-ep+1j.*ep, 'Waypoints', [ep+1j.*ep]);

@@ -12,7 +12,8 @@ mu0 = 1.25663706e-6;  % Free Space Permeability
 
 epsilon = er .* er0;
 mu = mur .* mu0;
-f = linspace(10.15e9, 14e9, 41);
+% f = linspace(10.15e9, 14e9, 41);
+f = linspace(18.597e9, 30e9, 41);
 %f = linspace(14.1569e9, 16.6551e9, 41);
 
 % f = linspace(22.7e9, 25e9, 20);
@@ -20,7 +21,7 @@ f = linspace(10.15e9, 14e9, 41);
 % f = linspace(23e9, 30e9, 20);
 % f = linspace(4.99654e9, 8.32757e9, 41);
 % f = linspace(4.99654e9, 20e9, 41);
-n_orig = 1;
+n_orig = 2;
 % F = 5e9;
 % lamb = c0/F;
 
@@ -41,10 +42,13 @@ k0 = omega./c0;
 
 L = 100;
 
-N = 2:1:6;
+N = 3:1:6;
 % N = [3 4 5];
 
 [Dm_, yap, Gamma, y11, Gamma_11, YTE11, y_for_debug] = Tworit_Integrals_K_Space_freq_TM(r, N, k0, L, er, mur, n_orig);
+
+% Gamma = (1 - yap)./(yap + 1);
+% Gamma_11 = (1 - y11)./(y11 + 1);
 % Gamma = Gamma'
 
 % figure(4);
@@ -58,7 +62,7 @@ N = 2:1:6;
 time = toc;
 
 % 
-[Yin, Gamma_K] = Mishustin_K_Freq_TM(r, k0, L, er, mur, len, n_orig);
+% [Yin, Gamma_K] = Mishustin_K_Freq_TM(r, k0, L, er, mur, len, n_orig);
 
 %% FEKO results
 % 
@@ -232,7 +236,7 @@ plot(f, unwrap(angle((Gamma))) .* 180/pi, 'o', 'Linewidth', 1);
 hold on;
 plot(f, angle((Gamma_11)) .* 180/pi, '-.', 'Linewidth', 1);
 hold on;
-plot(f, angle((Gamma_K)) .* 180/pi, '*', 'Linewidth', 1);
+% plot(f, angle((Gamma_K)) .* 180/pi, '*', 'Linewidth', 1);
 grid on;
 hold on;
 plot(f_, unwrap(angle((Gamma_FEKO))) .* 180/pi, 'r', 'LineWidth', 2); grid on;
